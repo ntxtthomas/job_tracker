@@ -1,0 +1,33 @@
+<div id="<%= dom_id contact %>">
+  <h2><%= contact.name %></h2>
+
+  <div class="contact-details">
+    <% if contact.title.present? %>
+    <p>
+      <strong>Title:</strong>
+      <%= contact.title %>
+    </p>
+    <% end %>
+
+    <% if contact.email.present? %>
+    <p>
+      <strong>Email:</strong>
+      <%= link_to contact.email, "mailto:#{contact.email}" %>
+    </p>
+    <% end %>
+
+    <% if contact.phone.present? %>
+    <p>
+      <strong>Phone:</strong>
+      <%= link_to contact.phone, "tel:#{contact.phone}" %>
+    </p>
+    <% end %>
+
+    <% if contact.company %>
+    <p>
+      <strong>Company:</strong>
+      <%= link_to contact.company.name, contact.company %>
+    </p>
+    <% end %>
+  </div>
+</div>

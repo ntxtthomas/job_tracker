@@ -1,10 +1,52 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @opportunity %>
+<%= render "opportunity_details", opportunity: @opportunity %>
 
-<div>
-  <%= link_to "Edit this opportunity", edit_opportunity_path(@opportunity) %> |
-  <%= link_to "Back to opportunities", opportunities_path %>
+<% if @interactions&.any? %>
+<div class="interactions-section" style="margin-top: 2rem;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <h3>Related Interactions</h3>
+    <%= link_to "Add New Interaction", new_interaction_path(company_id: @opportunity.company_id), class: "btn btn-primary" %>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Contact</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Follow-up Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @interactions.each do |interaction| %>
+      <tr>
+        <td><%= interaction.contact&.name || "No specific contact" %></td>
+        <td><%= interaction.category %></td>
+        <td><%= interaction.status %></td>
+        <td><%= interaction.follow_up_date %></td>
+        <td>
+          <%= link_to "View", interaction %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% else %>
+<div class="interactions-section" style="margin-top: 2rem;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <h3>Related Interactions</h3>
+    <%= link_to "Add New Interaction", new_interaction_path(company_id: @opportunity.company_id), class: "btn btn-primary" %>
+  </div>
+  <p>No interactions yet for this company.</p>
+</div>
+<% end %>
 
-  <%= button_to "Destroy this opportunity", @opportunity, method: :delete %>
+<div style="margin-top: 2rem;">
+  <%= link_to "Edit this opportunity", edit_opportunity_path(@opportunity), class: "btn btn-primary" %> |
+  <%= link_to "Back to opportunities", opportunities_path, class: "btn btn-secondary" %>
+
+  <%= button_to "Destroy this opportunity", @opportunity, method: :delete, class: "btn btn-danger", 
+      data: { confirm: "Are you sure?" } %>
 </div>

@@ -1,0 +1,49 @@
+<div id="<%= dom_id interaction %>">
+  <h2>Interaction Details</h2>
+
+  <div class="interaction-details">
+    <% if interaction.contact %>
+    <p>
+      <strong>Contact:</strong>
+      <%= link_to interaction.contact.name, interaction.contact %>
+    </p>
+    <% end %>
+
+    <% if interaction.company %>
+    <p>
+      <strong>Company:</strong>
+      <%= link_to interaction.company.name, interaction.company %>
+    </p>
+    <% end %>
+
+    <% if interaction.category.present? %>
+    <p>
+      <strong>Category:</strong>
+      <%= interaction.category %>
+    </p>
+    <% end %>
+
+    <% if interaction.status.present? %>
+    <p>
+      <strong>Status:</strong>
+      <%= interaction.status %>
+    </p>
+    <% end %>
+
+    <% if interaction.follow_up_date %>
+    <p>
+      <strong>Follow-up Date:</strong>
+      <%= interaction.follow_up_date %>
+    </p>
+    <% end %>
+
+    <% if interaction.note.present? %>
+    <p>
+      <strong>Note:</strong>
+    </p>
+    <div class="note">
+      <%= simple_format(interaction.note) %>
+    </div>
+    <% end %>
+  </div>
+</div>

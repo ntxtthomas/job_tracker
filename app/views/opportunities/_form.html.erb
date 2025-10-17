@@ -12,8 +12,16 @@
 <% end %>
 
 <div>
-  <%= form.label :company_id, style: "display: block" %>
-  <%= form.text_field :company_id %>
+  <%= form.label :company_id, "Company", style: "display: block" %>
+  <%= form.select :company_id, 
+      options_from_collection_for_select(
+        defined?(@companies) ? @companies : Company.all.order(:name), 
+        :id, 
+        :name, 
+        opportunity.company_id
+      ), 
+      { prompt: "Select a company" }, 
+      { style: "display: block" } %>
 </div>
 
 <div>
@@ -28,7 +36,19 @@
 
 <div>
   <%= form.label :status, style: "display: block" %>
-  <%= form.text_field :status %>
+  <%= form.select :status, 
+      options_for_select([
+        ["Applied", "submitted"],
+        ["Under Review", "under_review"],
+        ["Phone Screen", "phone_screen"],
+        ["Interview Scheduled", "interview"],
+        ["Responded", "responded"],
+        ["Offer Received", "offer"],
+        ["Rejected", "rejected"],
+        ["Withdrawn", "withdrawn"]
+      ], opportunity.status), 
+      { prompt: "Select status" }, 
+      { style: "display: block" } %>
 </div>
 
 <div>
@@ -43,12 +63,28 @@
 
 <div>
   <%= form.label :source, style: "display: block" %>
-  <%= form.text_field :source %>
+  <%= form.select :source, 
+      options_for_select([
+        ["LinkedIn", "linkedin"],
+        ["Indeed", "indeed"],
+        ["Company Website", "company_website"],
+        ["Glassdoor", "glassdoor"],
+        ["AngelList", "angellist"],
+        ["Dice", "dice"],
+        ["Monster", "monster"],
+        ["ZipRecruiter", "ziprecruiter"],
+        ["Referral", "referral"],
+        ["Recruiter", "recruiter"],
+        ["Job Fair", "job_fair"],
+        ["Other", "other"]
+      ], opportunity.source), 
+      { prompt: "Select source" }, 
+      { style: "display: block" } %>
 </div>
 
 <div>
   <%= form.label :notes, style: "display: block" %>
-  <%= form.textarea :notes %>
+  <%= form.text_area :notes, rows: 4, style: "display: block; width: 100%;" %>
 </div>
 
 <div>

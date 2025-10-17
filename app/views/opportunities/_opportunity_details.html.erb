@@ -1,0 +1,48 @@
+<div id="<%= dom_id opportunity %>">
+  <h2><%= opportunity.position_title %></h2>
+
+  <div class="opportunity-details">
+    <p>
+      <strong>Company:</strong>
+      <%= link_to opportunity.company.name, opportunity.company if opportunity.company %>
+    </p>
+
+    <p>
+      <strong>Application Date:</strong>
+      <%= opportunity.application_date %>
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      <span class="status-<%= opportunity.status %>"><%= opportunity.status&.humanize %></span>
+    </p>
+
+    <p>
+      <strong>Remote:</strong>
+      <%= opportunity.remote ? "Yes" : "No" %>
+    </p>
+
+    <% if opportunity.tech_stack.present? %>
+    <p>
+      <strong>Tech Stack:</strong>
+      <%= opportunity.tech_stack %>
+    </p>
+    <% end %>
+
+    <% if opportunity.source.present? %>
+    <p>
+      <strong>Source:</strong>
+      <%= opportunity.source&.humanize %>
+    </p>
+    <% end %>
+
+    <% if opportunity.notes.present? %>
+    <p>
+      <strong>Notes:</strong>
+    </p>
+    <div class="notes">
+      <%= simple_format(opportunity.notes) %>
+    </div>
+    <% end %>
+  </div>
+</div>

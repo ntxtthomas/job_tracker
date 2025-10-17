@@ -5,12 +5,21 @@
 <h1>Companies</h1>
 
 <div id="companies">
-  <% @companies.each do |company| %>
-    <%= render company %>
-    <p>
-      <%= link_to "Show this company", company %>
-    </p>
-  <% end %>
+  <table>
+    <thead>
+      <tr>
+        <th><%= sortable_link :name %></th>
+        <th><%= sortable_link :industry %></th>
+        <th><%= sortable_link :location %></th>
+        <th><%= sortable_link :website %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @companies.each do |company| %>
+      <%= render company %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 <%= link_to "New company", new_company_path %>

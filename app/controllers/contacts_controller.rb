@@ -3,7 +3,23 @@ class ContactsController < ApplicationController
 
   # GET /contacts or /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = Contact.includes(:company)
+
+    # Handle sorting
+    if params[:sort].present?
+      sort_column = params[:sort]
+      sort_direction = params[:direction] == "desc" ? "desc" : "asc"
+
+      # Validate sort column to prevent SQL injection
+      allowed_columns = %w[name title email phone created_at]
+      if allowed_columns.include?(sort_column)
+        @contacts = @contacts.order("#{sort_column} #{sort_direction}")
+      elsif sort_column == "company"
+        @contacts = @contacts.joins(:company).order("companies.name #{sort_direction}")
+      end
+    else
+      @contacts = @contacts.order(:name)
+    end
   end
 
   # GET /contacts/1 or /contacts/1.json

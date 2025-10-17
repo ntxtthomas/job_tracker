@@ -8,3 +8,120 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/* Clickable table rows */
+.clickable-row {
+  cursor: pointer !important;
+  transition: background-color 0.2s ease;
+}
+
+.clickable-row:hover {
+  background-color: #f5f5f5;
+}
+
+/* Basic table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+th,
+td {
+  padding: 0.75em;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+th a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  display: block;
+  padding: 0.25rem 0;
+}
+
+th a:hover {
+  background-color: #e9ecef;
+  color: #0d6efd;
+}
+
+/* Button styling */
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin: 0.25rem;
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5c636a;
+  border-color: #565e64;
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+/* Status styling */
+.status-submitted {
+  color: #0d6efd;
+}
+.status-under_review {
+  color: #fd7e14;
+}
+.status-phone_screen {
+  color: #20c997;
+}
+.status-interview {
+  color: #6f42c1;
+}
+.status-responded {
+  color: #198754;
+}
+.status-offer {
+  color: #198754;
+  font-weight: bold;
+}
+.status-rejected {
+  color: #dc3545;
+}
+.status-withdrawn {
+  color: #6c757d;
+}

@@ -1,0 +1,22 @@
+<div id="<%= dom_id company %>">
+  <h2><%= company.name %></h2>
+
+  <div class="company-details">
+    <p>
+      <strong>Industry:</strong>
+      <%= company.industry %>
+    </p>
+
+    <p>
+      <strong>Location:</strong>
+      <%= company.location %>
+    </p>
+
+    <% if company.website.present? %>
+    <p>
+      <strong>Website:</strong>
+      <%= link_to company.website, company.website.start_with?('http') ? company.website : "https://#{company.website}", target: "_blank" %>
+    </p>
+    <% end %>
+  </div>
+</div>

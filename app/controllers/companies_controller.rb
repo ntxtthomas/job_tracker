@@ -4,6 +4,20 @@ class CompaniesController < ApplicationController
   # GET /companies or /companies.json
   def index
     @companies = Company.all
+
+    # Handle sorting
+    if params[:sort].present?
+      sort_column = params[:sort]
+      sort_direction = params[:direction] == "desc" ? "desc" : "asc"
+
+      # Validate sort column to prevent SQL injection
+      allowed_columns = %w[name industry location website created_at]
+      if allowed_columns.include?(sort_column)
+        @companies = @companies.order("#{sort_column} #{sort_direction}")
+      end
+    else
+      @companies = @companies.order(:name)
+    end
   end
 
   # GET /companies/1 or /companies/1.json

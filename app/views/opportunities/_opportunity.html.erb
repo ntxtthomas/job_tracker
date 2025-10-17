@@ -1,38 +1,8 @@
-<div id="<%= dom_id opportunity %>">
-  <p>
-    <strong>Company:</strong>
-    <%= opportunity.company_id %>
-  </p>
-
-  <p>
-    <strong>Position title:</strong>
-    <%= opportunity.position_title %>
-  </p>
-
-  <p>
-    <strong>Application date:</strong>
-    <%= opportunity.application_date %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= opportunity.status %>
-  </p>
-  <p>
-    <strong>Remote:</strong>
-    <%= opportunity.remote ? "Yes" : "No" %>
-  </p>
-
-  <p>
-    <strong>Tech stack:</strong>
-    <%= opportunity.tech_stack %>
-  </p>
-  <p>
-    <strong>Source:</strong>
-    <%= opportunity.source %>
-  </p>
-  <p>
-    <strong>Notes:</strong>
-    <%= opportunity.notes %>
-  </p>
-</div>
+<tr id="<%= dom_id opportunity %>" class="clickable-row" data-href="<%= opportunity_path(opportunity) %>">
+  <td><%= opportunity.company.name if opportunity.company %></td>
+  <td><%= opportunity.position_title %></td>
+  <td><%= opportunity.application_date %></td>
+  <td><%= opportunity.status %></td>
+  <td><%= opportunity.remote ? "Yes" : "No" %></td>
+  <td><%= opportunity.tech_stack %></td>
+</tr>

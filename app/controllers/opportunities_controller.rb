@@ -3,20 +3,39 @@ class OpportunitiesController < ApplicationController
 
   # GET /opportunities or /opportunities.json
   def index
-    @opportunities = Opportunity.all
+    @opportunities = Opportunity.includes(:company)
+
+    # Handle sorting
+    if params[:sort].present?
+      sort_column = params[:sort]
+      sort_direction = params[:direction] == "desc" ? "desc" : "asc"
+
+      # Validate sort column to prevent SQL injection
+      allowed_columns = %w[position_title application_date status remote tech_stack created_at]
+      if allowed_columns.include?(sort_column)
+        @opportunities = @opportunities.order("#{sort_column} #{sort_direction}")
+      elsif sort_column == "company"
+        @opportunities = @opportunities.joins(:company).order("companies.name #{sort_direction}")
+      end
+    else
+      @opportunities = @opportunities.order(:application_date).reverse_order
+    end
   end
 
   # GET /opportunities/1 or /opportunities/1.json
   def show
+    @interactions = @opportunity.company.interactions.includes(:contact) if @opportunity.company
   end
 
   # GET /opportunities/new
   def new
     @opportunity = Opportunity.new
+    @companies = Company.all.order(:name)
   end
 
   # GET /opportunities/1/edit
   def edit
+    @companies = Company.all.order(:name)
   end
 
   # POST /opportunities or /opportunities.json
@@ -28,6 +47,7 @@ class OpportunitiesController < ApplicationController
         format.html { redirect_to @opportunity, notice: "Opportunity was successfully created." }
         format.json { render :show, status: :created, location: @opportunity }
       else
+        @companies = Company.all.order(:name)
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @opportunity.errors, status: :unprocessable_entity }
       end
@@ -41,6 +61,7 @@ class OpportunitiesController < ApplicationController
         format.html { redirect_to @opportunity, notice: "Opportunity was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @opportunity }
       else
+        @companies = Company.all.order(:name)
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @opportunity.errors, status: :unprocessable_entity }
       end

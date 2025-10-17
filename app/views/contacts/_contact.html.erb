@@ -1,27 +1,7 @@
-<div id="<%= dom_id contact %>">
-  <p>
-    <strong>Name:</strong>
-    <%= contact.name %>
-  </p>
-
-  <p>
-    <strong>Title:</strong>
-    <%= contact.title %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= contact.email %>
-  </p>
-
-  <p>
-    <strong>Phone:</strong>
-    <%= contact.phone %>
-  </p>
-
-  <p>
-    <strong>Company:</strong>
-    <%= contact.company_id %>
-  </p>
-
-</div>
+<tr id="<%= dom_id contact %>" class="clickable-row" data-href="<%= contact_path(contact) %>">
+  <td><%= contact.name %></td>
+  <td><%= contact.title %></td>
+  <td><%= contact.email %></td>
+  <td><%= contact.phone %></td>
+  <td><%= contact.company.name if contact.company %></td>
+</tr>

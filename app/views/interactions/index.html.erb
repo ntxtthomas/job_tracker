@@ -5,12 +5,22 @@
 <h1>Interactions</h1>
 
 <div id="interactions">
-  <% @interactions.each do |interaction| %>
-    <%= render interaction %>
-    <p>
-      <%= link_to "Show this interaction", interaction %>
-    </p>
-  <% end %>
+  <table>
+    <thead>
+      <tr>
+        <th><%= sortable_link :contact %></th>
+        <th><%= sortable_link :company %></th>
+        <th><%= sortable_link :category %></th>
+        <th><%= sortable_link :status %></th>
+        <th><%= sortable_link :follow_up_date, "Follow-up Date" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @interactions.each do |interaction| %>
+      <%= render interaction %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 <%= link_to "New interaction", new_interaction_path %>
