@@ -2,14 +2,20 @@
 
 one:
   company: one
-  position_title: MyString
+  position_title: Senior Software Engineer
   application_date: 2025-10-17
-  status: MyString
-  notes: MyText
+  status: submitted
+  notes: Great company culture
+  remote: true
+  tech_stack: Ruby on Rails
+  source: linkedin
 
 two:
   company: two
-  position_title: MyString
+  position_title: Product Manager
   application_date: 2025-10-17
-  status: MyString
-  notes: MyText
+  status: responded
+  notes: Interesting role
+  remote: false
+  tech_stack: Product Management
+  source: company_website
