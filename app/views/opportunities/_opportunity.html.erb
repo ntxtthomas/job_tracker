@@ -18,10 +18,17 @@
     <strong>Status:</strong>
     <%= opportunity.status %>
   </p>
+  <p>
+    <strong>Remote:</strong>
+    <%= opportunity.remote ? "Yes" : "No" %>
+  </p>
 
+  <p>
+    <strong>Tech stack:</strong>
+    <%= opportunity.tech_stack %>
+  </p>
   <p>
     <strong>Notes:</strong>
     <%= opportunity.notes %>
   </p>
-
 </div>

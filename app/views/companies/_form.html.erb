@@ -1,42 +1,37 @@
 <%= form_with(model: company) do |form| %>
-  <% if company.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
+<% if company.errors.any? %>
+<div style="color: red">
+  <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
 
-      <ul>
-        <% company.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% company.errors.each do |error| %>
+    <li><%= error.full_message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+<div>
+  <%= form.label :name, style: "display: block" %>
+  <%= form.text_field :name %>
+</div>
 
-  <div>
-    <%= form.label :industry, style: "display: block" %>
-    <%= form.text_field :industry %>
-  </div>
+<div>
+  <%= form.label :industry, style: "display: block" %>
+  <%= form.text_field :industry %>
+</div>
 
-  <div>
-    <%= form.label :location, style: "display: block" %>
-    <%= form.text_field :location %>
-  </div>
+<div>
+  <%= form.label :location, style: "display: block" %>
+  <%= form.text_field :location %>
+</div>
 
-  <div>
-    <%= form.label :tech_stack, style: "display: block" %>
-    <%= form.text_field :tech_stack %>
-  </div>
+<div>
+  <%= form.label :website, style: "display: block" %>
+  <%= form.text_field :website %>
+</div>
 
-  <div>
-    <%= form.label :website, style: "display: block" %>
-    <%= form.text_field :website %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+<div>
+  <%= form.submit %>
+</div>
 <% end %>
