@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_17_161223) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_17_170830) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -18,7 +18,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_17_161223) do
     t.string "name"
     t.string "industry"
     t.string "location"
-    t.string "tech_stack"
     t.string "website"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -56,6 +55,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_17_161223) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "remote"
+    t.string "tech_stack"
     t.index ["company_id"], name: "index_opportunities_on_company_id"
   end
 
