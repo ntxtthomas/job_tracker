@@ -1,42 +1,52 @@
 <%= form_with(model: opportunity) do |form| %>
-  <% if opportunity.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(opportunity.errors.count, "error") %> prohibited this opportunity from being saved:</h2>
+<% if opportunity.errors.any? %>
+<div style="color: red">
+  <h2><%= pluralize(opportunity.errors.count, "error") %> prohibited this opportunity from being saved:</h2>
 
-      <ul>
-        <% opportunity.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% opportunity.errors.each do |error| %>
+    <li><%= error.full_message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div>
-    <%= form.label :company_id, style: "display: block" %>
-    <%= form.text_field :company_id %>
-  </div>
+<div>
+  <%= form.label :company_id, style: "display: block" %>
+  <%= form.text_field :company_id %>
+</div>
 
-  <div>
-    <%= form.label :position_title, style: "display: block" %>
-    <%= form.text_field :position_title %>
-  </div>
+<div>
+  <%= form.label :position_title, style: "display: block" %>
+  <%= form.text_field :position_title %>
+</div>
 
-  <div>
-    <%= form.label :application_date, style: "display: block" %>
-    <%= form.date_field :application_date %>
-  </div>
+<div>
+  <%= form.label :application_date, style: "display: block" %>
+  <%= form.date_field :application_date %>
+</div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
-  </div>
+<div>
+  <%= form.label :status, style: "display: block" %>
+  <%= form.text_field :status %>
+</div>
 
-  <div>
-    <%= form.label :notes, style: "display: block" %>
-    <%= form.textarea :notes %>
-  </div>
+<div>
+  <%= form.label :remote, style: "display: block" %>
+  <%= form.check_box :remote %>
+</div>
 
-  <div>
-    <%= form.submit %>
-  </div>
+<div>
+  <%= form.label :tech_stack, style: "display: block" %>
+  <%= form.text_field :tech_stack %>
+</div>
+
+<div>
+  <%= form.label :notes, style: "display: block" %>
+  <%= form.textarea :notes %>
+</div>
+
+<div>
+  <%= form.submit %>
+</div>
 <% end %>
