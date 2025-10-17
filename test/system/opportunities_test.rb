@@ -15,10 +15,12 @@ class OpportunitiesTest < ApplicationSystemTestCase
     click_on "New opportunity"
 
     fill_in "Application date", with: @opportunity.application_date
-    fill_in "Company", with: @opportunity.company_id
+    select @opportunity.company.name, from: "Company"
     fill_in "Notes", with: @opportunity.notes
     fill_in "Position title", with: @opportunity.position_title
-    fill_in "Status", with: @opportunity.status
+    select "Applied", from: "Status"
+    fill_in "Tech stack", with: "Ruby on Rails"
+    select "LinkedIn", from: "Source"
     click_on "Create Opportunity"
 
     assert_text "Opportunity was successfully created"
@@ -30,10 +32,12 @@ class OpportunitiesTest < ApplicationSystemTestCase
     click_on "Edit this opportunity", match: :first
 
     fill_in "Application date", with: @opportunity.application_date
-    fill_in "Company", with: @opportunity.company_id
+    select @opportunity.company.name, from: "Company"
     fill_in "Notes", with: @opportunity.notes
     fill_in "Position title", with: @opportunity.position_title
-    fill_in "Status", with: @opportunity.status
+    select "Under Review", from: "Status"
+    fill_in "Tech stack", with: "Python Django"
+    select "Indeed", from: "Source"
     click_on "Update Opportunity"
 
     assert_text "Opportunity was successfully updated"

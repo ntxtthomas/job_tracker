@@ -14,12 +14,13 @@ class InteractionsTest < ApplicationSystemTestCase
     visit interactions_url
     click_on "New interaction"
 
-    fill_in "Category", with: @interaction.category
-    fill_in "Company", with: @interaction.company_id
-    fill_in "Contact", with: @interaction.contact_id
+    # Use select for dropdown fields with display values
+    select "Phone Call", from: "Category"
+    select @interaction.company.name, from: "Company"
+    select @interaction.contact.name, from: "Contact (Optional)" if @interaction.contact
     fill_in "Follow up date", with: @interaction.follow_up_date
     fill_in "Note", with: @interaction.note
-    fill_in "Status", with: @interaction.status
+    select "Pending", from: "Status"
     click_on "Create Interaction"
 
     assert_text "Interaction was successfully created"
@@ -30,12 +31,13 @@ class InteractionsTest < ApplicationSystemTestCase
     visit interaction_url(@interaction)
     click_on "Edit this interaction", match: :first
 
-    fill_in "Category", with: @interaction.category
-    fill_in "Company", with: @interaction.company_id
-    fill_in "Contact", with: @interaction.contact_id
+    # Use select for dropdown fields with display values
+    select "Email", from: "Category"
+    select @interaction.company.name, from: "Company"
+    select @interaction.contact.name, from: "Contact (Optional)" if @interaction.contact
     fill_in "Follow up date", with: @interaction.follow_up_date
     fill_in "Note", with: @interaction.note
-    fill_in "Status", with: @interaction.status
+    select "Completed", from: "Status"
     click_on "Update Interaction"
 
     assert_text "Interaction was successfully updated"

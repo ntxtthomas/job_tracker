@@ -3,15 +3,15 @@
 one:
   contact: one
   company: one
-  category: MyString
+  category: phone_call
   note: MyText
   follow_up_date: 2025-10-17
-  status: MyString
+  status: pending
 
 two:
   contact: two
   company: two
-  category: MyString
+  category: email
   note: MyText
   follow_up_date: 2025-10-17
-  status: MyString
+  status: completed

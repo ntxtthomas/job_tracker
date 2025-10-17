@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  title: MyString
-  email: MyString
-  phone: MyString
+  name: John Smith
+  title: Engineering Manager
+  email: john@acme.com
+  phone: 555-0101
   company: one
 
 two:
-  name: MyString
-  title: MyString
-  email: MyString
-  phone: MyString
+  name: Jane Doe
+  title: HR Director
+  email: jane@beta.com
+  phone: 555-0102
   company: two
