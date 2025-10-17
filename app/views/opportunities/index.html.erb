@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Opportunities" %>
+
+<h1>Opportunities</h1>
+
+<div id="opportunities">
+  <% @opportunities.each do |opportunity| %>
+    <%= render opportunity %>
+    <p>
+      <%= link_to "Show this opportunity", opportunity %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New opportunity", new_opportunity_path %>

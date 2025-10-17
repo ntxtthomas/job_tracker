@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contact: one
+  company: one
+  category: MyString
+  note: MyText
+  follow_up_date: 2025-10-17
+  status: MyString
+
+two:
+  contact: two
+  company: two
+  category: MyString
+  note: MyText
+  follow_up_date: 2025-10-17
+  status: MyString

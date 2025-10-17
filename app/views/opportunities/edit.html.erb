@@ -1,0 +1,12 @@
+<% content_for :title, "Editing opportunity" %>
+
+<h1>Editing opportunity</h1>
+
+<%= render "form", opportunity: @opportunity %>
+
+<br>
+
+<div>
+  <%= link_to "Show this opportunity", @opportunity %> |
+  <%= link_to "Back to opportunities", opportunities_path %>
+</div>
