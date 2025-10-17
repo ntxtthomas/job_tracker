@@ -3,7 +3,25 @@ class InteractionsController < ApplicationController
 
   # GET /interactions or /interactions.json
   def index
-    @interactions = Interaction.all
+    @interactions = Interaction.includes(:contact, :company)
+
+    # Handle sorting
+    if params[:sort].present?
+      sort_column = params[:sort]
+      sort_direction = params[:direction] == "desc" ? "desc" : "asc"
+
+      # Validate sort column to prevent SQL injection
+      allowed_columns = %w[category status follow_up_date created_at]
+      if allowed_columns.include?(sort_column)
+        @interactions = @interactions.order("#{sort_column} #{sort_direction}")
+      elsif sort_column == "contact"
+        @interactions = @interactions.joins(:contact).order("contacts.name #{sort_direction}")
+      elsif sort_column == "company"
+        @interactions = @interactions.joins(:company).order("companies.name #{sort_direction}")
+      end
+    else
+      @interactions = @interactions.order(:follow_up_date).reverse_order
+    end
   end
 
   # GET /interactions/1 or /interactions/1.json
@@ -13,10 +31,16 @@ class InteractionsController < ApplicationController
   # GET /interactions/new
   def new
     @interaction = Interaction.new
+    # Pre-fill company if coming from an opportunity
+    @interaction.company_id = params[:company_id] if params[:company_id]
+    @companies = Company.all.order(:name)
+    @contacts = Contact.all.order(:name)
   end
 
   # GET /interactions/1/edit
   def edit
+    @companies = Company.all.order(:name)
+    @contacts = Contact.all.order(:name)
   end
 
   # POST /interactions or /interactions.json
@@ -28,6 +52,8 @@ class InteractionsController < ApplicationController
         format.html { redirect_to @interaction, notice: "Interaction was successfully created." }
         format.json { render :show, status: :created, location: @interaction }
       else
+        @companies = Company.all.order(:name)
+        @contacts = Contact.all.order(:name)
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @interaction.errors, status: :unprocessable_entity }
       end
@@ -41,6 +67,8 @@ class InteractionsController < ApplicationController
         format.html { redirect_to @interaction, notice: "Interaction was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @interaction }
       else
+        @companies = Company.all.order(:name)
+        @contacts = Contact.all.order(:name)
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @interaction.errors, status: :unprocessable_entity }
       end

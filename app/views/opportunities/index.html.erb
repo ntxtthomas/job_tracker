@@ -5,12 +5,23 @@
 <h1>Opportunities</h1>
 
 <div id="opportunities">
-  <% @opportunities.each do |opportunity| %>
-    <%= render opportunity %>
-    <p>
-      <%= link_to "Show this opportunity", opportunity %>
-    </p>
-  <% end %>
+  <table>
+    <thead>
+      <tr>
+        <th><%= sortable_link :company %></th>
+        <th><%= sortable_link :position_title, "Position" %></th>
+        <th><%= sortable_link :application_date, "Date" %></th>
+        <th><%= sortable_link :status %></th>
+        <th><%= sortable_link :remote %></th>
+        <th><%= sortable_link :tech_stack, "Tech Stack" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @opportunities.each do |opportunity| %>
+      <%= render opportunity %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 <%= link_to "New opportunity", new_opportunity_path %>

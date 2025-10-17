@@ -1,10 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @interaction %>
+<%= render "interaction_details", interaction: @interaction %>
 
-<div>
-  <%= link_to "Edit this interaction", edit_interaction_path(@interaction) %> |
-  <%= link_to "Back to interactions", interactions_path %>
+<div style="margin-top: 2rem;">
+  <%= link_to "Edit this interaction", edit_interaction_path(@interaction), class: "btn btn-primary" %> |
+  <%= link_to "Back to interactions", interactions_path, class: "btn btn-secondary" %>
 
-  <%= button_to "Destroy this interaction", @interaction, method: :delete %>
+  <%= button_to "Destroy this interaction", @interaction, method: :delete, class: "btn btn-danger",
+      data: { confirm: "Are you sure?" } %>
 </div>
