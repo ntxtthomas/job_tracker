@@ -17,7 +17,7 @@ class CompaniesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create company" do
     assert_difference("Company.count") do
-      post companies_url, params: { company: { industry: @company.industry, location: @company.location, name: @company.name, tech_stack: @company.tech_stack, website: @company.website } }
+      post companies_url, params: { company: { industry: @company.industry, location: @company.location, name: @company.name, website: @company.website } }
     end
 
     assert_redirected_to company_url(Company.last)
@@ -34,13 +34,16 @@ class CompaniesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update company" do
-    patch company_url(@company), params: { company: { industry: @company.industry, location: @company.location, name: @company.name, tech_stack: @company.tech_stack, website: @company.website } }
+    patch company_url(@company), params: { company: { industry: @company.industry, location: @company.location, name: @company.name, website: @company.website } }
     assert_redirected_to company_url(@company)
   end
 
   test "should destroy company" do
+    # Create a company without any associated opportunities
+    company_to_delete = Company.create!(name: "Test Company", industry: "Tech", location: "Remote", website: "example.com")
+
     assert_difference("Company.count", -1) do
-      delete company_url(@company)
+      delete company_url(company_to_delete)
     end
 
     assert_redirected_to companies_url

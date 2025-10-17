@@ -4,12 +4,10 @@ one:
   name: MyString
   industry: MyString
   location: MyString
-  tech_stack: MyString
   website: MyString
 
 two:
   name: MyString
   industry: MyString
   location: MyString
-  tech_stack: MyString
   website: MyString

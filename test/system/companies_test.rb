@@ -17,7 +17,6 @@ class CompaniesTest < ApplicationSystemTestCase
     fill_in "Industry", with: @company.industry
     fill_in "Location", with: @company.location
     fill_in "Name", with: @company.name
-    fill_in "Tech stack", with: @company.tech_stack
     fill_in "Website", with: @company.website
     click_on "Create Company"
 
@@ -32,7 +31,6 @@ class CompaniesTest < ApplicationSystemTestCase
     fill_in "Industry", with: @company.industry
     fill_in "Location", with: @company.location
     fill_in "Name", with: @company.name
-    fill_in "Tech stack", with: @company.tech_stack
     fill_in "Website", with: @company.website
     click_on "Update Company"
 
