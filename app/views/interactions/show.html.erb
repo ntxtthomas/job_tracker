@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @interaction %>
+
+<div>
+  <%= link_to "Edit this interaction", edit_interaction_path(@interaction) %> |
+  <%= link_to "Back to interactions", interactions_path %>
+
+  <%= button_to "Destroy this interaction", @interaction, method: :delete %>
+</div>
