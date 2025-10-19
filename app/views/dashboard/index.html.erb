@@ -1,7 +1,69 @@
-<h1>Dashboard</h1>
-<ul>
-  <li>Resumes Submitted: <%= @total_resumes %></li>
-  <li>Responses: <%= @total_responses %></li>
-  <li>Interviews: <%= @total_interviews %></li>
-  <li>Offers: <%= @total_offers %></li>
-</ul>
+<% content_for :title, "Dashboard" %>
+
+<h1>Job Tracker Dashboard</h1>
+
+<div class="dashboard-cards">
+  <div class="card card-potentials">
+    <div class="card-header">
+      <h3>Potential Opportunities</h3>
+      <div class="card-icon">💡</div>
+    </div>
+    <div class="card-body">
+      <div class="card-number"><%= @total_potentials %></div>
+      <p class="card-subtitle">Not yet applied to</p>
+    </div>
+  </div>
+
+  <div class="card card-submitted">
+    <div class="card-header">
+      <h3>Applications Submitted</h3>
+      <div class="card-icon">📋</div>
+    </div>
+    <div class="card-body">
+      <div class="card-number"><%= @total_resumes %></div>
+      <p class="card-subtitle">Total applications sent</p>
+    </div>
+  </div>
+
+  <div class="card card-responses">
+    <div class="card-header">
+      <h3>Responses Received</h3>
+      <div class="card-icon">📬</div>
+    </div>
+    <div class="card-body">
+      <div class="card-number"><%= @total_responses %></div>
+      <p class="card-subtitle">Companies that responded</p>
+    </div>
+  </div>
+
+  <div class="card card-interviews">
+    <div class="card-header">
+      <h3>Interviews Scheduled</h3>
+      <div class="card-icon">🎯</div>
+    </div>
+    <div class="card-body">
+      <div class="card-number"><%= @total_interviews %></div>
+      <p class="card-subtitle">Interviews in pipeline</p>
+    </div>
+  </div>
+
+  <div class="card card-offers">
+    <div class="card-header">
+      <h3>Offers Received</h3>
+      <div class="card-icon">🎉</div>
+    </div>
+    <div class="card-body">
+      <div class="card-number"><%= @total_offers %></div>
+      <p class="card-subtitle">Job offers to consider</p>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard-actions">
+  <h2>Quick Actions</h2>
+  <div class="action-buttons">
+    <%= link_to "Add New Company", new_company_path, class: "btn btn-primary" %>
+    <%= link_to "Create Opportunity", new_opportunity_path, class: "btn btn-secondary" %>
+    <%= link_to "View All Applications", opportunities_path, class: "btn btn-secondary" %>
+  </div>
+</div>
