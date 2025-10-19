@@ -11,9 +11,9 @@
 </div>
 <% end %>
 
-  <div>
-    <%= form.label :contact_id, "Contact (Optional)", style: "display: block" %>
-    <%= form.select :contact_id, 
+<div>
+  <%= form.label :contact_id, "Contact (Optional)", style: "display: block" %>
+  <%= form.select :contact_id, 
           options_from_collection_for_select(
             defined?(@contacts) ? @contacts : Contact.all.order(:name), 
             :id, 
@@ -22,7 +22,8 @@
           ), 
           { prompt: "No specific contact", include_blank: true }, 
           { style: "display: block" } %>
-  </div><div>
+</div>
+<div>
   <%= form.label :company_id, "Company", style: "display: block" %>
   <%= form.select :company_id, 
         options_from_collection_for_select(

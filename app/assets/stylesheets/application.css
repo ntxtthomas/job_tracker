@@ -125,3 +125,143 @@ th a:hover {
 .status-withdrawn {
   color: #6c757d;
 }
+
+/* Dashboard Cards */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-left: 4px solid #e9ecef;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.card-icon {
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.card-subtitle {
+  margin: 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Card color themes */
+.card-potentials {
+  border-left-color: #20c997;
+}
+
+.card-potentials .card-number {
+  color: #20c997;
+}
+
+.card-submitted {
+  border-left-color: #0d6efd;
+}
+
+.card-submitted .card-number {
+  color: #0d6efd;
+}
+
+.card-responses {
+  border-left-color: #fd7e14;
+}
+
+.card-responses .card-number {
+  color: #fd7e14;
+}
+
+.card-interviews {
+  border-left-color: #6f42c1;
+}
+
+.card-interviews .card-number {
+  color: #6f42c1;
+}
+
+.card-offers {
+  border-left-color: #198754;
+}
+
+.card-offers .card-number {
+  color: #198754;
+}
+
+/* Dashboard Actions */
+.dashboard-actions {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.dashboard-actions h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #495057;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.action-buttons .btn {
+  margin: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
