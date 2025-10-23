@@ -3,18 +3,12 @@ class CompaniesController < ApplicationController
 
   # GET /companies or /companies.json
   def index
-    @companies = Company.all
+    @companies = Company.includes(:opportunities)
 
-    # Handle sorting
-    if params[:sort].present?
-      sort_column = params[:sort]
-      sort_direction = params[:direction] == "desc" ? "desc" : "asc"
-
-      # Validate sort column to prevent SQL injection
-      allowed_columns = %w[name industry location website created_at]
-      if allowed_columns.include?(sort_column)
-        @companies = @companies.order("#{sort_column} #{sort_direction}")
-      end
+    # Skip sorting for tech_stack since it's aggregated data, but allow other columns
+    if params[:sort].present? && params[:sort] != "tech_stack"
+      direction = params[:direction] == "desc" ? "desc" : "asc"
+      @companies = @companies.order("#{params[:sort]} #{direction}")
     else
       @companies = @companies.order(:name)
     end

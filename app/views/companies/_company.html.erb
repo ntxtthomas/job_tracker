@@ -3,4 +3,8 @@
   <td><%= company.industry %></td>
   <td><%= company.location %></td>
   <td><%= company.website %></td>
+  <td>
+    <% tech_stacks = company.opportunities.filter_map(&:tech_stack).uniq.join(", ") %>
+    <%= tech_stacks.present? ? tech_stacks : "N/A" %>
+  </td>
 </tr>
