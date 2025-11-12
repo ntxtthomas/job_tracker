@@ -41,5 +41,4 @@
 /config/master.key
 
 # Engineering files
-/docs/*
-/docs/TODO.md
+/app/docs/*
