@@ -2,7 +2,10 @@
 
 <% content_for :title, "Opportunities" %>
 
-<h1>Opportunities</h1>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+  <h1 style="margin: 0;">Opportunities</h1>
+  <%= link_to "Download CSV", opportunities_path(format: :csv), class: "btn btn-secondary", style: "text-decoration: none; padding: 0.5rem 1rem; background-color: #6c757d; color: white; border-radius: 4px; display: inline-block;" %>
+</div>
 
 <div id="opportunities">
   <table>
@@ -12,8 +15,11 @@
         <th><%= sortable_link :position_title, "Position" %></th>
         <th><%= sortable_link :application_date, "Application Date" %></th>
         <th><%= sortable_link :status %></th>
-        <th><%= sortable_link :remote %></th>
         <th><%= sortable_link :tech_stack, "Tech Stack" %></th>
+        <th><%= sortable_link :salary_range, "Salary Range" %></th>
+        <th><%= sortable_link :chatgpt_match, "ChatGPT" %></th>
+        <th><%= sortable_link :jobright_match, "Jobright" %></th>
+        <th><%= sortable_link :linkedin_match, "LinkedIn" %></th>
       </tr>
     </thead>
     <tbody>

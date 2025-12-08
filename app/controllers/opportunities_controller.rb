@@ -11,7 +11,7 @@ class OpportunitiesController < ApplicationController
       sort_direction = params[:direction] == "desc" ? "desc" : "asc"
 
       # Validate sort column to prevent SQL injection
-      allowed_columns = %w[position_title application_date status remote tech_stack created_at]
+      allowed_columns = %w[position_title application_date status remote tech_stack created_at salary_range chatgpt_match jobright_match linkedin_match]
       if allowed_columns.include?(sort_column)
         @opportunities = @opportunities.order("#{sort_column} #{sort_direction}")
       elsif sort_column == "company"
@@ -19,6 +19,14 @@ class OpportunitiesController < ApplicationController
       end
     else
       @opportunities = @opportunities.order(:application_date).reverse_order
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        csv_data = OpportunitiesCsvExporter.new(@opportunities).generate
+        send_data csv_data, filename: "opportunities_#{Date.today}.csv", type: 'text/csv'
+      end
     end
   end
 
@@ -86,6 +94,6 @@ class OpportunitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def opportunity_params
-      params.expect(opportunity: [ :company_id, :position_title, :application_date, :status, :notes, :remote, :tech_stack, :source ])
+      params.expect(opportunity: [ :company_id, :position_title, :application_date, :status, :notes, :remote, :tech_stack, :source, :salary_range, :listing_url, :chatgpt_match, :jobright_match, :linkedin_match ])
     end
 end

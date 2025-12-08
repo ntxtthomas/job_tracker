@@ -2,18 +2,7 @@
 
 <h1>Job Tracker Dashboard</h1>
 
-<div class="dashboard-cards">
-  <div class="card card-potentials">
-    <div class="card-header">
-      <h3>Potential Opportunities</h3>
-      <div class="card-icon">💡</div>
-    </div>
-    <div class="card-body">
-      <div class="card-number"><%= @total_potentials %></div>
-      <p class="card-subtitle">Not yet applied to</p>
-    </div>
-  </div>
-
+<div class="dashboard-cards" style="max-width: 400px;">
   <div class="card card-submitted">
     <div class="card-header">
       <h3>Applications Submitted</h3>
@@ -24,40 +13,33 @@
       <p class="card-subtitle">Total applications sent</p>
     </div>
   </div>
-
-  <div class="card card-responses">
-    <div class="card-header">
-      <h3>Responses Received</h3>
-      <div class="card-icon">📬</div>
-    </div>
-    <div class="card-body">
-      <div class="card-number"><%= @total_responses %></div>
-      <p class="card-subtitle">Companies that responded</p>
-    </div>
-  </div>
-
-  <div class="card card-interviews">
-    <div class="card-header">
-      <h3>Interviews Scheduled</h3>
-      <div class="card-icon">🎯</div>
-    </div>
-    <div class="card-body">
-      <div class="card-number"><%= @total_interviews %></div>
-      <p class="card-subtitle">Interviews in pipeline</p>
-    </div>
-  </div>
-
-  <div class="card card-offers">
-    <div class="card-header">
-      <h3>Offers Received</h3>
-      <div class="card-icon">🎉</div>
-    </div>
-    <div class="card-body">
-      <div class="card-number"><%= @total_offers %></div>
-      <p class="card-subtitle">Job offers to consider</p>
-    </div>
-  </div>
 </div>
+
+<% if @tech_stack_data.any? %>
+  <div class="dashboard-cards" style="max-width: 800px; margin-top: 2rem;">
+    <div class="card">
+      <div class="card-header">
+        <h3>Tech Stack Distribution</h3>
+        <div class="card-icon">📊</div>
+      </div>
+      <div class="card-body">
+        <div class="tech-stack-chart">
+          <% max_count = @tech_stack_data.values.max %>
+          <% @tech_stack_data.each do |tech_stack, count| %>
+            <div class="chart-bar-container">
+              <div class="chart-label"><%= tech_stack %></div>
+              <div class="chart-bar-wrapper">
+                <div class="chart-bar" style="width: <%= (count.to_f / max_count * 100).round(1) %>%;">
+                  <span class="chart-count"><%= count %></span>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <div class="dashboard-actions">
   <h2>Quick Actions</h2>

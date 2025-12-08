@@ -44,7 +44,7 @@
         ["Interview Scheduled", "interview"],
         ["Responded", "responded"],
         ["Offer Received", "offer"],
-        ["Rejected", "rejected"],
+        ["Closed", "closed"],
         ["Withdrawn", "withdrawn"]
       ], opportunity.status), 
       { prompt: "Select status" }, 
@@ -66,6 +66,8 @@
   <%= form.select :source, 
       options_for_select([
         ["LinkedIn", "linkedin"],
+        ["JobrightAI", "jobrightai"],
+        ["Y Combinator", "y_combinator"],
         ["Indeed", "indeed"],
         ["Company Website", "company_website"],
         ["Glassdoor", "glassdoor"],
@@ -85,6 +87,31 @@
 <div>
   <%= form.label :notes, style: "display: block" %>
   <%= form.text_area :notes, rows: 4, style: "display: block; width: 100%;" %>
+</div>
+
+<div>
+  <%= form.label :salary_range, style: "display: block" %>
+  <%= form.text_field :salary_range %>
+</div>
+
+<div>
+  <%= form.label :listing_url, "Listing URL", style: "display: block" %>
+  <%= form.url_field :listing_url, placeholder: "https://..." %>
+</div>
+
+<div>
+  <%= form.label :chatgpt_match, "ChatGPT Match", style: "display: block" %>
+  <%= form.text_field :chatgpt_match, placeholder: "e.g., 85%" %>
+</div>
+
+<div>
+  <%= form.label :jobright_match, "Jobright Match", style: "display: block" %>
+  <%= form.text_field :jobright_match, placeholder: "e.g., 90%" %>
+</div>
+
+<div>
+  <%= form.label :linkedin_match, "LinkedIn Match", style: "display: block" %>
+  <%= form.text_field :linkedin_match, placeholder: "e.g., 78%" %>
 </div>
 
 <div>

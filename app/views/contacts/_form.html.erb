@@ -32,8 +32,8 @@
   </div>
 
   <div>
-    <%= form.label :company_id, style: "display: block" %>
-    <%= form.text_field :company_id %>
+    <%= form.label :company_id, "Company", style: "display: block" %>
+    <%= form.collection_select :company_id, Company.order(:name), :id, :name, { prompt: "Select a company" } %>
   </div>
 
   <div>
