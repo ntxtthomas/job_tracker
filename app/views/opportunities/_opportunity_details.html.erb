@@ -36,6 +36,41 @@
     </p>
     <% end %>
 
+    <% if opportunity.salary_range.present? %>
+    <p>
+      <strong>Salary Range:</strong>
+      <%= opportunity.salary_range %>
+    </p>
+    <% end %>
+
+    <% if opportunity.listing_url.present? %>
+    <p>
+      <strong>Listing URL:</strong>
+      <%= link_to opportunity.listing_url, opportunity.listing_url, target: "_blank", rel: "noopener noreferrer" %>
+    </p>
+    <% end %>
+
+    <% if opportunity.chatgpt_match.present? %>
+    <p>
+      <strong>ChatGPT Match:</strong>
+      <%= opportunity.chatgpt_match %>
+    </p>
+    <% end %>
+
+    <% if opportunity.jobright_match.present? %>
+    <p>
+      <strong>Jobright Match:</strong>
+      <%= opportunity.jobright_match %>
+    </p>
+    <% end %>
+
+    <% if opportunity.linkedin_match.present? %>
+    <p>
+      <strong>LinkedIn Match:</strong>
+      <%= opportunity.linkedin_match %>
+    </p>
+    <% end %>
+
     <% if opportunity.notes.present? %>
     <p>
       <strong>Notes:</strong>

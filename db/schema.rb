@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_17_194016) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_08_194047) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -58,6 +58,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_17_194016) do
     t.boolean "remote"
     t.string "tech_stack"
     t.string "source"
+    t.string "salary_range"
+    t.string "chatgpt_match"
+    t.string "jobright_match"
+    t.string "linkedin_match"
+    t.string "listing_url"
     t.index ["company_id"], name: "index_opportunities_on_company_id"
   end
 
