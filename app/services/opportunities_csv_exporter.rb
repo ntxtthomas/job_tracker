@@ -1,4 +1,4 @@
-require 'csv'
+require "csv"
 
 class OpportunitiesCsvExporter
   def initialize(opportunities)
@@ -29,15 +29,15 @@ class OpportunitiesCsvExporter
 
   def headers
     [
-      'Company',
-      'Position Title',
-      'Application Date',
-      'Status',
-      'Tech Stack',
-      'Salary Range',
-      'ChatGPT Match',
-      'Jobright Match',
-      'LinkedIn Match'
+      "Company",
+      "Position Title",
+      "Application Date",
+      "Status",
+      "Tech Stack",
+      "Salary Range",
+      "ChatGPT Match",
+      "Jobright Match",
+      "LinkedIn Match"
     ]
   end
 end

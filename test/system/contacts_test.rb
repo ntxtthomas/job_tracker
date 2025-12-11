@@ -14,7 +14,7 @@ class ContactsTest < ApplicationSystemTestCase
     visit contacts_url
     click_on "New contact"
 
-    fill_in "Company", with: @contact.company_id
+    select @contact.company.name, from: "Company"
     fill_in "Email", with: @contact.email
     fill_in "Name", with: @contact.name
     fill_in "Phone", with: @contact.phone
@@ -29,7 +29,7 @@ class ContactsTest < ApplicationSystemTestCase
     visit contact_url(@contact)
     click_on "Edit this contact", match: :first
 
-    fill_in "Company", with: @contact.company_id
+    select @contact.company.name, from: "Company"
     fill_in "Email", with: @contact.email
     fill_in "Name", with: @contact.name
     fill_in "Phone", with: @contact.phone
