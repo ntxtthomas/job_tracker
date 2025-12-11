@@ -25,7 +25,7 @@ class OpportunitiesController < ApplicationController
       format.html
       format.csv do
         csv_data = OpportunitiesCsvExporter.new(@opportunities).generate
-        send_data csv_data, filename: "opportunities_#{Date.today}.csv", type: 'text/csv'
+        send_data csv_data, filename: "opportunities_#{Date.today}.csv", type: "text/csv"
       end
     end
   end
