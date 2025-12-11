@@ -17,5 +17,8 @@ class Company < ApplicationRecord
       shortened = UrlShortenerService.shorten(linkedin)
       self.linkedin = shortened if shortened.present?
     end
+  rescue StandardError => e
+    Rails.logger.error("URL shortening failed in Company#shorten_urls: #{e.message}")
+    # Continue with save even if shortening fails
   end
 end
