@@ -2,7 +2,10 @@
 
 <% content_for :title, "Companies" %>
 
-<h1>Companies</h1>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+  <h1 style="margin: 0;">Companies</h1>
+  <%= link_to "New company", new_company_path, style: "margin-top: 20px; background-color: #0d6efd; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
+</div>
 
 <div id="companies">
   <table>
@@ -12,6 +15,7 @@
         <th><%= sortable_link :industry %></th>
         <th><%= sortable_link :location %></th>
         <th><%= sortable_link :website %></th>
+        <th><%= sortable_link :linkedin %></th>
         <th>Tech Stack</th>
       </tr>
     </thead>
@@ -22,5 +26,3 @@
     </tbody>
   </table>
 </div>
-
-<%= link_to "New company", new_company_path %>
