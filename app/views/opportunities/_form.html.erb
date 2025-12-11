@@ -21,17 +21,17 @@
         opportunity.company_id
       ), 
       { prompt: "Select a company" }, 
-      { style: "display: block" } %>
+      { style: "display: block; width: 250px; height: 30px;" } %>
 </div>
 
 <div>
   <%= form.label :position_title, style: "display: block" %>
-  <%= form.text_field :position_title %>
+  <%= form.text_field :position_title, style: "width: 250px; height: 25px;" %>
 </div>
 
 <div>
   <%= form.label :application_date, style: "display: block" %>
-  <%= form.date_field :application_date %>
+  <%= form.date_field :application_date, style: "width: 250px; height: 25px;" %>
 </div>
 
 <div>
@@ -48,7 +48,7 @@
         ["Withdrawn", "withdrawn"]
       ], opportunity.status), 
       { prompt: "Select status" }, 
-      { style: "display: block" } %>
+      { style: "display: block; width: 250px; height: 30px;" } %>
 </div>
 
 <div>
@@ -58,7 +58,7 @@
 
 <div>
   <%= form.label :tech_stack, style: "display: block" %>
-  <%= form.text_field :tech_stack %>
+  <%= form.text_field :tech_stack, style: "width: 250px; height: 25px;" %>
 </div>
 
 <div>
@@ -81,7 +81,7 @@
         ["Other", "other"]
       ], opportunity.source), 
       { prompt: "Select source" }, 
-      { style: "display: block" } %>
+      { style: "display: block; width: 250px; height: 30px;" } %>
 </div>
 
 <div>
@@ -91,22 +91,22 @@
 
 <div>
   <%= form.label :salary_range, style: "display: block" %>
-  <%= form.text_field :salary_range %>
+  <%= form.text_field :salary_range, style: "width: 250px; height: 25px;" %>
 </div>
 
 <div>
   <%= form.label :listing_url, "Listing URL", style: "display: block" %>
-  <%= form.url_field :listing_url, placeholder: "https://..." %>
+  <%= form.url_field :listing_url, placeholder: "https://...", style: "width: 250px; height: 25px;" %>
 </div>
 
 <div>
   <%= form.label :chatgpt_match, "ChatGPT Match", style: "display: block" %>
-  <%= form.text_field :chatgpt_match, placeholder: "e.g., 85%" %>
+  <%= form.text_field :chatgpt_match, placeholder: "e.g., 85%", style: "height: 25px;" %>
 </div>
 
 <div>
   <%= form.label :jobright_match, "Jobright Match", style: "display: block" %>
-  <%= form.text_field :jobright_match, placeholder: "e.g., 90%" %>
+  <%= form.text_field :jobright_match, placeholder: "e.g., 90%", style: "height: 25px;" %>
 </div>
 
 <div>
@@ -118,7 +118,7 @@
         ["Top", "top"]
       ], opportunity.linkedin_match), 
       { prompt: "Select" }, 
-      { style: "display: block; width: 145px; height: 22px;" } %>
+      { style: "display: block; width: 145px; height: 25px;" } %>
 </div>
 
 <div>
