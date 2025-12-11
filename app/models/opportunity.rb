@@ -12,5 +12,8 @@ class Opportunity < ApplicationRecord
     if listing_url_changed? && listing_url.present? && !listing_url.include?("is.gd")
       self.listing_url = UrlShortenerService.shorten(listing_url)
     end
+  rescue StandardError => e
+    Rails.logger.error("URL shortening failed in Opportunity#shorten_urls: #{e.message}")
+    # Continue with save even if shortening fails
   end
 end
