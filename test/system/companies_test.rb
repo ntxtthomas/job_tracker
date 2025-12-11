@@ -17,7 +17,7 @@ class CompaniesTest < ApplicationSystemTestCase
     fill_in "Industry", with: @company.industry
     fill_in "Location", with: @company.location
     fill_in "Name", with: @company.name
-    fill_in "Website", with: @company.website
+    fill_in "Website", with: "https://#{@company.website}"
     click_on "Create Company"
 
     assert_text "Company was successfully created"
@@ -31,7 +31,7 @@ class CompaniesTest < ApplicationSystemTestCase
     fill_in "Industry", with: @company.industry
     fill_in "Location", with: @company.location
     fill_in "Name", with: @company.name
-    fill_in "Website", with: @company.website
+    fill_in "Website", with: "https://#{@company.website}"
     click_on "Update Company"
 
     assert_text "Company was successfully updated"
