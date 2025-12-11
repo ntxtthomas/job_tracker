@@ -15,37 +15,65 @@
   </div>
 </div>
 
-<% if @tech_stack_data.any? %>
-  <div class="dashboard-cards" style="max-width: 800px; margin-top: 2rem;">
-    <div class="card">
-      <div class="card-header">
-        <h3>Tech Stack Distribution</h3>
-        <div class="card-icon">📊</div>
-      </div>
-      <div class="card-body">
-        <div class="tech-stack-chart">
-          <% max_count = @tech_stack_data.values.max %>
-          <% @tech_stack_data.each do |tech_stack, count| %>
-            <div class="chart-bar-container">
-              <div class="chart-label"><%= tech_stack %></div>
-              <div class="chart-bar-wrapper">
-                <div class="chart-bar" style="width: <%= (count.to_f / max_count * 100).round(1) %>%;">
-                  <span class="chart-count"><%= count %></span>
+<div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 2rem;">
+  <% if @tech_stack_data.any? %>
+    <div class="dashboard-cards" style="max-width: 800px; flex: 1; min-width: 400px;">
+      <div class="card">
+        <div class="card-header">
+          <h3>Tech Stack Distribution</h3>
+          <div class="card-icon">📊</div>
+        </div>
+        <div class="card-body">
+          <div class="tech-stack-chart">
+            <% max_count = @tech_stack_data.values.max %>
+            <% @tech_stack_data.each do |tech_stack, count| %>
+              <div class="chart-bar-container">
+                <div class="chart-label"><%= tech_stack %></div>
+                <div class="chart-bar-wrapper">
+                  <div class="chart-bar" style="width: <%= (count.to_f / max_count * 100).round(1) %>%;">
+                    <span class="chart-count"><%= count %></span>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+
+  <% if @source_data.any? %>
+    <div class="dashboard-cards" style="max-width: 800px; flex: 1; min-width: 400px;">
+      <div class="card">
+        <div class="card-header">
+          <h3>Source Distribution</h3>
+          <div class="card-icon">🔍</div>
+        </div>
+        <div class="card-body">
+          <div class="tech-stack-chart">
+            <% max_count_source = @source_data.values.max %>
+            <% @source_data.each do |source, count| %>
+              <div class="chart-bar-container">
+                <div class="chart-label"><%= source&.humanize %></div>
+                <div class="chart-bar-wrapper">
+                  <div class="chart-bar" style="width: <%= (count.to_f / max_count_source * 100).round(1) %>%;">
+                    <span class="chart-count"><%= count %></span>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <div class="dashboard-actions">
   <h2>Quick Actions</h2>
   <div class="action-buttons">
-    <%= link_to "Add New Company", new_company_path, class: "btn btn-primary" %>
-    <%= link_to "Create Opportunity", new_opportunity_path, class: "btn btn-secondary" %>
-    <%= link_to "View All Applications", opportunities_path, class: "btn btn-secondary" %>
+    <%= link_to "Add New Company", new_company_path, style: "background-color: #0d6efd; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
+    <%= link_to "Create Opportunity", new_opportunity_path, style: "background-color: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#5a6268'", onmouseout: "this.style.backgroundColor='#6c757d'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
+    <%= link_to "View All Applications", opportunities_path, style: "background-color: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#5a6268'", onmouseout: "this.style.backgroundColor='#6c757d'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
   </div>
 </div>

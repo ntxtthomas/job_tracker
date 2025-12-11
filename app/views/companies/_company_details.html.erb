@@ -18,5 +18,12 @@
       <%= link_to company.website, company.website.start_with?('http') ? company.website : "https://#{company.website}", target: "_blank" %>
     </p>
     <% end %>
+
+    <% if company.linkedin.present? %>
+    <p>
+      <strong>LinkedIn:</strong>
+      <%= link_to company.linkedin, company.linkedin, target: "_blank", rel: "noopener noreferrer" %>
+    </p>
+    <% end %>
   </div>
 </div>

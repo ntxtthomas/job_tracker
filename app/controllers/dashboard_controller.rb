@@ -12,5 +12,12 @@ class DashboardController < ApplicationController
                                   .count
                                   .sort_by { |_, count| -count }
                                   .to_h
+    
+    # Source breakdown
+    @source_data = Opportunity.where.not(source: [nil, ""])
+                              .group(:source)
+                              .count
+                              .sort_by { |_, count| -count }
+                              .to_h
   end
 end

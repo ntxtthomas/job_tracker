@@ -1,12 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render "opportunity_details", opportunity: @opportunity %>
-
+<div style="margin-top: 2rem; display: flex; gap: 0.5rem; align-items: center;">
+  <%= link_to "Edit this opportunity", edit_opportunity_path(@opportunity), style: "background-color: #0d6efd; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
+  <%= link_to "Back to opportunities", opportunities_path, style: "background-color: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#5a6268'", onmouseout: "this.style.backgroundColor='#6c757d'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
+  <%= button_to "Destroy this opportunity", @opportunity, method: :delete, style: "margin: 0; background-color: #dc3545; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease;", data: { confirm: "Are you sure?" }, onmouseover: "this.style.backgroundColor='#c82333'", onmouseout: "this.style.backgroundColor='#dc3545'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
+  <%= link_to "Add New Interaction", new_interaction_path(company_id: @opportunity.company_id), style: "background-color: #0d6efd; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
+</div>
 <% if @interactions&.any? %>
 <div class="interactions-section" style="margin-top: 2rem;">
   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
     <h3>Related Interactions</h3>
-    <%= link_to "Add New Interaction", new_interaction_path(company_id: @opportunity.company_id), class: "btn btn-primary" %>
+    <%#= link_to "Old Add New Interaction", new_interaction_path(company_id: @opportunity.company_id), class: "btn btn-primary" %>
   </div>
   <table>
     <thead>
@@ -37,16 +42,10 @@
 <div class="interactions-section" style="margin-top: 2rem;">
   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
     <h3>Related Interactions</h3>
-    <%= link_to "Add New Interaction", new_interaction_path(company_id: @opportunity.company_id), class: "btn btn-primary" %>
+    <%#= link_to "Older Add New Interaction", new_interaction_path(company_id: @opportunity.company_id), class: "btn btn-primary" %>
   </div>
   <p>No interactions yet for this company.</p>
 </div>
 <% end %>
 
-<div style="margin-top: 2rem;">
-  <%= link_to "Edit this opportunity", edit_opportunity_path(@opportunity), class: "btn btn-primary" %> |
-  <%= link_to "Back to opportunities", opportunities_path, class: "btn btn-secondary" %>
 
-  <%= button_to "Destroy this opportunity", @opportunity, method: :delete, class: "btn btn-danger", 
-      data: { confirm: "Are you sure?" } %>
-</div>

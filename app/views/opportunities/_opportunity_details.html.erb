@@ -7,6 +7,20 @@
       <%= link_to opportunity.company.name, opportunity.company if opportunity.company %>
     </p>
 
+    <% if opportunity.company&.website.present? %>
+    <p>
+      <strong>Website:</strong>
+      <%= link_to opportunity.company.website, opportunity.company.website, target: "_blank", rel: "noopener noreferrer" %>
+    </p>
+    <% end %>
+
+    <% if opportunity.company&.linkedin.present? %>
+    <p>
+      <strong>LinkedIn:</strong>
+      <%= link_to opportunity.company.linkedin, opportunity.company.linkedin, target: "_blank", rel: "noopener noreferrer" %>
+    </p>
+    <% end %>
+
     <p>
       <strong>Application Date:</strong>
       <%= opportunity.application_date %>
