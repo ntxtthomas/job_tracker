@@ -9,6 +9,72 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
+/* CSS Variables for Light/Dark Theme */
+:root {
+  /* Light theme colors (default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --text-primary: #212529;
+  --text-secondary: #495057;
+  --text-muted: #6c757d;
+  --border-color: #ddd;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: rgba(0, 0, 0, 0.15);
+  --hover-bg: #f5f5f5;
+  --table-header-bg: #f8f9fa;
+  --input-bg: #ffffff;
+  --input-border: #ced4da;
+}
+
+/* Dark theme colors */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-tertiary: #3a3a3a;
+    --text-primary: #e9ecef;
+    --text-secondary: #ced4da;
+    --text-muted: #adb5bd;
+    --border-color: #495057;
+    --card-shadow: rgba(0, 0, 0, 0.3);
+    --card-shadow-hover: rgba(0, 0, 0, 0.5);
+    --hover-bg: #2d2d2d;
+    --table-header-bg: #2d2d2d;
+    --input-bg: #2d2d2d;
+    --input-border: #495057;
+  }
+}
+
+/* Apply theme colors to body and common elements */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+a {
+  color: #0d6efd;
+}
+
+@media (prefers-color-scheme: dark) {
+  a {
+    color: #6ea8fe;
+  }
+  
+  a:hover {
+    color: #9ec5fe;
+  }
+}
+
 /* Clickable table rows */
 .clickable-row {
   cursor: pointer !important;
@@ -16,7 +82,7 @@
 }
 
 .clickable-row:hover {
-  background-color: #f5f5f5;
+  background-color: var(--hover-bg);
 }
 
 /* Basic table styling */
@@ -30,25 +96,32 @@ th,
 td {
   padding: 0.75em;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
 th {
-  background-color: #f8f9fa;
+  background-color: var(--table-header-bg);
   font-weight: bold;
 }
 
 th a {
   text-decoration: none;
-  color: inherit;
+  color: var(--text-primary);
   font-weight: bold;
   display: block;
   padding: 0.25rem 0;
 }
 
 th a:hover {
-  background-color: #e9ecef;
+  background-color: var(--bg-tertiary);
   color: #0d6efd;
+}
+
+@media (prefers-color-scheme: dark) {
+  th a:hover {
+    color: #6ea8fe;
+  }
 }
 
 /* Button styling */
@@ -135,17 +208,18 @@ th a:hover {
 }
 
 .card {
-  background: white;
+  background: var(--bg-primary);
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px var(--card-shadow);
   padding: 1.5rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border-left: 4px solid #e9ecef;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--bg-tertiary);
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 15px var(--card-shadow-hover);
 }
 
 .card-header {
@@ -159,7 +233,7 @@ th a:hover {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #495057;
+  color: var(--text-secondary);
 }
 
 .card-icon {
@@ -180,7 +254,7 @@ th a:hover {
 
 .card-subtitle {
   margin: 0;
-  color: #6c757d;
+  color: var(--text-muted);
   font-size: 0.9rem;
 }
 
@@ -229,14 +303,15 @@ th a:hover {
 .dashboard-actions {
   margin-top: 3rem;
   padding: 2rem;
-  background: #f8f9fa;
+  background: var(--bg-secondary);
   border-radius: 12px;
+  border: 1px solid var(--border-color);
 }
 
 .dashboard-actions h2 {
   margin-top: 0;
   margin-bottom: 1.5rem;
-  color: #495057;
+  color: var(--text-secondary);
 }
 
 .action-buttons {
@@ -266,13 +341,13 @@ th a:hover {
 .chart-label {
   min-width: 150px;
   font-weight: 500;
-  color: #495057;
+  color: var(--text-secondary);
   font-size: 0.95rem;
 }
 
 .chart-bar-wrapper {
   flex: 1;
-  background: #e9ecef;
+  background: var(--bg-tertiary);
   border-radius: 4px;
   height: 32px;
   position: relative;
@@ -294,6 +369,99 @@ th a:hover {
   color: white;
   font-weight: bold;
   font-size: 0.9rem;
+}
+
+/* Navigation styles */
+.main-nav {
+  background-color: var(--bg-secondary);
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #0056b3;
+}
+
+.nav-link-bold {
+  font-weight: bold;
+}
+
+.nav-divider {
+  color: var(--text-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  .nav-link {
+    color: #6ea8fe;
+  }
+  
+  .nav-link:hover {
+    color: #9ec5fe;
+  }
+}
+
+/* Form inputs dark theme support */
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+textarea,
+select {
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--input-border);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  background-color: var(--input-bg);
+  border-color: #0d6efd;
+  outline: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="url"]:focus,
+  input[type="tel"]:focus,
+  input[type="number"]:focus,
+  input[type="date"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #6ea8fe;
+  }
+}
+
+/* Error messages */
+div[style*="color: red"],
+.error {
+  color: #dc3545 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  div[style*="color: red"],
+  .error {
+    color: #ea868f !important;
+  }
 }
 
 /* Responsive design */
