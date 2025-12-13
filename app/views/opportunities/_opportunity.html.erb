@@ -2,8 +2,8 @@
   <td><%= opportunity.company.name if opportunity.company %></td>
   <td><%= opportunity.position_title %></td>
   <td><%= opportunity.application_date %></td>
-  <td><%= opportunity.status %></td>
-  <td><%= opportunity.source&.humanize %></td>
+  <td><%= opportunity.status.present? && opportunity.status != "select" ? opportunity.status : "" %></td>
+  <td><%= opportunity.source.present? ? opportunity.source.humanize : "" %></td>
   <td><%= opportunity.tech_stack %></td>
   <td><%= opportunity.salary_range %></td>
   <td><%= opportunity.chatgpt_match %></td>
