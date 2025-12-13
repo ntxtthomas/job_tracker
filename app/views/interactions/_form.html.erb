@@ -21,7 +21,7 @@
             interaction.contact_id
           ), 
           { prompt: "No specific contact", include_blank: true }, 
-          { style: "display: block" } %>
+          { style: "display: block; width: 250px; height: 30px;" } %>
 </div>
 <div>
   <%= form.label :company_id, "Company", style: "display: block" %>
@@ -33,7 +33,7 @@
           interaction.company_id
         ), 
         { prompt: "Select a company" }, 
-        { style: "display: block" } %>
+        { style: "display: block; width: 250px; height: 30px;" } %>
 </div>
 
 <div>
@@ -49,7 +49,7 @@
           ["Other", "other"]
         ], interaction.category), 
         { prompt: "Select category" }, 
-        { style: "display: block" } %>
+        { style: "display: block; width: 250px; height: 30px;" } %>
 </div>
 
 <div>
@@ -59,7 +59,7 @@
 
 <div>
   <%= form.label :follow_up_date, style: "display: block" %>
-  <%= form.date_field :follow_up_date %>
+  <%= form.date_field :follow_up_date, style: "display: block; width: 250px; height: 30px;" %>
 </div>
 
 <div>
@@ -72,10 +72,10 @@
           ["Cancelled", "cancelled"]
         ], interaction.status), 
         { prompt: "Select status" }, 
-        { style: "display: block" } %>
+        { style: "display: block; width: 250px; height: 30px;" } %>
 </div>
 
-<div>
+<div style="margin-top: 20px;">
   <%= form.submit %>
 </div>
 <% end %>

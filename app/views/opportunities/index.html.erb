@@ -3,10 +3,18 @@
 <% content_for :title, "Opportunities" %>
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-  <h1 style="margin: 0;">Opportunities</h1>
+  <div>
+    <h1 style="margin: 0;">Opportunities</h1>
+    <% if @date_filter %>
+      <p style="margin: 0.5rem 0 0 0; color: var(--text-muted); font-size: 0.95rem;">
+        Showing applications from <%= @date_filter %>
+        <%= link_to "Clear filter", opportunities_path, style: "margin-left: 1rem; color: #0d6efd; text-decoration: none;" %>
+      </p>
+    <% end %>
+  </div>
   <div style="display: flex; gap: 0.5rem;">
     <%= link_to "New opportunity", new_opportunity_path, style: "margin-top: 20px; background-color: #0d6efd; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
-    <%= link_to "Download CSV", opportunities_path(format: :csv), style: "margin-top: 20px; text-decoration: none; padding: 10px 20px; background-color: #6c757d; color: white; border-radius: 4px; display: inline-block; cursor: pointer; transition: all 0.2s ease;", onmouseover: "this.style.backgroundColor='#5a6268'", onmouseout: "this.style.backgroundColor='#6c757d'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
+    <%= link_to "Download CSV", opportunities_path(format: :csv, start_date: params[:start_date], end_date: params[:end_date]), style: "margin-top: 20px; text-decoration: none; padding: 10px 20px; background-color: #6c757d; color: white; border-radius: 4px; display: inline-block; cursor: pointer; transition: all 0.2s ease;", onmouseover: "this.style.backgroundColor='#5a6268'", onmouseout: "this.style.backgroundColor='#6c757d'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
   </div>
 </div>
 
