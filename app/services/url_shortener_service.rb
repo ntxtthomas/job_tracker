@@ -17,6 +17,8 @@ class UrlShortenerService
       http.use_ssl = true
       http.open_timeout = 5
       http.read_timeout = 5
+      # Set ca_file to use system certificates if available
+      http.ca_file = "/etc/ssl/cert.pem" if File.exist?("/etc/ssl/cert.pem")
 
       request = Net::HTTP::Get.new(uri.request_uri)
       response = http.request(request)
