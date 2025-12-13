@@ -5,6 +5,14 @@ class OpportunitiesController < ApplicationController
   def index
     @opportunities = Opportunity.includes(:company)
 
+    # Handle date range filtering from weekly dashboard cards
+    if params[:start_date].present? && params[:end_date].present?
+      start_date = Date.parse(params[:start_date])
+      end_date = Date.parse(params[:end_date])
+      @opportunities = @opportunities.where(application_date: start_date..end_date)
+      @date_filter = "#{start_date.strftime('%b %d')} - #{end_date.strftime('%b %d, %Y')}"
+    end
+
     # Handle sorting
     if params[:sort].present?
       sort_column = params[:sort]
@@ -24,7 +32,8 @@ class OpportunitiesController < ApplicationController
     respond_to do |format|
       format.html
       format.csv do
-        csv_data = OpportunitiesCsvExporter.new(@opportunities).generate
+        title = @date_filter ? "Showing applications from #{@date_filter}" : nil
+        csv_data = OpportunitiesCsvExporter.new(@opportunities, title: title).generate
         send_data csv_data, filename: "opportunities_#{Date.today}.csv", type: "text/csv"
       end
     end

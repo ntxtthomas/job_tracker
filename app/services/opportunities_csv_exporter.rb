@@ -1,12 +1,19 @@
 require "csv"
 
 class OpportunitiesCsvExporter
-  def initialize(opportunities)
+  def initialize(opportunities, title: nil)
     @opportunities = opportunities
+    @title = title
   end
 
   def generate
     CSV.generate(headers: true) do |csv|
+      # Add title row if provided
+      if @title.present?
+        csv << [ @title ]
+        csv << [] # Empty row for spacing
+      end
+
       csv << headers
 
       @opportunities.each do |opportunity|
