@@ -2,10 +2,10 @@
 
 <h1>Job Tracker Dashboard</h1>
 
-<div class="dashboard-cards" style="max-width: 400px;">
+<div class="dashboard-cards">
   <div class="card card-submitted">
     <div class="card-header">
-      <h3>Applications Submitted</h3>
+      <h3>Total Applications Submitted</h3>
       <div class="card-icon">📋</div>
     </div>
     <div class="card-body">
@@ -13,6 +13,22 @@
       <p class="card-subtitle">Total applications sent</p>
     </div>
   </div>
+</div>
+
+<h2 style="margin-top: 3rem; margin-bottom: 1rem; color: var(--text-secondary);">Applications by Week</h2>
+<div class="dashboard-cards weekly-cards">
+  <% @weekly_data.each_with_index do |week, index| %>
+    <%= link_to opportunities_path(start_date: week[:start_date], end_date: week[:end_date]), class: "card card-week clickable-week-card", style: "text-decoration: none; color: inherit;" do %>
+      <div class="card-header">
+        <h3><%= week[:label] %></h3>
+        <div class="card-icon">📅</div>
+      </div>
+      <div class="card-body">
+        <div class="card-number"><%= week[:count] %></div>
+        <p class="card-subtitle">applications</p>
+      </div>
+    <% end %>
+  <% end %>
 </div>
 
 <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 2rem;">
@@ -67,13 +83,4 @@
       </div>
     </div>
   <% end %>
-</div>
-
-<div class="dashboard-actions">
-  <h2>Quick Actions</h2>
-  <div class="action-buttons">
-    <%= link_to "Add New Company", new_company_path, style: "background-color: #0d6efd; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
-    <%= link_to "Create Opportunity", new_opportunity_path, style: "background-color: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#5a6268'", onmouseout: "this.style.backgroundColor='#6c757d'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
-    <%= link_to "View All Applications", opportunities_path, style: "background-color: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#5a6268'", onmouseout: "this.style.backgroundColor='#6c757d'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
-  </div>
 </div>
