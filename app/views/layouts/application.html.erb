@@ -24,15 +24,15 @@
 </head>
 
 <body>
-  <nav style="background-color: #f8f9fa; padding: 1rem; margin-bottom: 2rem; border-bottom: 1px solid #dee2e6;">
+  <nav class="main-nav">
     <div style="display: flex; gap: 1rem; align-items: center;">
-      <%= link_to "Dashboard", root_path, style: "text-decoration: none; color: #007bff; font-weight: bold;" %>
-      <span style="color: #6c757d;">|</span>
-      <%= link_to "Companies", companies_path, style: "text-decoration: none; color: #007bff;" %>
-      <span style="color: #6c757d;">|</span>
-      <%= link_to "Contacts", contacts_path, style: "text-decoration: none; color: #007bff;" %>
-      <span style="color: #6c757d;">|</span>
-      <%= link_to "Opportunities", opportunities_path, style: "text-decoration: none; color: #007bff;" %>
+      <%= link_to "Dashboard", root_path, class: "nav-link nav-link-bold" %>
+      <span class="nav-divider">|</span>
+      <%= link_to "Companies", companies_path, class: "nav-link" %>
+      <span class="nav-divider">|</span>
+      <%= link_to "Contacts", contacts_path, class: "nav-link" %>
+      <span class="nav-divider">|</span>
+      <%= link_to "Opportunities", opportunities_path, class: "nav-link" %>
     </div>
   </nav>
 
