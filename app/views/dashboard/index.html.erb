@@ -2,17 +2,53 @@
 
 <h1>Job Tracker Dashboard</h1>
 
-<div class="dashboard-cards">
-  <div class="card card-submitted">
-    <div class="card-header">
-      <h3>Total Applications Submitted</h3>
-      <div class="card-icon">📋</div>
-    </div>
-    <div class="card-body">
-      <div class="card-number"><%= @total_resumes %></div>
-      <p class="card-subtitle">Total applications sent</p>
+<div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem;">
+  <div class="dashboard-cards" style="flex: 1; min-width: 300px; max-width: 500px;">
+    <div class="card card-submitted">
+      <div class="card-header">
+        <h3>Total Applications Submitted</h3>
+        <div class="card-icon">📋</div>
+      </div>
+      <div class="card-body">
+        <div class="card-number"><%= @total_resumes %></div>
+        <p class="card-subtitle">Total applications sent</p>
+      </div>
     </div>
   </div>
+
+  <% if @learning_insights.any? %>
+    <div class="dashboard-cards" style="flex: 2; min-width: 400px;">
+      <div class="card">
+        <div class="card-header">
+          <h3>🎯 Your Learning Priorities</h3>
+          <div class="card-icon">📚</div>
+        </div>
+        <div class="card-body">
+          <div style="padding: 10px 0;">
+            <% @learning_insights.each_with_index do |insight, index| %>
+              <div style="margin-bottom: 20px; padding: 15px; background-color: <%= index == 0 ? 'rgba(111, 66, 193, 0.05)' : 'var(--bg-primary, #fff)' %>; border-left: 4px solid <%= index == 0 ? '#6f42c1' : '#dee2e6' %>; border-radius: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <div>
+                    <span style="font-weight: bold; font-size: 16px; color: var(--text-primary, #333);"><%= index + 1 %>. <%= insight[:name] %></span>
+                    <% if index == 0 %>
+                      <span style="background-color: #6f42c1; color: white; padding: 2px 8px; border-radius: 3px; font-size: 11px; margin-left: 8px; font-weight: bold;">TOP PRIORITY</span>
+                    <% end %>
+                  </div>
+                  <span style="font-size: 20px; font-weight: bold; color: #6f42c1;"><%= insight[:percentage] %>%</span>
+                </div>
+                <div style="font-size: 14px; color: var(--text-secondary, #666); margin-bottom: 5px;">
+                  <%= insight[:insight] %>
+                </div>
+                <div style="font-size: 12px; color: var(--text-tertiary, #999);">
+                  Appears in <strong><%= insight[:count] %></strong> of your tracked opportunities
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <h2 style="margin-top: 3rem; margin-bottom: 1rem; color: var(--text-secondary);">Applications by Week</h2>
@@ -32,22 +68,48 @@
 </div>
 
 <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 2rem;">
-  <% if @tech_stack_data.any? %>
+  <% if @tech_combinations.any? %>
     <div class="dashboard-cards" style="max-width: 800px; flex: 1; min-width: 400px;">
       <div class="card">
         <div class="card-header">
-          <h3>Tech Stack Distribution</h3>
-          <div class="card-icon">📊</div>
+          <h3>Top Tech Stack Combinations</h3>
+          <div class="card-icon">🔧</div>
         </div>
         <div class="card-body">
           <div class="tech-stack-chart">
-            <% max_count = @tech_stack_data.values.max %>
-            <% @tech_stack_data.each do |tech_stack, count| %>
+            <% max_count = @tech_combinations.values.max %>
+            <% @tech_combinations.each do |tech_combo, count| %>
               <div class="chart-bar-container">
-                <div class="chart-label"><%= tech_stack %></div>
+                <div class="chart-label" style="font-size: 13px;"><%= tech_combo %></div>
                 <div class="chart-bar-wrapper">
                   <div class="chart-bar" style="width: <%= (count.to_f / max_count * 100).round(1) %>%;">
-                    <span class="chart-count"><%= count %></span>
+                    <span class="chart-count"><%= count %> jobs</span>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @top_technologies.any? %>
+    <div class="dashboard-cards" style="max-width: 800px; flex: 1; min-width: 400px;">
+      <div class="card">
+        <div class="card-header">
+          <h3>Most In-Demand Technologies</h3>
+          <div class="card-icon">⭐</div>
+        </div>
+        <div class="card-body">
+          <div class="tech-stack-chart">
+            <% max_count_tech = @top_technologies.values.max %>
+            <% @top_technologies.each do |tech, count| %>
+              <div class="chart-bar-container">
+                <div class="chart-label"><%= tech %></div>
+                <div class="chart-bar-wrapper">
+                  <div class="chart-bar" style="width: <%= (count.to_f / max_count_tech * 100).round(1) %>%; background-color: #28a745;">
+                    <span class="chart-count"><%= count %> jobs</span>
                   </div>
                 </div>
               </div>

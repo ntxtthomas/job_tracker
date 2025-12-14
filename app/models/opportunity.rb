@@ -1,5 +1,9 @@
 class Opportunity < ApplicationRecord
   belongs_to :company
+  has_many :opportunity_technologies, dependent: :destroy
+  has_many :technologies, through: :opportunity_technologies
+
+  accepts_nested_attributes_for :opportunity_technologies, allow_destroy: true
 
   # Delegate website and linkedin to the company
   delegate :website, :linkedin, to: :company, allow_nil: true

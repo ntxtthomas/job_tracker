@@ -4,7 +4,21 @@
   <td><%= opportunity.application_date %></td>
   <td><%= opportunity.status.present? && opportunity.status != "select" ? opportunity.status : "" %></td>
   <td><%= opportunity.source.present? ? opportunity.source.humanize : "" %></td>
-  <td><%= opportunity.tech_stack %></td>
+  <td>
+    <% if opportunity.technologies.any? %>
+      <div style="display: flex; flex-wrap: wrap; gap: 3px;">
+        <% opportunity.technologies.order(:category, :name).limit(5).each do |tech| %>
+          <span style="background-color: #e7f1ff; color: #0056b3; padding: 2px 6px; border-radius: 3px; font-size: 11px; white-space: nowrap;"><%= tech.name %></span>
+        <% end %>
+        <% if opportunity.technologies.count > 5 %>
+          <span style="color: #666; font-size: 11px;">+<%= opportunity.technologies.count - 5 %></span>
+        <% end %>
+      </div>
+    <% end %>
+    <% if opportunity.other_tech_stack.present? %>
+      <div style="font-size: 11px; color: #666; margin-top: 2px;"><%= opportunity.other_tech_stack.truncate(30) %></div>
+    <% end %>
+  </td>
   <td><%= opportunity.salary_range %></td>
   <td><%= opportunity.chatgpt_match %></td>
   <td><%= opportunity.jobright_match %></td>

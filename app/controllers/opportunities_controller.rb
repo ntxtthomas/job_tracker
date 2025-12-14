@@ -3,7 +3,7 @@ class OpportunitiesController < ApplicationController
 
   # GET /opportunities or /opportunities.json
   def index
-    @opportunities = Opportunity.includes(:company)
+    @opportunities = Opportunity.includes(:company, :technologies)
 
     # Handle date range filtering from weekly dashboard cards
     if params[:start_date].present? && params[:end_date].present?
@@ -103,6 +103,11 @@ class OpportunitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def opportunity_params
-      params.expect(opportunity: [ :company_id, :position_title, :application_date, :status, :notes, :remote, :tech_stack, :source, :salary_range, :listing_url, :chatgpt_match, :jobright_match, :linkedin_match ])
+      params.expect(opportunity: [ 
+        :company_id, :position_title, :application_date, :status, :notes, :remote, 
+        :tech_stack, :other_tech_stack, :source, :salary_range, :listing_url, 
+        :chatgpt_match, :jobright_match, :linkedin_match,
+        technology_ids: []
+      ])
     end
 end

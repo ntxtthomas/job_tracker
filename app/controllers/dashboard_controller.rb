@@ -6,12 +6,13 @@ class DashboardController < ApplicationController
     @total_interviews = Opportunity.where(status: "interview").count
     @total_offers = Opportunity.where(status: "offer").count
 
-    # Tech stack breakdown
-    @tech_stack_data = Opportunity.where.not(tech_stack: [ nil, "" ])
-                                  .group(:tech_stack)
-                                  .count
-                                  .sort_by { |_, count| -count }
-                                  .to_h
+    # Tech stack analytics
+    opportunities_with_tech = Opportunity.joins(:technologies).distinct
+    analyzer = TechStackAnalyzer.new(opportunities_with_tech)
+    
+    @tech_combinations = analyzer.analyze_combinations.first(10).to_h # Top 10 combinations as hash
+    @learning_insights = analyzer.learning_insights(limit: 5)
+    @top_technologies = analyzer.top_technologies(limit: 15)
 
     # Source breakdown
     @source_data = Opportunity.where.not(source: [ nil, "" ])
