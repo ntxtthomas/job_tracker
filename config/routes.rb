@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "dashboard/index"
+  get "dashboard" => "dashboard#index"
   resources :opportunities
   resources :interactions
   resources :contacts

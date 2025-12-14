@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_11_171807) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_14_184113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -64,11 +64,33 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_11_171807) do
     t.string "jobright_match"
     t.string "linkedin_match"
     t.string "listing_url"
+    t.text "other_tech_stack"
     t.index ["company_id"], name: "index_opportunities_on_company_id"
+  end
+
+  create_table "opportunity_technologies", force: :cascade do |t|
+    t.bigint "opportunity_id", null: false
+    t.bigint "technology_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["opportunity_id", "technology_id"], name: "index_opp_tech_on_opp_and_tech", unique: true
+    t.index ["opportunity_id"], name: "index_opportunity_technologies_on_opportunity_id"
+    t.index ["technology_id"], name: "index_opportunity_technologies_on_technology_id"
+  end
+
+  create_table "technologies", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "category", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category"], name: "index_technologies_on_category"
+    t.index ["name"], name: "index_technologies_on_name", unique: true
   end
 
   add_foreign_key "contacts", "companies"
   add_foreign_key "interactions", "companies"
   add_foreign_key "interactions", "contacts"
   add_foreign_key "opportunities", "companies"
+  add_foreign_key "opportunity_technologies", "opportunities"
+  add_foreign_key "opportunity_technologies", "technologies"
 end

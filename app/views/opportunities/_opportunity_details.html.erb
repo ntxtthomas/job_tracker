@@ -36,10 +36,30 @@
       <%= opportunity.remote ? "Yes" : "No" %>
     </p>
 
-    <% if opportunity.tech_stack.present? %>
+    <% if opportunity.technologies.any? %>
     <p>
-      <strong>Tech Stack:</strong>
-      <%= opportunity.tech_stack %>
+      <strong>Technologies:</strong>
+      <div style="margin-top: 5px;">
+        <% Technology::CATEGORIES.each do |category| %>
+          <% category_techs = opportunity.technologies.where(category: category).order(:name) %>
+          <% next if category_techs.empty? %>
+          <div style="margin-bottom: 10px;">
+            <strong style="font-size: 14px; color: var(--text-secondary, #666);"><%= category %>:</strong>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px;">
+              <% category_techs.each do |tech| %>
+                <span style="background-color: #e7f1ff; color: #0056b3; padding: 3px 8px; border-radius: 3px; font-size: 13px;"><%= tech.name %></span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </p>
+    <% end %>
+    
+    <% if opportunity.other_tech_stack.present? %>
+    <p>
+      <strong>Other Technologies:</strong>
+      <%= opportunity.other_tech_stack %>
     </p>
     <% end %>
 

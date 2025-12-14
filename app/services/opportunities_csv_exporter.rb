@@ -17,12 +17,17 @@ class OpportunitiesCsvExporter
       csv << headers
 
       @opportunities.each do |opportunity|
+        # Combine structured technologies with other_tech_stack
+        tech_list = opportunity.technologies.order(:category, :name).pluck(:name).join(", ")
+        tech_list += ", #{opportunity.other_tech_stack}" if opportunity.other_tech_stack.present?
+        tech_list = tech_list.presence || opportunity.tech_stack # Fallback to old field if no structured data
+        
         csv << [
           opportunity.company.name,
           opportunity.position_title,
           opportunity.application_date,
           opportunity.status,
-          opportunity.tech_stack,
+          tech_list,
           opportunity.salary_range,
           opportunity.chatgpt_match,
           opportunity.jobright_match,
