@@ -4,6 +4,17 @@ class CompaniesController < ApplicationController
   # GET /companies or /companies.json
   def index
     @companies = Company.includes(:opportunities)
+    @technologies = Technology.order(:name)
+
+    # Filter by technology if provided
+    if params[:technology].present?
+      tech = Technology.find_by(name: params[:technology])
+      if tech
+        @companies = @companies.joins(:opportunities).joins(:technologies)
+                              .where(technologies: { id: tech.id }).distinct
+      end
+      @selected_technology = params[:technology]
+    end
 
     # Skip sorting for tech_stack since it's aggregated data, but allow other columns
     if params[:sort].present? && params[:sort] != "tech_stack"
@@ -44,6 +55,12 @@ class CompaniesController < ApplicationController
 
   # PATCH/PUT /companies/1 or /companies/1.json
   def update
+    # Handle known_tech_stack_list from checkboxes
+    if params[:company] && params[:company][:known_tech_stack_list].present?
+      techs = params[:company][:known_tech_stack_list].reject(&:blank?)
+      params[:company][:known_tech_stack] = techs.join(', ')
+    end
+
     respond_to do |format|
       if @company.update(company_params)
         format.html { redirect_to @company, notice: "Company was successfully updated.", status: :see_other }
@@ -73,6 +90,6 @@ class CompaniesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def company_params
-      params.expect(company: [ :name, :industry, :location, :website, :linkedin ])
+      params.expect(company: [ :name, :industry, :location, :website, :linkedin, :known_tech_stack ])
     end
 end

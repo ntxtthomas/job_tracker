@@ -5,7 +5,40 @@
   <td><%= company.website %></td>
   <td><%= company.linkedin %></td>
   <td>
-    <% tech_stacks = company.opportunities.filter_map(&:tech_stack).uniq.join(", ") %>
-    <%= tech_stacks.present? ? tech_stacks : "N/A" %>
+    <% tech_sources = company.tech_stack_with_sources %>
+    <% if tech_sources.any? %>
+      <div style="display: flex; flex-wrap: wrap; gap: 4px; align-items: center;">
+        <% 
+          main_categories = ["Backend", "Frontend"]
+          main_techs = tech_sources.select { |t| main_categories.include?(t[:category]) }
+          other_techs = tech_sources.reject { |t| main_categories.include?(t[:category]) }
+        %>
+        <% main_techs.first(2).each do |tech| %>
+          <span style="
+            background-color: <%= tech[:source] == :opportunity ? '#e7f1ff' : '#f0e7ff' %>;
+            color: <%= tech[:source] == :opportunity ? '#0056b3' : '#6f42c1' %>;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            border: 1px solid <%= tech[:source] == :opportunity ? '#b8daff' : '#d4c5f9' %>;
+            title="<%= tech[:source] == :opportunity ? 'From opportunities' : 'Known / researched' %>"
+          ">
+            <%= tech[:name] %>
+          </span>
+        <% end %>
+        <% if (main_techs.count > 2) || other_techs.any? %>
+          <span style="
+            font-weight: bold;
+            color: var(--text-secondary, #666);
+            padding: 2px 4px;
+            font-size: 12px;
+            cursor: pointer;
+            title="Click on company to see full tech stack"
+          ">+</span>
+        <% end %>
+      </div>
+    <% else %>
+      <span style="color: #999;">N/A</span>
+    <% end %>
   </td>
 </tr>
