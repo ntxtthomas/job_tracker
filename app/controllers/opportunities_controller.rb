@@ -103,9 +103,9 @@ class OpportunitiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def opportunity_params
-      params.expect(opportunity: [ 
-        :company_id, :position_title, :application_date, :status, :notes, :remote, 
-        :tech_stack, :other_tech_stack, :source, :salary_range, :listing_url, 
+      params.expect(opportunity: [
+        :company_id, :position_title, :application_date, :status, :notes, :remote,
+        :tech_stack, :other_tech_stack, :source, :salary_range, :listing_url,
         :chatgpt_match, :jobright_match, :linkedin_match,
         technology_ids: []
       ])
