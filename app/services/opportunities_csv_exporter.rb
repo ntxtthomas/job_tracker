@@ -21,7 +21,7 @@ class OpportunitiesCsvExporter
         tech_list = opportunity.technologies.order(:category, :name).pluck(:name).join(", ")
         tech_list += ", #{opportunity.other_tech_stack}" if opportunity.other_tech_stack.present?
         tech_list = tech_list.presence || opportunity.tech_stack # Fallback to old field if no structured data
-        
+
         csv << [
           opportunity.company.name,
           opportunity.position_title,

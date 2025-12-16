@@ -15,19 +15,19 @@ class TechStackAnalyzer
   # e.g., { "Ruby on Rails, React, PostgreSQL" => 8, ... }
   def analyze_combinations
     combination_counts = Hash.new(0)
-    
+
     @opportunities.each do |opp|
       next if opp.technologies.empty?
-      
+
       # Sort technologies by category then name for consistent grouping
       tech_names = opp.technologies
                       .order(:category, :name)
                       .pluck(:name)
                       .join(", ")
-      
+
       combination_counts[tech_names] += 1
     end
-    
+
     # Sort by count descending
     combination_counts.sort_by { |_combo, count| -count }.to_h
   end
@@ -37,33 +37,33 @@ class TechStackAnalyzer
   # Excludes intermediate technologies (JavaScript, Tailwind, etc.)
   def analyze_main_stack_combinations
     combination_counts = Hash.new(0)
-    
+
     # Main framework technologies to track
-    backend_frameworks = ["Ruby on Rails", "Python", "Django", "Node.js", "Laravel", "Express"]
-    frontend_frameworks = ["React", "Vue", "Angular", "Stimulus", "Hotwire"]
-    
+    backend_frameworks = [ "Ruby on Rails", "Python", "Django", "Node.js", "Laravel", "Express" ]
+    frontend_frameworks = [ "React", "Vue", "Angular", "Stimulus", "Hotwire" ]
+
     @opportunities.each do |opp|
       next if opp.technologies.empty?
-      
+
       tech_names = opp.technologies.pluck(:name)
-      
+
       # Find which backend framework is used
       backend = backend_frameworks.find { |fw| tech_names.include?(fw) }
-      
+
       # Find which frontend framework is used
       frontend = frontend_frameworks.find { |fw| tech_names.include?(fw) }
-      
+
       # Build combo key
       combo_parts = []
       combo_parts << backend if backend
       combo_parts << frontend if frontend
-      
+
       next if combo_parts.empty?
-      
+
       combo_key = combo_parts.join(" + ")
       combination_counts[combo_key] += 1
     end
-    
+
     # Sort by count descending
     combination_counts.sort_by { |_combo, count| -count }.to_h
   end
@@ -72,7 +72,7 @@ class TechStackAnalyzer
   # e.g., { "Backend" => 20, "Frontend" => 18, ... }
   def analyze_by_category
     category_counts = Hash.new(0)
-    
+
     Technology::CATEGORIES.each do |category|
       count = OpportunityTechnology
                 .joins(:technology)
@@ -80,10 +80,10 @@ class TechStackAnalyzer
                 .where(opportunity_id: @opportunities.pluck(:id))
                 .distinct
                 .count(:opportunity_id)
-      
+
       category_counts[category] = count if count > 0
     end
-    
+
     category_counts
   end
 
@@ -91,7 +91,7 @@ class TechStackAnalyzer
   # e.g., { "Ruby on Rails" => 20, "React" => 18, ... }
   def top_technologies(limit: 10)
     tech_counts = Hash.new(0)
-    
+
     Technology
       .joins(:opportunity_technologies)
       .where(opportunity_technologies: { opportunity_id: @opportunities.pluck(:id) })
@@ -108,10 +108,10 @@ class TechStackAnalyzer
   def analyze_pairings(technology_name)
     tech = Technology.find_by(name: technology_name)
     return {} unless tech
-    
+
     # Find all opportunities with this technology
     opportunity_ids = tech.opportunity_technologies.pluck(:opportunity_id)
-    
+
     # Count other technologies in those opportunities
     pairing_counts = Technology
       .joins(:opportunity_technologies)
@@ -121,7 +121,7 @@ class TechStackAnalyzer
       .count
       .sort_by { |_name, count| -count }
       .to_h
-    
+
     {
       tech: technology_name,
       total_opportunities: opportunity_ids.count,
@@ -151,7 +151,7 @@ class TechStackAnalyzer
 
       # Generate contextual insight
       insight = generate_insight(tech_name, count, percentage, total_opps)
-      
+
       insights << {
         name: tech_name,
         count: count,

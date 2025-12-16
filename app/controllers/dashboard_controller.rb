@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
     # Tech stack analytics
     opportunities_with_tech = Opportunity.joins(:technologies).distinct
     analyzer = TechStackAnalyzer.new(opportunities_with_tech)
-    
+
     @tech_combinations = analyzer.analyze_main_stack_combinations.first(10).to_h # Top 10 simplified combinations
     @learning_insights = analyzer.learning_insights(limit: 5)
     @top_technologies = analyzer.top_technologies(limit: 15)

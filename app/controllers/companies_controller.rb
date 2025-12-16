@@ -48,7 +48,7 @@ class CompaniesController < ApplicationController
     # Handle known_tech_stack_list from checkboxes
     if params[:company] && params[:company][:known_tech_stack_list].present?
       techs = params[:company][:known_tech_stack_list].reject(&:blank?)
-      @company.known_tech_stack = techs.join(', ')
+      @company.known_tech_stack = techs.join(", ")
     end
 
     respond_to do |format|
@@ -67,7 +67,7 @@ class CompaniesController < ApplicationController
     # Handle known_tech_stack_list from checkboxes
     if params[:company] && params[:company][:known_tech_stack_list].present?
       techs = params[:company][:known_tech_stack_list].reject(&:blank?)
-      params[:company][:known_tech_stack] = techs.join(', ')
+      params[:company][:known_tech_stack] = techs.join(", ")
     end
 
     respond_to do |format|
