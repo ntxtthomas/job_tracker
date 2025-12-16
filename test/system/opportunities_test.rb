@@ -19,7 +19,8 @@ class OpportunitiesTest < ApplicationSystemTestCase
     fill_in "Notes", with: @opportunity.notes
     fill_in "Position title", with: @opportunity.position_title
     select "Applied", from: "Status"
-    fill_in "Tech stack", with: "Ruby on Rails"
+    check "Ruby on Rails"
+    check "React"
     select "LinkedIn", from: "Source"
     click_on "Create Opportunity"
 
@@ -36,7 +37,7 @@ class OpportunitiesTest < ApplicationSystemTestCase
     fill_in "Notes", with: @opportunity.notes
     fill_in "Position title", with: @opportunity.position_title
     select "Under Review", from: "Status"
-    fill_in "Tech stack", with: "Python Django"
+    check "Python"
     select "Indeed", from: "Source"
     click_on "Update Opportunity"
 
