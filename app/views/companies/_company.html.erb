@@ -12,8 +12,11 @@
           main_categories = ["Backend", "Frontend"]
           main_techs = tech_sources.select { |t| main_categories.include?(t[:category]) }
           other_techs = tech_sources.reject { |t| main_categories.include?(t[:category]) }
+          
+          # If no main techs, use other techs
+          display_techs = main_techs.any? ? main_techs : other_techs
         %>
-        <% main_techs.first(2).each do |tech| %>
+        <% display_techs.first(2).each do |tech| %>
           <span style="
             background-color: <%= tech[:source] == :opportunity ? '#e7f1ff' : '#f0e7ff' %>;
             color: <%= tech[:source] == :opportunity ? '#0056b3' : '#6f42c1' %>;
@@ -26,7 +29,7 @@
             <%= tech[:name] %>
           </span>
         <% end %>
-        <% if (main_techs.count > 2) || other_techs.any? %>
+        <% if display_techs.count > 2 %>
           <span style="
             font-weight: bold;
             color: var(--text-secondary, #666);

@@ -10,11 +10,14 @@ class CompaniesController < ApplicationController
     if params[:technology].present?
       tech = Technology.find_by(name: params[:technology])
       if tech
-        @companies = @companies.joins(:opportunities).joins(:technologies)
+        @companies = @companies.joins(opportunities: :technologies)
                               .where(technologies: { id: tech.id }).distinct
       end
       @selected_technology = params[:technology]
     end
+
+    # Always include technologies for display
+    @companies = @companies.includes(opportunities: :technologies)
 
     # Skip sorting for tech_stack since it's aggregated data, but allow other columns
     if params[:sort].present? && params[:sort] != "tech_stack"
@@ -41,6 +44,12 @@ class CompaniesController < ApplicationController
   # POST /companies or /companies.json
   def create
     @company = Company.new(company_params)
+
+    # Handle known_tech_stack_list from checkboxes
+    if params[:company] && params[:company][:known_tech_stack_list].present?
+      techs = params[:company][:known_tech_stack_list].reject(&:blank?)
+      @company.known_tech_stack = techs.join(', ')
+    end
 
     respond_to do |format|
       if @company.save

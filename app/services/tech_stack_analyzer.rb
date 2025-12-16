@@ -32,6 +32,42 @@ class TechStackAnalyzer
     combination_counts.sort_by { |_combo, count| -count }.to_h
   end
 
+  # Returns simplified tech combinations showing only Backend + Frontend
+  # e.g., { "Ruby on Rails + React" => 8, "Python + Vue" => 5, ... }
+  # Excludes intermediate technologies (JavaScript, Tailwind, etc.)
+  def analyze_main_stack_combinations
+    combination_counts = Hash.new(0)
+    
+    # Main framework technologies to track
+    backend_frameworks = ["Ruby on Rails", "Python", "Django", "Node.js", "Laravel", "Express"]
+    frontend_frameworks = ["React", "Vue", "Angular", "Stimulus", "Hotwire"]
+    
+    @opportunities.each do |opp|
+      next if opp.technologies.empty?
+      
+      tech_names = opp.technologies.pluck(:name)
+      
+      # Find which backend framework is used
+      backend = backend_frameworks.find { |fw| tech_names.include?(fw) }
+      
+      # Find which frontend framework is used
+      frontend = frontend_frameworks.find { |fw| tech_names.include?(fw) }
+      
+      # Build combo key
+      combo_parts = []
+      combo_parts << backend if backend
+      combo_parts << frontend if frontend
+      
+      next if combo_parts.empty?
+      
+      combo_key = combo_parts.join(" + ")
+      combination_counts[combo_key] += 1
+    end
+    
+    # Sort by count descending
+    combination_counts.sort_by { |_combo, count| -count }.to_h
+  end
+
   # Returns count by category
   # e.g., { "Backend" => 20, "Frontend" => 18, ... }
   def analyze_by_category
