@@ -7,3 +7,7 @@ one:
 two:
   name: React
   category: Frontend
+
+three:
+  name: Python
+  category: Backend
