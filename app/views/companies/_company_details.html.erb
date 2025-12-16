@@ -25,5 +25,47 @@
       <%= link_to company.linkedin, company.linkedin, target: "_blank", rel: "noopener noreferrer" %>
     </p>
     <% end %>
+
+    <% if company.tech_stack_summary.any? || company.known_tech_stack.present? %>
+    <p>
+      <strong>Technologies:</strong>
+    </p>
+    <div style="margin-top: 10px; margin-bottom: 20px;">
+      <% tech_sources = company.tech_stack_with_sources %>
+      <% if tech_sources.any? %>
+        <% grouped_techs = tech_sources.group_by { |t| t[:category] } %>
+        <% grouped_techs.each do |category, techs| %>
+          <div style="margin-bottom: 15px;">
+            <strong style="font-size: 14px; color: var(--text-secondary, #666); display: block; margin-bottom: 5px;"><%= category %></strong>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+              <% techs.each do |tech| %>
+                <span style="
+                  background-color: <%= tech[:source] == :opportunity ? '#e7f1ff' : '#f0e7ff' %>;
+                  color: <%= tech[:source] == :opportunity ? '#0056b3' : '#6f42c1' %>;
+                  padding: 4px 10px;
+                  border-radius: 3px;
+                  font-size: 13px;
+                  border: 1px solid <%= tech[:source] == :opportunity ? '#b8daff' : '#d4c5f9' %>;
+                  title="<%= tech[:source] == :opportunity ? 'From job opportunities' : 'Known / researched' %>"
+                ">
+                  <%= tech[:name] %>
+                  <% if tech[:source] == :known %>
+                    <span style="font-size: 10px; opacity: 0.7;">*</span>
+                  <% end %>
+                </span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <% if company.known_tech_stack.present? %>
+          <p style="font-size: 12px; color: var(--text-tertiary, #999); margin-top: 10px;">
+            * = Known/researched technology (not confirmed in opportunities)
+          </p>
+        <% end %>
+      <% else %>
+        <p style="color: #999;">No technologies tracked yet</p>
+      <% end %>
+    </div>
+    <% end %>
   </div>
 </div>

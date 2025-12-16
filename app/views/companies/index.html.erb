@@ -7,6 +7,23 @@
   <%= link_to "New company", new_company_path, style: "margin-top: 20px; background-color: #0d6efd; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
 </div>
 
+<div style="margin-bottom: 20px; padding: 15px; background-color: var(--bg-secondary, #f8f9fa); border-radius: 4px;">
+  <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+    <label for="technology_filter" style="font-weight: bold; margin: 0;">Filter by technology:</label>
+    <%= form_with url: companies_path, method: :get, local: true do |f| %>
+      <%= f.select :technology, 
+          options_from_collection_for_select(@technologies, :name, :name, @selected_technology),
+          { include_blank: "All Technologies" },
+          id: "technology_filter",
+          style: "padding: 8px; border: 1px solid #ddd; border-radius: 4px; min-width: 200px;" %>
+      <%= f.submit "Filter", style: "padding: 8px 16px; background-color: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;" %>
+      <% if @selected_technology.present? %>
+        <%= link_to "Clear", companies_path, style: "padding: 8px 16px; background-color: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block;" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
 <div id="companies">
   <table>
     <thead>

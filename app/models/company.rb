@@ -5,6 +5,51 @@ class Company < ApplicationRecord
 
   before_save :shorten_urls
 
+  def tech_stack_summary
+    opportunities
+      .joins(:technologies)
+      .select('DISTINCT technologies.name, technologies.category')
+      .order('technologies.category, technologies.name')
+  end
+
+  def full_tech_stack_summary
+    # Combine opportunity-derived techs with known techs
+    opportunity_techs = opportunities
+      .joins(:technologies)
+      .select('DISTINCT technologies.name')
+      .order(:name)
+      .pluck(:name)
+
+    known_techs = known_tech_stack.present? ? known_tech_stack.split(',').map(&:strip) : []
+
+    (opportunity_techs + known_techs).uniq.sort
+  end
+
+  def tech_stack_with_sources
+    # Returns array of hashes with tech name and source (opportunity or known)
+    result = []
+
+    # Add opportunity-derived technologies
+    opportunities
+      .joins(:technologies)
+      .select('DISTINCT technologies.name, technologies.category')
+      .order('technologies.category, technologies.name')
+      .each do |tech|
+        result << { name: tech.name, source: :opportunity, category: tech.category }
+      end
+
+    # Add known technologies not already in opportunities
+    if known_tech_stack.present?
+      known_techs = known_tech_stack.split(',').map(&:strip)
+      known_techs.each do |tech_name|
+        next if result.any? { |t| t[:name] == tech_name }
+        result << { name: tech_name, source: :known, category: 'Other' }
+      end
+    end
+
+    result
+  end
+
   private
 
   def shorten_urls

@@ -36,7 +36,33 @@
   <%= form.url_field :linkedin, placeholder: "https://linkedin.com/...", style: "width: 250px; height: 25px;" %>
 </div>
 
-<div>
+<div style="margin-top: 20px;">
+  <%= form.label :known_tech_stack, "Known Technologies", style: "display: block; margin-bottom: 10px; font-weight: bold;" %>
+  <p style="font-size: 12px; color: var(--text-secondary, #666); margin-bottom: 10px;">
+    Technologies this company uses (from research, website, job postings, etc.)
+  </p>
+  <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 4px; background-color: var(--bg-primary, #fff);">
+    <% Technology::CATEGORIES.each do |category| %>
+      <% techs = Technology.where(category: category).order(:name) %>
+      <% next if techs.empty? %>
+      
+      <fieldset style="margin-bottom: 15px; border: none; padding: 0;">
+        <legend style="font-weight: bold; color: var(--text-primary, #333); margin-bottom: 5px;"><%= category %></legend>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 5px;">
+          <% techs.each do |tech| %>
+            <label style="display: flex; align-items: center; cursor: pointer;">
+              <% known_techs = company.known_tech_stack.present? ? company.known_tech_stack.split(',').map(&:strip) : [] %>
+              <input type="checkbox" name="company[known_tech_stack_list][]" value="<%= tech.name %>" 
+                <%= 'checked' if known_techs.include?(tech.name) %> />
+              <span style="margin-left: 5px; font-size: 14px;"><%= tech.name %></span>
+            </label>
+          <% end %>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+  <%= hidden_field_tag "company[known_tech_stack_list][]", "" %>
+</div>
   <%= form.submit style: "margin-top: 20px; background-color: #0d6efd; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
 </div>
 <% end %>
