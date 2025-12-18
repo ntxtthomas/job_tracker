@@ -5,18 +5,46 @@
   <td><%= opportunity.status.present? && opportunity.status != "select" ? opportunity.status : "" %></td>
   <td><%= opportunity.source.present? ? opportunity.source.humanize : "" %></td>
   <td>
-    <% if opportunity.technologies.any? %>
-      <div style="display: flex; flex-wrap: wrap; gap: 3px;">
-        <% opportunity.technologies.order(:category, :name).limit(5).each do |tech| %>
-          <span style="background-color: #e7f1ff; color: #0056b3; padding: 2px 6px; border-radius: 3px; font-size: 11px; white-space: nowrap;"><%= tech.name %></span>
+    <% tech_sources = opportunity.technologies.map { |t| { name: t.name, category: t.category, source: :opportunity } } %>
+    <% if opportunity.other_tech_stack.present? %>
+      <% tech_sources << { name: opportunity.other_tech_stack.truncate(20), category: "Other", source: :other } %>
+    <% end %>
+    
+    <% if tech_sources.any? %>
+      <div style="display: flex; flex-wrap: wrap; gap: 4px; align-items: center;">
+        <% 
+          main_categories = ["Backend", "Frontend"]
+          main_techs = tech_sources.select { |t| main_categories.include?(t[:category]) }
+          other_techs = tech_sources.reject { |t| main_categories.include?(t[:category]) }
+          
+          # If no main techs, use other techs
+          display_techs = main_techs.any? ? main_techs : other_techs
+        %>
+        <% display_techs.first(2).each do |tech| %>
+          <span style="
+            background-color: #e7f1ff;
+            color: #0056b3;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            border: 1px solid #b8daff;
+            white-space: nowrap;
+          ">
+            <%= tech[:name] %>
+          </span>
         <% end %>
-        <% if opportunity.technologies.count > 5 %>
-          <span style="color: #666; font-size: 11px;">+<%= opportunity.technologies.count - 5 %></span>
+        <% if display_techs.count > 2 %>
+          <span style="
+            font-weight: bold;
+            color: var(--text-secondary, #666);
+            padding: 2px 4px;
+            font-size: 12px;
+            cursor: pointer;
+          ">+</span>
         <% end %>
       </div>
-    <% end %>
-    <% if opportunity.other_tech_stack.present? %>
-      <div style="font-size: 11px; color: #666; margin-top: 2px;"><%= opportunity.other_tech_stack.truncate(30) %></div>
+    <% else %>
+      <span style="color: #999;">N/A</span>
     <% end %>
   </td>
   <td><%= opportunity.salary_range %></td>
