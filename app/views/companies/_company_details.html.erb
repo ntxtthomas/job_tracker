@@ -7,10 +7,24 @@
       <%= company.industry %>
     </p>
 
+    <% if company.company_type.present? %>
+    <p>
+      <strong>Company Type:</strong>
+      <%= company.company_type %>
+    </p>
+    <% end %>
+
     <p>
       <strong>Location:</strong>
       <%= company.location %>
     </p>
+
+    <% if company.size.present? %>
+    <p>
+      <strong>Company Size:</strong>
+      <%= company.size %> employees
+    </p>
+    <% end %>
 
     <% if company.website.present? %>
     <p>
