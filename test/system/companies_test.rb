@@ -15,6 +15,7 @@ class CompaniesTest < ApplicationSystemTestCase
     click_on "New company"
 
     fill_in "Industry", with: @company.industry
+    select "Product / Platform", from: "Company Type"
     fill_in "Location", with: @company.location
     fill_in "Name", with: @company.name
     fill_in "Website", with: "https://#{@company.website}"
@@ -29,6 +30,7 @@ class CompaniesTest < ApplicationSystemTestCase
     click_on "Edit this company", match: :first
 
     fill_in "Industry", with: @company.industry
+    select @company.company_type, from: "Company Type"
     fill_in "Location", with: @company.location
     fill_in "Name", with: @company.name
     fill_in "Website", with: "https://#{@company.website}"
