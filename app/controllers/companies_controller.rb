@@ -99,6 +99,6 @@ class CompaniesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def company_params
-      params.expect(company: [ :name, :industry, :location, :website, :linkedin, :known_tech_stack ])
+      params.expect(company: [ :name, :industry, :company_type, :location, :size, :website, :linkedin, :known_tech_stack ])
     end
 end

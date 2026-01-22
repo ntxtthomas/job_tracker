@@ -22,8 +22,24 @@
 </div>
 
 <div>
+  <%= form.label :company_type, "Company Type", style: "display: block" %>
+  <%= form.select :company_type, 
+      [["Select a type...", ""], 
+       ["Product / Platform", "Product"], 
+       ["Consultancy / Agency", "Consultancy"], 
+       ["Staffing / Contract", "Staffing"]], 
+      {}, 
+      style: "width: 250px; height: 25px; padding: 4px;" %>
+</div>
+
+<div>
   <%= form.label :location, style: "display: block" %>
   <%= form.text_field :location, style: "width: 250px; height: 25px;" %>
+</div>
+
+<div>
+  <%= form.label :size, "Company Size (Employee Range)", style: "display: block" %>
+  <%= form.text_field :size, placeholder: "e.g., 501-1,000", style: "width: 250px; height: 25px;" %>
 </div>
 
 <div>

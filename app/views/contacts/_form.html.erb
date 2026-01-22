@@ -32,6 +32,21 @@
   </div>
 
   <div>
+    <%= form.label :linkedin, "LinkedIn URL", style: "display: block" %>
+    <%= form.url_field :linkedin, placeholder: "https://linkedin.com/...", style: "width: 250px; height: 25px;" %>
+  </div>
+
+  <div>
+    <%= form.label :about, style: "display: block" %>
+    <%= form.text_area :about, rows: 4, style: "width: 250px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+  </div>
+
+  <div>
+    <%= form.label :notes, style: "display: block" %>
+    <%= form.text_area :notes, rows: 4, style: "width: 250px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+  </div>
+
+  <div>
     <%= form.label :company_id, "Company", style: "display: block" %>
     <%= form.collection_select :company_id, Company.order(:name), :id, :name, { prompt: "Select a company" }, { style: "display: block; width: 250px; height: 30px;" } %>
   </div>

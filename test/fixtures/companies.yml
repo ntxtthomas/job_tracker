@@ -5,9 +5,11 @@ one:
   industry: Technology
   location: San Francisco
   website: acme.com
+  company_type: Product
 
 two:
   name: Beta Industries
   industry: Manufacturing
   location: New York
   website: beta.com
+  company_type: Consultancy
