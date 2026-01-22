@@ -24,6 +24,8 @@ class OpportunitiesCsvExporter
 
         csv << [
           opportunity.company.name,
+          opportunity.company.company_type || "",
+          opportunity.company.size || "",
           opportunity.position_title,
           opportunity.application_date,
           opportunity.status,
@@ -42,6 +44,8 @@ class OpportunitiesCsvExporter
   def headers
     [
       "Company",
+      "Company Type",
+      "Company Size",
       "Position Title",
       "Application Date",
       "Status",

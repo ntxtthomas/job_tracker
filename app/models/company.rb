@@ -3,7 +3,19 @@ class Company < ApplicationRecord
   has_many :interactions, dependent: :destroy
   has_many :opportunities, dependent: :destroy
 
-  before_save :shorten_urls
+  before_save :shorten_urls, :sanitize_size
+
+  # Validations
+  validates :name, presence: true
+  validates :company_type, inclusion: { in: %w[Product Consultancy Staffing], message: "%{value} is not a valid company type" }, allow_nil: true
+  validates :size, format: { with: /\A[\d,\-\s]*\z/, message: "should be a range like '501-1,000'" }, allow_nil: true, allow_blank: true
+
+  # Enum for company type
+  enum :company_type, {
+    Product: "Product",
+    Consultancy: "Consultancy",
+    Staffing: "Staffing"
+  }, validate: true
 
   def tech_stack_summary
     opportunities
@@ -65,5 +77,9 @@ class Company < ApplicationRecord
   rescue StandardError => e
     Rails.logger.error("URL shortening failed in Company#shorten_urls: #{e.message}")
     # Continue with save even if shortening fails
+  end
+
+  def sanitize_size
+    self.size = size&.gsub(",", "") if size.present?
   end
 end
