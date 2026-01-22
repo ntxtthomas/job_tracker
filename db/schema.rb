@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_16_211536) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_22_024419) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,6 +23,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_16_211536) do
     t.datetime "updated_at", null: false
     t.string "linkedin"
     t.text "known_tech_stack"
+    t.string "company_type"
+    t.string "size"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -33,6 +35,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_16_211536) do
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "linkedin"
+    t.text "about"
+    t.text "notes"
     t.index ["company_id"], name: "index_contacts_on_company_id"
   end
 
