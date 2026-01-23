@@ -5,6 +5,12 @@ class OpportunitiesController < ApplicationController
   def index
     @opportunities = Opportunity.includes(:company, :technologies)
 
+    # Handle role type filtering
+    if params[:role_type].present? && params[:role_type] != "all"
+      @opportunities = @opportunities.where(role_type: params[:role_type])
+      @role_filter = Opportunity::ROLE_TYPES[params[:role_type]]
+    end
+
     # Handle date range filtering from weekly dashboard cards
     if params[:start_date].present? && params[:end_date].present?
       start_date = Date.parse(params[:start_date])
@@ -19,7 +25,7 @@ class OpportunitiesController < ApplicationController
       sort_direction = params[:direction] == "desc" ? "desc" : "asc"
 
       # Validate sort column to prevent SQL injection
-      allowed_columns = %w[position_title application_date status remote tech_stack created_at salary_range chatgpt_match jobright_match linkedin_match]
+      allowed_columns = %w[position_title application_date status remote tech_stack created_at salary_range chatgpt_match jobright_match linkedin_match role_type]
       if allowed_columns.include?(sort_column)
         @opportunities = @opportunities.order("#{sort_column} #{sort_direction}")
       elsif sort_column == "company"
@@ -106,8 +112,9 @@ class OpportunitiesController < ApplicationController
       params.expect(opportunity: [
         :company_id, :position_title, :application_date, :status, :notes, :remote,
         :tech_stack, :other_tech_stack, :source, :salary_range, :listing_url,
-        :chatgpt_match, :jobright_match, :linkedin_match,
-        technology_ids: []
+        :chatgpt_match, :jobright_match, :linkedin_match, :role_type,
+        technology_ids: [],
+        role_metadata: {}
       ])
     end
 end

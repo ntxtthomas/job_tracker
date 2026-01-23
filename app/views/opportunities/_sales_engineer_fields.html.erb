@@ -1,0 +1,265 @@
+<div class="role-metadata-fields">
+  <h3>Sales Engineer Criteria</h3>
+  
+  <div class="metadata-section">
+    <h4>Sales Motion</h4>
+    
+    <div>
+      <%= label_tag "opportunity[role_metadata][sales_motion]", "Sales Motion" %>
+      <%= select_tag "opportunity[role_metadata][sales_motion]", 
+          options_for_select([
+            ["SMB", "smb"],
+            ["Mid-Market", "mid_market"],
+            ["Enterprise", "enterprise"]
+          ], @opportunity.metadata[:sales_motion]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][deal_type]", "Deal Type" %>
+      <%= select_tag "opportunity[role_metadata][deal_type]", 
+          options_for_select([
+            ["New Logo", "new_logo"],
+            ["Expansion", "expansion"],
+            ["Both", "both"]
+          ], @opportunity.metadata[:deal_type]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][acv_range]", "ACV Range" %>
+      <%= text_field_tag "opportunity[role_metadata][acv_range]", 
+          @opportunity.metadata[:acv_range], 
+          placeholder: "e.g., $50k-$500k", class: "form-input" %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][sales_cycle_length]", "Sales Cycle Length" %>
+      <%= text_field_tag "opportunity[role_metadata][sales_cycle_length]", 
+          @opportunity.metadata[:sales_cycle_length], 
+          placeholder: "e.g., 3-6 months", class: "form-input" %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][quota_type]", "Quota Type" %>
+      <%= select_tag "opportunity[role_metadata][quota_type]", 
+          options_for_select([
+            ["Influence", "influence"],
+            ["Ownership", "ownership"]
+          ], @opportunity.metadata[:quota_type]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+  </div>
+
+  <div class="metadata-section">
+    <h4>Customer & Domain</h4>
+    
+    <div>
+      <%= label_tag "opportunity[role_metadata][customer_persona]", "Customer Persona (check all that apply)" %>
+      <div class="checkbox-group">
+        <% personas = @opportunity.metadata[:customer_persona] || [] %>
+        <label><%= check_box_tag "opportunity[role_metadata][customer_persona][]", "business_users", personas.include?("business_users") %> Business Users</label>
+        <label><%= check_box_tag "opportunity[role_metadata][customer_persona][]", "operators", personas.include?("operators") %> Operators</label>
+        <label><%= check_box_tag "opportunity[role_metadata][customer_persona][]", "it_security", personas.include?("it_security") %> IT / Security</label>
+        <label><%= check_box_tag "opportunity[role_metadata][customer_persona][]", "execs", personas.include?("execs") %> Execs</label>
+        <label><%= check_box_tag "opportunity[role_metadata][customer_persona][]", "mixed", personas.include?("mixed") %> Mixed Audiences</label>
+      </div>
+      <%= hidden_field_tag "opportunity[role_metadata][customer_persona][]", "" %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][domain_depth]", "Domain Depth Required" %>
+      <%= select_tag "opportunity[role_metadata][domain_depth]", 
+          options_for_select([
+            ["Shallow (generic SaaS)", "shallow"],
+            ["Moderate (needs onboarding)", "moderate"],
+            ["Deep (regulatory/workflow heavy)", "deep"]
+          ], @opportunity.metadata[:domain_depth]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+  </div>
+
+  <div class="metadata-section">
+    <h4>Technical & Demo Requirements</h4>
+    
+    <div>
+      <%= label_tag "opportunity[role_metadata][demo_intensity]", "Demo Intensity" %>
+      <%= select_tag "opportunity[role_metadata][demo_intensity]", 
+          options_for_select([
+            ["Scripted Demos", "scripted"],
+            ["Custom Demos", "custom"],
+            ["Sandbox Builds", "sandbox"],
+            ["Live Integrations", "live_integration"],
+            ["ROI Modeling", "roi_modeling"]
+          ], @opportunity.metadata[:demo_intensity]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][technical_depth]", "Technical Depth (check all that apply)" %>
+      <div class="checkbox-group">
+        <% tech_depth = @opportunity.metadata[:technical_depth] || [] %>
+        <label><%= check_box_tag "opportunity[role_metadata][technical_depth][]", "apis", tech_depth.include?("apis") %> APIs</label>
+        <label><%= check_box_tag "opportunity[role_metadata][technical_depth][]", "integrations", tech_depth.include?("integrations") %> Integrations</label>
+        <label><%= check_box_tag "opportunity[role_metadata][technical_depth][]", "data_models", tech_depth.include?("data_models") %> Data Models</label>
+        <label><%= check_box_tag "opportunity[role_metadata][technical_depth][]", "security", tech_depth.include?("security") %> Security/Compliance</label>
+        <label><%= check_box_tag "opportunity[role_metadata][technical_depth][]", "config", tech_depth.include?("config") %> Configuration</label>
+      </div>
+      <%= hidden_field_tag "opportunity[role_metadata][technical_depth][]", "" %>
+    </div>
+  </div>
+
+  <div class="metadata-section">
+    <h4>Pressure Sources</h4>
+    
+    <div>
+      <%= label_tag "opportunity[role_metadata][pressure_sources][quota_pressure]", "Quota Pressure?" %>
+      <%= check_box_tag "opportunity[role_metadata][pressure_sources][quota_pressure]", 
+          "1", @opportunity.metadata.dig(:pressure_sources, :quota_pressure) %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][pressure_sources][travel_percent]", "Travel %" %>
+      <%= number_field_tag "opportunity[role_metadata][pressure_sources][travel_percent]", 
+          @opportunity.metadata.dig(:pressure_sources, :travel_percent), 
+          min: 0, max: 100, class: "form-input" %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][pressure_sources][overtime_expected]", "Overtime Expected?" %>
+      <%= check_box_tag "opportunity[role_metadata][pressure_sources][overtime_expected]", 
+          "1", @opportunity.metadata.dig(:pressure_sources, :overtime_expected) %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][pressure_sources][deal_urgency]", "Deal Urgency" %>
+      <%= text_field_tag "opportunity[role_metadata][pressure_sources][deal_urgency]", 
+          @opportunity.metadata.dig(:pressure_sources, :deal_urgency), 
+          placeholder: "e.g., quarterly, monthly", class: "form-input" %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][pressure_sources][exec_visibility]", "Exec Visibility" %>
+      <%= select_tag "opportunity[role_metadata][pressure_sources][exec_visibility]", 
+          options_for_select([
+            ["Low", "low"],
+            ["Medium", "medium"],
+            ["High", "high"]
+          ], @opportunity.metadata.dig(:pressure_sources, :exec_visibility)), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+  </div>
+
+  <div class="metadata-section">
+    <h4>Fit & Culture</h4>
+    
+    <div>
+      <%= label_tag "opportunity[role_metadata][fit_reasons]", "Why You Are a Fit (check all that apply)" %>
+      <div class="checkbox-group">
+        <% fit_reasons = @opportunity.metadata[:fit_reasons] || [] %>
+        <label><%= check_box_tag "opportunity[role_metadata][fit_reasons][]", "prior_customer", fit_reasons.include?("prior_customer") %> Prior Customer</label>
+        <label><%= check_box_tag "opportunity[role_metadata][fit_reasons][]", "domain_operator", fit_reasons.include?("domain_operator") %> Domain Operator</label>
+        <label><%= check_box_tag "opportunity[role_metadata][fit_reasons][]", "technical_translator", fit_reasons.include?("technical_translator") %> Technical Translator</label>
+        <label><%= check_box_tag "opportunity[role_metadata][fit_reasons][]", "relationship_builder", fit_reasons.include?("relationship_builder") %> Relationship Builder</label>
+        <label><%= check_box_tag "opportunity[role_metadata][fit_reasons][]", "change_agent", fit_reasons.include?("change_agent") %> Change Agent</label>
+      </div>
+      <%= hidden_field_tag "opportunity[role_metadata][fit_reasons][]", "" %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][nervous_system_cost]", "Nervous System Cost" %>
+      <%= select_tag "opportunity[role_metadata][nervous_system_cost]", 
+          options_for_select([
+            ["Low", "low"],
+            ["Medium", "medium"],
+            ["High", "high"]
+          ], @opportunity.metadata[:nervous_system_cost]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][energy_type]", "Energy Type" %>
+      <%= select_tag "opportunity[role_metadata][energy_type]", 
+          options_for_select([
+            ["Presenting", "presenting"],
+            ["Collaborating", "collaborating"],
+            ["Building", "building"]
+          ], @opportunity.metadata[:energy_type]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][remote_tolerance]", "Remote Tolerance" %>
+      <%= select_tag "opportunity[role_metadata][remote_tolerance]", 
+          options_for_select([
+            ["Strict Remote", "strict"],
+            ["Flexible", "flexible"],
+            ["Onsite Required", "onsite"]
+          ], @opportunity.metadata[:remote_tolerance]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .role-metadata-fields h3 {
+    margin: 20px 0 15px 0;
+    color: var(--text-primary, #333);
+    border-bottom: 2px solid var(--border-color, #ddd);
+    padding-bottom: 5px;
+  }
+
+  .metadata-section {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: var(--bg-secondary, #f9f9f9);
+    border-radius: 5px;
+  }
+
+  .metadata-section h4 {
+    margin: 0 0 10px 0;
+    color: var(--text-secondary, #666);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .metadata-section > div {
+    margin-bottom: 15px;
+  }
+
+  .metadata-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  .checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .checkbox-group label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+  }
+
+  .checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+  }
+
+  .form-select, .form-input {
+    width: 100%;
+    max-width: 350px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid var(--border-color, #ddd);
+    border-radius: 4px;
+  }
+
+  .form-input {
+    height: 25px;
+  }
+</style>

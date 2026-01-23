@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_22_024419) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_23_193352) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -71,7 +71,11 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_22_024419) do
     t.string "linkedin_match"
     t.string "listing_url"
     t.text "other_tech_stack"
+    t.string "role_type", default: "software_engineer", null: false
+    t.jsonb "role_metadata", default: {}, null: false
     t.index ["company_id"], name: "index_opportunities_on_company_id"
+    t.index ["role_metadata"], name: "index_opportunities_on_role_metadata", using: :gin
+    t.index ["role_type"], name: "index_opportunities_on_role_type"
   end
 
   create_table "opportunity_technologies", force: :cascade do |t|

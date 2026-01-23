@@ -1,4 +1,10 @@
 class Opportunity < ApplicationRecord
+  # Include role-specific concerns
+  include RoleTypes::SoftwareEngineer
+  include RoleTypes::SalesEngineer
+  include RoleTypes::SolutionsEngineer
+  include RoleTypes::ProductManager
+
   belongs_to :company
   has_many :opportunity_technologies, dependent: :destroy
   has_many :technologies, through: :opportunity_technologies
@@ -8,8 +14,49 @@ class Opportunity < ApplicationRecord
   # Delegate website and linkedin to the company
   delegate :website, :linkedin, to: :company, allow_nil: true
 
+  # Role type enum
+  ROLE_TYPES = {
+    "software_engineer" => "Software Engineer",
+    "sales_engineer" => "Sales Engineer",
+    "solutions_engineer" => "Solutions Engineer",
+    "product_manager" => "Product Manager"
+  }.freeze
+
+  validates :role_type, presence: true, inclusion: { in: ROLE_TYPES.keys }
+
   before_save :shorten_urls
   before_save :standardize_salary_range
+
+  # Role type helper methods
+  def role_type_label
+    ROLE_TYPES[role_type] || role_type.titleize
+  end
+
+  def software_engineer?
+    role_type == "software_engineer"
+  end
+
+  def sales_engineer?
+    role_type == "sales_engineer"
+  end
+
+  def solutions_engineer?
+    role_type == "solutions_engineer"
+  end
+
+  def product_manager?
+    role_type == "product_manager"
+  end
+
+  # Get/Set role metadata with indifferent access
+  def metadata
+    @metadata ||= (role_metadata || {}).with_indifferent_access
+  end
+
+  def metadata=(hash)
+    self.role_metadata = hash
+    @metadata = nil # Clear memoization
+  end
 
   private
 
