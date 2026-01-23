@@ -1,12 +1,29 @@
 <tr id="<%= dom_id opportunity %>" class="clickable-row" data-href="<%= opportunity_path(opportunity) %>">
   <td>
+    <%
+      badge_color = case opportunity.role_type
+      when "software_engineer"
+        "#6c757d" # Gray
+      when "sales_engineer"
+        "#28a745" # Green
+      when "solutions_engineer"
+        "#17a2b8" # Teal
+      when "product_manager"
+        "#6f42c1" # Purple
+      else
+        "#6c757d" # Default gray
+      end
+    %>
     <span style="
-      background-color: #6c757d;
+      background-color: <%= badge_color %>;
       color: white;
       padding: 2px 8px;
       border-radius: 4px;
       font-size: 11px;
       white-space: nowrap;
+      display: inline-block;
+      width: 80px;
+      text-align: center;
     ">
       <%= opportunity.role_type_label.gsub("Engineer", "Eng").gsub("Manager", "Mgr") %>
     </span>
