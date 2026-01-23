@@ -1,4 +1,16 @@
 <tr id="<%= dom_id opportunity %>" class="clickable-row" data-href="<%= opportunity_path(opportunity) %>">
+  <td>
+    <span style="
+      background-color: #6c757d;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      white-space: nowrap;
+    ">
+      <%= opportunity.role_type_label.gsub("Engineer", "Eng").gsub("Manager", "Mgr") %>
+    </span>
+  </td>
   <td><%= opportunity.company.name if opportunity.company %></td>
   <td><%= opportunity.position_title %></td>
   <td><%= opportunity.application_date %></td>

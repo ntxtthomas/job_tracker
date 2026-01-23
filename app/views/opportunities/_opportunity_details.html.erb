@@ -3,6 +3,13 @@
 
   <div class="opportunity-details">
     <p>
+      <strong>Role Type:</strong>
+      <span class="badge" style="background-color: #6c757d; color: white; padding: 5px 10px; border-radius: 4px; font-size: 14px;">
+        <%= opportunity.role_type_label %>
+      </span>
+    </p>
+
+    <p>
       <strong>Company:</strong>
       <%= link_to opportunity.company.name, opportunity.company if opportunity.company %>
     </p>
@@ -112,6 +119,87 @@
     <div class="notes">
       <%= simple_format(opportunity.notes) %>
     </div>
+    <% end %>
+
+    <!-- Role-specific details -->
+    <% if opportunity.sales_engineer? && opportunity.metadata.present? %>
+      <div class="role-specific-details" style="margin-top: 2rem; padding: 1rem; background-color: #f8f9fa; border-radius: 5px;">
+        <h3>Sales Engineer Details</h3>
+        
+        <% if opportunity.metadata[:sales_motion].present? %>
+          <p><strong>Sales Motion:</strong> <%= opportunity.sales_motion_summary %></p>
+        <% end %>
+        
+        <% if opportunity.metadata[:customer_persona].present? %>
+          <p><strong>Customer Persona:</strong> <%= opportunity.customer_persona_summary %></p>
+        <% end %>
+        
+        <% if opportunity.metadata[:domain_depth].present? %>
+          <p><strong>Domain Depth:</strong> <%= opportunity.metadata[:domain_depth].titleize %></p>
+        <% end %>
+        
+        <% if opportunity.metadata[:demo_intensity].present? %>
+          <p><strong>Demo Intensity:</strong> <%= opportunity.metadata[:demo_intensity].gsub("_", " ").titleize %></p>
+        <% end %>
+        
+        <% if opportunity.metadata[:pressure_sources].present? %>
+          <p><strong>Pressure Sources:</strong> <%= opportunity.pressure_summary %></p>
+        <% end %>
+        
+        <% if opportunity.metadata[:fit_reasons].present? %>
+          <p><strong>Fit Reasons:</strong> 
+            <%= opportunity.metadata[:fit_reasons].map { |r| r.gsub("_", " ").titleize }.join(", ") %>
+          </p>
+        <% end %>
+        
+        <% if opportunity.metadata[:nervous_system_cost].present? %>
+          <p><strong>Nervous System Cost:</strong> <%= opportunity.metadata[:nervous_system_cost].titleize %></p>
+        <% end %>
+        
+        <% if opportunity.metadata[:remote_tolerance].present? %>
+          <p><strong>Remote Tolerance:</strong> <%= opportunity.metadata[:remote_tolerance].titleize %></p>
+        <% end %>
+      </div>
+    <% elsif opportunity.solutions_engineer? && opportunity.metadata.present? %>
+      <div class="role-specific-details" style="margin-top: 2rem; padding: 1rem; background-color: #f8f9fa; border-radius: 5px;">
+        <h3>Solutions Engineer Details</h3>
+        
+        <% if opportunity.metadata[:solution_scope].present? %>
+          <p><strong>Solution Scope:</strong> <%= opportunity.solution_scope_summary %></p>
+        <% end %>
+        
+        <% if opportunity.metadata[:customer_size].present? %>
+          <p><strong>Customer Size:</strong> <%= opportunity.metadata[:customer_size].titleize %></p>
+        <% end %>
+        
+        <% if opportunity.metadata[:implementation_depth].present? %>
+          <p><strong>Implementation Depth:</strong> <%= opportunity.metadata[:implementation_depth].titleize %></p>
+        <% end %>
+        
+        <% if opportunity.metadata[:travel_requirement].present? %>
+          <p><strong>Travel Requirement:</strong> <%= opportunity.metadata[:travel_requirement] %>%</p>
+        <% end %>
+      </div>
+    <% elsif opportunity.product_manager? && opportunity.metadata.present? %>
+      <div class="role-specific-details" style="margin-top: 2rem; padding: 1rem; background-color: #f8f9fa; border-radius: 5px;">
+        <h3>Product Manager Details</h3>
+        
+        <% if opportunity.metadata[:product_stage].present? %>
+          <p><strong>Product:</strong> <%= opportunity.product_summary %></p>
+        <% end %>
+        
+        <% if opportunity.metadata[:stakeholder_complexity].present? %>
+          <p><strong>Stakeholder Complexity:</strong> <%= opportunity.metadata[:stakeholder_complexity].titleize %></p>
+        <% end %>
+        
+        <% if opportunity.metadata[:technical_depth_required].present? %>
+          <p><strong>Technical Depth:</strong> <%= opportunity.metadata[:technical_depth_required].titleize %></p>
+        <% end %>
+        
+        <% if opportunity.metadata[:customer_interaction].present? %>
+          <p><strong>Customer Interaction:</strong> <%= opportunity.metadata[:customer_interaction].titleize %></p>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>
