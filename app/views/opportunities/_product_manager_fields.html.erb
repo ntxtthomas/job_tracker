@@ -1,0 +1,131 @@
+<div class="role-metadata-fields">
+  <h3>Product Manager Criteria</h3>
+  
+  <div class="metadata-section">
+    <div>
+      <%= label_tag "opportunity[role_metadata][product_stage]", "Product Stage" %>
+      <%= select_tag "opportunity[role_metadata][product_stage]", 
+          options_for_select([
+            ["Early Stage", "early_stage"],
+            ["Growth", "growth"],
+            ["Mature", "mature"]
+          ], @opportunity.metadata[:product_stage]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][product_type]", "Product Type" %>
+      <%= select_tag "opportunity[role_metadata][product_type]", 
+          options_for_select([
+            ["B2B SaaS", "b2b_saas"],
+            ["B2C", "b2c"],
+            ["Platform", "platform"],
+            ["Infrastructure", "infrastructure"]
+          ], @opportunity.metadata[:product_type]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][pm_type]", "PM Type" %>
+      <%= select_tag "opportunity[role_metadata][pm_type]", 
+          options_for_select([
+            ["Technical PM", "technical"],
+            ["Growth PM", "growth"],
+            ["Platform PM", "platform"],
+            ["Core PM", "core"]
+          ], @opportunity.metadata[:pm_type]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][team_size]", "Team Size" %>
+      <%= number_field_tag "opportunity[role_metadata][team_size]", 
+          @opportunity.metadata[:team_size], 
+          min: 0, class: "form-input" %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][engineering_ratio]", "PM:Engineer Ratio" %>
+      <%= text_field_tag "opportunity[role_metadata][engineering_ratio]", 
+          @opportunity.metadata[:engineering_ratio], 
+          placeholder: "e.g., 1:5", class: "form-input" %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][stakeholder_complexity]", "Stakeholder Complexity" %>
+      <%= select_tag "opportunity[role_metadata][stakeholder_complexity]", 
+          options_for_select([
+            ["Low", "low"],
+            ["Medium", "medium"],
+            ["High", "high"]
+          ], @opportunity.metadata[:stakeholder_complexity]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][data_driven_level]", "Data-Driven Level" %>
+      <%= select_tag "opportunity[role_metadata][data_driven_level]", 
+          options_for_select([
+            ["Low", "low"],
+            ["Medium", "medium"],
+            ["High", "high"]
+          ], @opportunity.metadata[:data_driven_level]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][technical_depth_required]", "Technical Depth Required" %>
+      <%= select_tag "opportunity[role_metadata][technical_depth_required]", 
+          options_for_select([
+            ["Low", "low"],
+            ["Moderate", "moderate"],
+            ["High", "high"]
+          ], @opportunity.metadata[:technical_depth_required]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][strategy_vs_execution]", "Strategy vs Execution" %>
+      <%= select_tag "opportunity[role_metadata][strategy_vs_execution]", 
+          options_for_select([
+            ["Strategy Focus", "strategy"],
+            ["Balanced", "balanced"],
+            ["Execution Focus", "execution"]
+          ], @opportunity.metadata[:strategy_vs_execution]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][customer_interaction]", "Customer Interaction" %>
+      <%= select_tag "opportunity[role_metadata][customer_interaction]", 
+          options_for_select([
+            ["Rare", "rare"],
+            ["Occasional", "occasional"],
+            ["Frequent", "frequent"]
+          ], @opportunity.metadata[:customer_interaction]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][domain_expertise_required]", "Domain Expertise Required" %>
+      <%= select_tag "opportunity[role_metadata][domain_expertise_required]", 
+          options_for_select([
+            ["Shallow", "shallow"],
+            ["Moderate", "moderate"],
+            ["Deep", "deep"]
+          ], @opportunity.metadata[:domain_expertise_required]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][roadmap_horizon]", "Roadmap Horizon" %>
+      <%= select_tag "opportunity[role_metadata][roadmap_horizon]", 
+          options_for_select([
+            ["Quarterly", "quarterly"],
+            ["6 Months", "6_months"],
+            ["Annual", "annual"]
+          ], @opportunity.metadata[:roadmap_horizon]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+  </div>
+</div>
