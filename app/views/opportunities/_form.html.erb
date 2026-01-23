@@ -1,3 +1,4 @@
+<div data-controller="role-type">
 <%= form_with(model: opportunity) do |form| %>
 <% if opportunity.errors.any? %>
 <div style="color: red">
@@ -16,11 +17,14 @@
   <%= form.select :role_type, 
       options_for_select(
         Opportunity::ROLE_TYPES.map { |k, v| [v, k] }, 
-        opportunity.role_type
+        opportunity.role_type || "software_engineer"
       ), 
       { prompt: "Select role type" }, 
       { style: "display: block; width: 250px; height: 30px;", 
-        data: { action: "change->role-type#toggle" } } %>
+        data: { 
+          role_type_target: "select",
+          action: "change->role-type#toggle" 
+        } } %>
 </div>
 
 <div>
@@ -70,41 +74,47 @@
 
 <!-- Role-specific metadata fields -->
 <div id="role-specific-fields">
-  <% case opportunity.role_type %>
-  <% when "sales_engineer" %>
-    <%= render "sales_engineer_fields", opportunity: opportunity %>
-  <% when "solutions_engineer" %>
-    <%= render "solutions_engineer_fields", opportunity: opportunity %>
-  <% when "product_manager" %>
-    <%= render "product_manager_fields", opportunity: opportunity %>
-  <% when "software_engineer" %>
-    <!-- Software Engineer: Show technologies -->
-    <div id="technologies-section">
-      <%= form.label "Technologies" %>
-      <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 4px; background-color: var(--bg-primary, #fff);">
-        <% Technology::CATEGORIES.each do |category| %>
-          <% techs = Technology.where(category: category).order(:name) %>
-          <% next if techs.empty? %>
-          
-          <fieldset style="margin-bottom: 15px; border: none; padding: 0;">
-            <legend style="font-weight: bold; color: var(--text-primary, #333); margin-bottom: 5px;"><%= category %></legend>
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 5px;">
-              <% techs.each do |tech| %>
-                <label style="display: flex; align-items: center; cursor: pointer;">
-                  <%= check_box_tag "opportunity[technology_ids][]", tech.id, opportunity.technologies.include?(tech), id: "opportunity_technology_ids_#{tech.id}" %>
-                  <span style="margin-left: 5px; font-size: 14px;"><%= tech.name %></span>
-                </label>
-              <% end %>
-            </div>
-          </fieldset>
-        <% end %>
-      </div>
-      <%= hidden_field_tag "opportunity[technology_ids][]", "" %>
-    
-      <%= form.label :other_tech_stack, "Other Technologies (not listed above)", style: "display: block; margin-top: 10px;" %>
-      <%= form.text_area :other_tech_stack, rows: 2, placeholder: "e.g., Custom framework, proprietary tools...", style: "display: block; width: 100%;" %>
+  <!-- Software Engineer Fields -->
+  <div data-role-type-target="section" data-role="software_engineer" style="<%= opportunity.role_type == 'software_engineer' || opportunity.role_type.blank? ? '' : 'display: none;' %>">
+    <%= form.label "Technologies" %>
+    <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 4px; background-color: var(--bg-primary, #fff);">
+      <% Technology::CATEGORIES.each do |category| %>
+        <% techs = Technology.where(category: category).order(:name) %>
+        <% next if techs.empty? %>
+        
+        <fieldset style="margin-bottom: 15px; border: none; padding: 0;">
+          <legend style="font-weight: bold; color: var(--text-primary, #333); margin-bottom: 5px;"><%= category %></legend>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 5px;">
+            <% techs.each do |tech| %>
+              <label style="display: flex; align-items: center; cursor: pointer;">
+                <%= check_box_tag "opportunity[technology_ids][]", tech.id, opportunity.technologies.include?(tech), id: "opportunity_technology_ids_#{tech.id}" %>
+                <span style="margin-left: 5px; font-size: 14px;"><%= tech.name %></span>
+              </label>
+            <% end %>
+          </div>
+        </fieldset>
+      <% end %>
     </div>
-  <% end %>
+    <%= hidden_field_tag "opportunity[technology_ids][]", "" %>
+  
+    <%= form.label :other_tech_stack, "Other Technologies (not listed above)", style: "display: block; margin-top: 10px;" %>
+    <%= form.text_area :other_tech_stack, rows: 2, placeholder: "e.g., Custom framework, proprietary tools...", style: "display: block; width: 100%;" %>
+  </div>
+
+  <!-- Sales Engineer Fields -->
+  <div data-role-type-target="section" data-role="sales_engineer" style="<%= opportunity.role_type == 'sales_engineer' ? '' : 'display: none;' %>">
+    <%= render "sales_engineer_fields", opportunity: opportunity %>
+  </div>
+
+  <!-- Solutions Engineer Fields -->
+  <div data-role-type-target="section" data-role="solutions_engineer" style="<%= opportunity.role_type == 'solutions_engineer' ? '' : 'display: none;' %>">
+    <%= render "solutions_engineer_fields", opportunity: opportunity %>
+  </div>
+
+  <!-- Product Manager Fields -->
+  <div data-role-type-target="section" data-role="product_manager" style="<%= opportunity.role_type == 'product_manager' ? '' : 'display: none;' %>">
+    <%= render "product_manager_fields", opportunity: opportunity %>
+  </div>
 </div>
 
 <div>
@@ -171,3 +181,4 @@
   <%= form.submit style: "margin-top: 20px; background-color: #0d6efd; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
 </div>
 <% end %>
+</div>
