@@ -33,7 +33,7 @@ module RoleTypes
     end
 
     def validate_sales_engineer_metadata
-      return if role_metadata.blank?
+      nil if role_metadata.blank?
 
       # Optional: Add validations for required fields
       # errors.add(:role_metadata, "must include sales_motion") unless role_metadata["sales_motion"].present?
@@ -41,31 +41,31 @@ module RoleTypes
 
     def sales_motion_summary
       return "Not specified" unless role_metadata["sales_motion"].present?
-      
+
       parts = []
       parts << role_metadata["sales_motion"]&.titleize
       parts << role_metadata["deal_type"]&.gsub("_", " ")&.titleize if role_metadata["deal_type"].present?
       parts << role_metadata["acv_range"] if role_metadata["acv_range"].present?
-      
+
       parts.join(" • ")
     end
 
     def customer_persona_summary
       personas = role_metadata["customer_persona"]
       return "Not specified" unless personas.is_a?(Array) && personas.any?
-      
+
       personas.map { |p| p.gsub("_", " ").titleize }.join(", ")
     end
 
     def pressure_summary
       pressure = role_metadata["pressure_sources"]
       return "Not specified" unless pressure.is_a?(Hash)
-      
+
       parts = []
       parts << "Quota pressure" if pressure["quota_pressure"]
       parts << "#{pressure['travel_percent']}% travel" if pressure["travel_percent"]
       parts << "Overtime expected" if pressure["overtime_expected"]
-      
+
       parts.any? ? parts.join(" • ") : "Low pressure"
     end
   end

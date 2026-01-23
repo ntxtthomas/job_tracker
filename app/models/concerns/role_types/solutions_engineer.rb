@@ -29,11 +29,11 @@ module RoleTypes
 
     def solution_scope_summary
       return "Not specified" unless role_metadata["solution_scope"].present?
-      
+
       scope = role_metadata["solution_scope"].gsub("_", " ").titleize
       complexity = role_metadata["technical_complexity"]&.titleize
-      
-      [scope, complexity].compact.join(" • ")
+
+      [ scope, complexity ].compact.join(" • ")
     end
   end
 end

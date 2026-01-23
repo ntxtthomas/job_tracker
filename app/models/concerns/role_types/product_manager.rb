@@ -29,11 +29,11 @@ module RoleTypes
 
     def product_summary
       return "Not specified" unless role_metadata["product_stage"].present?
-      
+
       parts = []
       parts << role_metadata["product_stage"]&.gsub("_", " ")&.titleize
       parts << role_metadata["pm_type"]&.gsub("_", " ")&.titleize + " PM" if role_metadata["pm_type"].present?
-      
+
       parts.join(" • ")
     end
   end
