@@ -123,7 +123,7 @@
 
     <!-- Role-specific details -->
     <% if opportunity.sales_engineer? && opportunity.metadata.present? %>
-      <div class="role-specific-details" style="margin-top: 2rem; padding: 1rem; background-color: #f8f9fa; border-radius: 5px;">
+      <div class="role-specific-details" style="margin-top: 2rem;">
         <h3>Sales Engineer Details</h3>
         
         <% if opportunity.metadata[:sales_motion].present? %>
@@ -161,7 +161,7 @@
         <% end %>
       </div>
     <% elsif opportunity.solutions_engineer? && opportunity.metadata.present? %>
-      <div class="role-specific-details" style="margin-top: 2rem; padding: 1rem; background-color: #f8f9fa; border-radius: 5px;">
+      <div class="role-specific-details" style="margin-top: 2rem;">
         <h3>Solutions Engineer Details</h3>
         
         <% if opportunity.metadata[:solution_scope].present? %>
@@ -181,7 +181,7 @@
         <% end %>
       </div>
     <% elsif opportunity.product_manager? && opportunity.metadata.present? %>
-      <div class="role-specific-details" style="margin-top: 2rem; padding: 1rem; background-color: #f8f9fa; border-radius: 5px;">
+      <div class="role-specific-details" style="margin-top: 2rem;">
         <h3>Product Manager Details</h3>
         
         <% if opportunity.metadata[:product_stage].present? %>

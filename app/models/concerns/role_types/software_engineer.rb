@@ -24,7 +24,7 @@ module RoleTypes
 
     def tech_stack_summary
       return tech_stack if tech_stack.present?
-      
+
       techs = technologies.pluck(:name).join(", ")
       techs.present? ? techs : "Not specified"
     end

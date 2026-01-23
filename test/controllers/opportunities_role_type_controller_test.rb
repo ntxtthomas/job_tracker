@@ -8,15 +8,15 @@ class OpportunitiesRoleTypeControllerTest < ActionDispatch::IntegrationTest
 
   test "should create software engineer opportunity with role metadata" do
     assert_difference("Opportunity.count") do
-      post opportunities_url, params: { 
-        opportunity: { 
+      post opportunities_url, params: {
+        opportunity: {
           company_id: @company.id,
           position_title: "Senior Software Engineer",
           application_date: Date.today,
           role_type: "software_engineer",
           status: "submitted",
           role_metadata: {}
-        } 
+        }
       }
     end
 
@@ -26,8 +26,8 @@ class OpportunitiesRoleTypeControllerTest < ActionDispatch::IntegrationTest
 
   test "should create sales engineer opportunity with metadata" do
     assert_difference("Opportunity.count") do
-      post opportunities_url, params: { 
-        opportunity: { 
+      post opportunities_url, params: {
+        opportunity: {
           company_id: @company.id,
           position_title: "Sales Engineer",
           application_date: Date.today,
@@ -36,13 +36,13 @@ class OpportunitiesRoleTypeControllerTest < ActionDispatch::IntegrationTest
           role_metadata: {
             sales_motion: "enterprise",
             acv_range: "$100k-$500k",
-            customer_persona: ["operators", "it_security"],
+            customer_persona: [ "operators", "it_security" ],
             pressure_sources: {
               quota_pressure: "1",
               travel_percent: "30"
             }
           }
-        } 
+        }
       }
     end
 
@@ -51,13 +51,13 @@ class OpportunitiesRoleTypeControllerTest < ActionDispatch::IntegrationTest
     assert_equal "sales_engineer", opportunity.role_type
     assert_equal "enterprise", opportunity.metadata[:sales_motion]
     assert_equal "$100k-$500k", opportunity.metadata[:acv_range]
-    assert_equal ["operators", "it_security"], opportunity.metadata[:customer_persona]
+    assert_equal [ "operators", "it_security" ], opportunity.metadata[:customer_persona]
   end
 
   test "should create solutions engineer opportunity" do
     assert_difference("Opportunity.count") do
-      post opportunities_url, params: { 
-        opportunity: { 
+      post opportunities_url, params: {
+        opportunity: {
           company_id: @company.id,
           position_title: "Solutions Engineer",
           application_date: Date.today,
@@ -68,7 +68,7 @@ class OpportunitiesRoleTypeControllerTest < ActionDispatch::IntegrationTest
             technical_complexity: "high",
             customer_facing_percent: "60"
           }
-        } 
+        }
       }
     end
 
@@ -79,8 +79,8 @@ class OpportunitiesRoleTypeControllerTest < ActionDispatch::IntegrationTest
 
   test "should create product manager opportunity" do
     assert_difference("Opportunity.count") do
-      post opportunities_url, params: { 
-        opportunity: { 
+      post opportunities_url, params: {
+        opportunity: {
           company_id: @company.id,
           position_title: "Product Manager",
           application_date: Date.today,
@@ -91,7 +91,7 @@ class OpportunitiesRoleTypeControllerTest < ActionDispatch::IntegrationTest
             pm_type: "technical",
             stakeholder_complexity: "high"
           }
-        } 
+        }
       }
     end
 
@@ -101,13 +101,13 @@ class OpportunitiesRoleTypeControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update opportunity role_type" do
-    patch opportunity_url(@opportunity), params: { 
-      opportunity: { 
+    patch opportunity_url(@opportunity), params: {
+      opportunity: {
         role_type: "sales_engineer",
         role_metadata: {
           sales_motion: "mid_market"
         }
-      } 
+      }
     }
 
     @opportunity.reload

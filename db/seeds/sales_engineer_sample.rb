@@ -27,15 +27,15 @@ opportunity = Opportunity.create!(
     acv_range: "$50k-$500k",
     sales_cycle_length: "3-6 months",
     quota_type: "influence",
-    
+
     # Customer & Domain
-    customer_persona: ["operators", "it_security"],
+    customer_persona: [ "operators", "it_security" ],
     domain_depth: "deep",
-    
+
     # Technical & Demo
     demo_intensity: "custom",
-    technical_depth: ["integrations", "apis", "config"],
-    
+    technical_depth: [ "integrations", "apis", "config" ],
+
     # Pressure Sources
     pressure_sources: {
       quota_pressure: true,
@@ -44,9 +44,9 @@ opportunity = Opportunity.create!(
       deal_urgency: "quarterly",
       exec_visibility: "high"
     },
-    
+
     # Fit & Culture
-    fit_reasons: ["prior_customer", "domain_operator"],
+    fit_reasons: [ "prior_customer", "domain_operator" ],
     nervous_system_cost: "medium",
     energy_type: "presenting",
     remote_tolerance: "flexible"
@@ -56,7 +56,7 @@ opportunity = Opportunity.create!(
     - Former PropertyWare customer and implementer
     - Deep domain knowledge in property management
     - Experience with integrations and APIs
-    
+
     Concerns:
     - Quota pressure and travel requirements
     - Overtime expectations during quarter-end

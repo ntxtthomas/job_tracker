@@ -72,14 +72,14 @@ class OpportunityRoleTypesTest < ActiveSupport::TestCase
       role_metadata: {
         sales_motion: "enterprise",
         acv_range: "$50k-$500k",
-        customer_persona: ["operators", "it_security"]
+        customer_persona: [ "operators", "it_security" ]
       }
     )
 
     opp.reload
     assert_equal "enterprise", opp.metadata[:sales_motion]
     assert_equal "$50k-$500k", opp.metadata[:acv_range]
-    assert_equal ["operators", "it_security"], opp.metadata[:customer_persona]
+    assert_equal [ "operators", "it_security" ], opp.metadata[:customer_persona]
   end
 
   test "should handle nested pressure_sources metadata" do

@@ -12,7 +12,7 @@ class SalesEngineerConcernTest < ActiveSupport::TestCase
         sales_motion: "enterprise",
         deal_type: "both",
         acv_range: "$50k-$500k",
-        customer_persona: ["operators", "it_security"],
+        customer_persona: [ "operators", "it_security" ],
         pressure_sources: {
           quota_pressure: true,
           travel_percent: 25,
@@ -59,7 +59,7 @@ class SalesEngineerConcernTest < ActiveSupport::TestCase
 
   test "pressure_summary should show low pressure when no pressure sources" do
     opp = Opportunity.new(
-      role_type: "sales_engineer", 
+      role_type: "sales_engineer",
       role_metadata: { pressure_sources: {} }
     )
     assert_equal "Low pressure", opp.pressure_summary
