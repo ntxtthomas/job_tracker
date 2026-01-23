@@ -1,0 +1,109 @@
+<div class="role-metadata-fields">
+  <h3>Solutions Engineer Criteria</h3>
+  
+  <div class="metadata-section">
+    <div>
+      <%= label_tag "opportunity[role_metadata][solution_scope]", "Solution Scope" %>
+      <%= select_tag "opportunity[role_metadata][solution_scope]", 
+          options_for_select([
+            ["Pre-Sales", "pre_sales"],
+            ["Implementation", "implementation"],
+            ["Post-Sales", "post_sales"],
+            ["Hybrid", "hybrid"]
+          ], @opportunity.metadata[:solution_scope]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][customer_size]", "Customer Size" %>
+      <%= select_tag "opportunity[role_metadata][customer_size]", 
+          options_for_select([
+            ["SMB", "smb"],
+            ["Mid-Market", "mid_market"],
+            ["Enterprise", "enterprise"]
+          ], @opportunity.metadata[:customer_size]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][technical_complexity]", "Technical Complexity" %>
+      <%= select_tag "opportunity[role_metadata][technical_complexity]", 
+          options_for_select([
+            ["Low", "low"],
+            ["Medium", "medium"],
+            ["High", "high"]
+          ], @opportunity.metadata[:technical_complexity]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][customer_facing_percent]", "Customer Facing %" %>
+      <%= number_field_tag "opportunity[role_metadata][customer_facing_percent]", 
+          @opportunity.metadata[:customer_facing_percent], 
+          min: 0, max: 100, class: "form-input" %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][implementation_depth]", "Implementation Depth" %>
+      <%= select_tag "opportunity[role_metadata][implementation_depth]", 
+          options_for_select([
+            ["Shallow", "shallow"],
+            ["Moderate", "moderate"],
+            ["Deep", "deep"]
+          ], @opportunity.metadata[:implementation_depth]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][integration_heavy]", "Integration Heavy?" %>
+      <%= check_box_tag "opportunity[role_metadata][integration_heavy]", 
+          "1", @opportunity.metadata[:integration_heavy] %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][customization_level]", "Customization Level" %>
+      <%= select_tag "opportunity[role_metadata][customization_level]", 
+          options_for_select([
+            ["Low", "low"],
+            ["Medium", "medium"],
+            ["High", "high"]
+          ], @opportunity.metadata[:customization_level]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][support_vs_project]", "Support vs Project" %>
+      <%= select_tag "opportunity[role_metadata][support_vs_project]", 
+          options_for_select([
+            ["Support Focus", "support"],
+            ["Balanced", "balanced"],
+            ["Project Focus", "project"]
+          ], @opportunity.metadata[:support_vs_project]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][domain_knowledge]", "Domain Knowledge Required" %>
+      <%= select_tag "opportunity[role_metadata][domain_knowledge]", 
+          options_for_select([
+            ["Shallow", "shallow"],
+            ["Moderate", "moderate"],
+            ["Deep", "deep"]
+          ], @opportunity.metadata[:domain_knowledge]), 
+          { prompt: "Select", class: "form-select" } %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][travel_requirement]", "Travel Requirement %" %>
+      <%= number_field_tag "opportunity[role_metadata][travel_requirement]", 
+          @opportunity.metadata[:travel_requirement], 
+          min: 0, max: 100, class: "form-input" %>
+    </div>
+
+    <div>
+      <%= label_tag "opportunity[role_metadata][on_call_requirement]", "On-Call Required?" %>
+      <%= check_box_tag "opportunity[role_metadata][on_call_requirement]", 
+          "1", @opportunity.metadata[:on_call_requirement] %>
+    </div>
+  </div>
+</div>
