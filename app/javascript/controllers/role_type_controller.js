@@ -2,18 +2,30 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="role-type"
 export default class extends Controller {
-  static targets = ["roleSelect", "fieldsContainer"]
+  static targets = ["select", "section"]
 
   connect() {
     console.log("Role type controller connected")
+    // Show the appropriate section on initial load
+    this.toggle()
   }
 
   toggle(event) {
-    const roleType = event.target.value
-    console.log("Role type changed to:", roleType)
+    const selectedRole = this.selectTarget.value || "software_engineer"
+    console.log("Role type changed to:", selectedRole)
     
-    // For now, just a placeholder
-    // Full implementation would require adding data-role-type attributes
-    // to sections and showing/hiding them based on selection
+    // Hide all sections
+    this.sectionTargets.forEach(section => {
+      section.style.display = "none"
+    })
+    
+    // Show the selected role's section
+    const targetSection = this.sectionTargets.find(section => 
+      section.dataset.role === selectedRole
+    )
+    
+    if (targetSection) {
+      targetSection.style.display = "block"
+    }
   }
 }
