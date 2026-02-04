@@ -64,22 +64,31 @@
       </div>
     </div>
   <% end %>
-</div>
 
-<h2 style="margin-top: 3rem; margin-bottom: 1rem; color: var(--text-secondary);">Applications by Week</h2>
-<div class="dashboard-cards weekly-cards">
-  <% @weekly_data.each_with_index do |week, index| %>
-    <%= link_to opportunities_path(start_date: week[:start_date], end_date: week[:end_date]), class: "card card-week clickable-week-card", style: "text-decoration: none; color: inherit;" do %>
+  <div class="dashboard-cards" style="flex: 1; min-width: 320px;">
+    <div class="card">
       <div class="card-header">
-        <h3><%= week[:label] %></h3>
+        <h3>Applications by Week</h3>
         <div class="card-icon">📅</div>
       </div>
       <div class="card-body">
-        <div class="card-number"><%= week[:count] %></div>
-        <p class="card-subtitle">applications</p>
+        <div class="dashboard-cards weekly-cards" style="margin: 0;">
+          <% @weekly_data.each_with_index do |week, index| %>
+            <%= link_to opportunities_path(start_date: week[:start_date], end_date: week[:end_date]), class: "card card-week clickable-week-card", style: "text-decoration: none; color: inherit;" do %>
+              <div class="card-header">
+                <h3><%= week[:label] %></h3>
+                <div class="card-icon">📅</div>
+              </div>
+              <div class="card-body">
+                <div class="card-number"><%= week[:count] %></div>
+                <p class="card-subtitle">applications</p>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
       </div>
-    <% end %>
-  <% end %>
+    </div>
+  </div>
 </div>
 
 <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 2rem;">

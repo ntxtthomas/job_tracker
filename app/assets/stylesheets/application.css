@@ -173,30 +173,14 @@ th a:hover {
 }
 
 /* Status styling */
-.status-submitted {
+.status-applied {
   color: #0d6efd;
 }
-.status-under_review {
-  color: #fd7e14;
-}
-.status-phone_screen {
-  color: #20c997;
-}
-.status-interview {
+.status-interviewing {
   color: #6f42c1;
-}
-.status-responded {
-  color: #198754;
-}
-.status-offer {
-  color: #198754;
-  font-weight: bold;
 }
 .status-closed {
   color: #dc3545;
-}
-.status-withdrawn {
-  color: #6c757d;
 }
 
 /* Dashboard Cards */

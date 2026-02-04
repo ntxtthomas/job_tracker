@@ -36,7 +36,7 @@ class OpportunitiesTest < ApplicationSystemTestCase
     select @opportunity.company.name, from: "Company"
     fill_in "Notes", with: @opportunity.notes
     fill_in "Position title", with: @opportunity.position_title
-    select "Under Review", from: "Status"
+    select "Interviewing", from: "Status"
     check "Python"
     select "Indeed", from: "Source"
     click_on "Update Opportunity"

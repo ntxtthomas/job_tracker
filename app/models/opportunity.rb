@@ -4,6 +4,8 @@ class Opportunity < ApplicationRecord
   include RoleTypes::SalesEngineer
   include RoleTypes::SolutionsEngineer
   include RoleTypes::ProductManager
+  include RoleTypes::SupportEngineer
+  include RoleTypes::Other
 
   belongs_to :company
   has_many :opportunity_technologies, dependent: :destroy
@@ -19,7 +21,9 @@ class Opportunity < ApplicationRecord
     "software_engineer" => "Software Engineer",
     "sales_engineer" => "Sales Engineer",
     "solutions_engineer" => "Solutions Engineer",
-    "product_manager" => "Product Manager"
+    "product_manager" => "Product Manager",
+    "support_engineer" => "Support Engineer",
+    "other" => "Other"
   }.freeze
 
   validates :role_type, presence: true, inclusion: { in: ROLE_TYPES.keys }
@@ -46,6 +50,14 @@ class Opportunity < ApplicationRecord
 
   def product_manager?
     role_type == "product_manager"
+  end
+
+  def support_engineer?
+    role_type == "support_engineer"
+  end
+
+  def other?
+    role_type == "other"
   end
 
   # Get/Set role metadata with indifferent access
