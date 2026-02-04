@@ -13,11 +13,11 @@ namespace :companies do
     )
 
     count = companies_to_update.count
-    
+
     if count.zero?
       puts "No companies found with Real Estate related industries."
     else
-      puts "Found #{count} #{'company'.pluralize(count)} to update:"
+      puts "Found #{count} #{"company".pluralize(count)} to update:"
       companies_to_update.each do |company|
         puts "  - #{company.name}: '#{company.industry}' -> 'PropTech'"
       end
@@ -25,9 +25,9 @@ namespace :companies do
       print "\nProceed with update? (y/n): "
       response = STDIN.gets.chomp.downcase
 
-      if response == 'y'
+      if response == "y"
         updated = companies_to_update.update_all(industry: "PropTech")
-        puts "\n✓ Successfully updated #{updated} #{'company'.pluralize(updated)} to PropTech"
+        puts "\n✓ Successfully updated #{updated} #{"company".pluralize(updated)} to PropTech"
       else
         puts "\n✗ Update cancelled"
       end

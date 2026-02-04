@@ -1,0 +1,4 @@
+{
+  "ruby.rubocop.useBundler": true,
+  "ruby.rubocop.commandPath": "bin/rubocop"
+}
