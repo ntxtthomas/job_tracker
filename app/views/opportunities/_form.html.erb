@@ -54,14 +54,9 @@
   <%= form.label :status, style: "display: block" %>
   <%= form.select :status, 
       options_for_select([
-        ["Applied", "submitted"],
-        ["Under Review", "under_review"],
-        ["Phone Screen", "phone_screen"],
-        ["Interview Scheduled", "interview"],
-        ["Responded", "responded"],
-        ["Offer Received", "offer"],
-        ["Closed", "closed"],
-        ["Withdrawn", "withdrawn"]
+        ["Applied", "applied"],
+        ["Interviewing", "interviewing"],
+        ["Closed", "closed"]
       ], opportunity.status), 
       { include_blank: "Select status" }, 
       { style: "display: block; width: 250px; height: 30px;" } %>
@@ -114,6 +109,16 @@
   <!-- Product Manager Fields -->
   <div data-role-type-target="section" data-role="product_manager" style="<%= opportunity.role_type == 'product_manager' ? '' : 'display: none;' %>">
     <%= render "product_manager_fields", opportunity: opportunity %>
+  </div>
+
+  <!-- Support Engineer Fields -->
+  <div data-role-type-target="section" data-role="support_engineer" style="<%= opportunity.role_type == 'support_engineer' ? '' : 'display: none;' %>">
+    <%= render "support_engineer_fields", opportunity: opportunity %>
+  </div>
+
+  <!-- Other Fields -->
+  <div data-role-type-target="section" data-role="other" style="<%= opportunity.role_type == 'other' ? '' : 'display: none;' %>">
+    <%= render "other_fields", opportunity: opportunity %>
   </div>
 </div>
 

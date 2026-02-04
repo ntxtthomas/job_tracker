@@ -36,6 +36,18 @@
                   #{ params[:role_type] == 'product_manager' ? 'background-color: #6f42c1; color: white;' : 'background-color: white; color: #333; border: 1px solid #dee2e6;' }",
           onmouseover: "if (!this.style.backgroundColor.includes('rgb(111, 66, 193)')) { this.style.backgroundColor='#e9ecef'; }",
           onmouseout: "if (!this.style.backgroundColor.includes('rgb(111, 66, 193)')) { this.style.backgroundColor='white'; }" %>
+
+            <%= link_to "Support Engineer", opportunities_path(role_type: "support_engineer"), 
+          style: "padding: 6px 16px; border-radius: 4px; text-decoration: none; font-size: 14px; transition: all 0.2s; width: 160px; text-align: center;
+            #{ params[:role_type] == 'support_engineer' ? 'background-color: #fd7e14; color: white;' : 'background-color: white; color: #333; border: 1px solid #dee2e6;' }",
+          onmouseover: "if (!this.style.backgroundColor.includes('rgb(253, 126, 20)')) { this.style.backgroundColor='#e9ecef'; }",
+          onmouseout: "if (!this.style.backgroundColor.includes('rgb(253, 126, 20)')) { this.style.backgroundColor='white'; }" %>
+
+            <%= link_to "Other", opportunities_path(role_type: "other"), 
+          style: "padding: 6px 16px; border-radius: 4px; text-decoration: none; font-size: 14px; transition: all 0.2s; width: 160px; text-align: center;
+            #{ params[:role_type] == 'other' ? 'background-color: #343a40; color: white;' : 'background-color: white; color: #333; border: 1px solid #dee2e6;' }",
+          onmouseover: "if (!this.style.backgroundColor.includes('rgb(52, 58, 64)')) { this.style.backgroundColor='#e9ecef'; }",
+          onmouseout: "if (!this.style.backgroundColor.includes('rgb(52, 58, 64)')) { this.style.backgroundColor='white'; }" %>
     </div>
     <% if @role_filter %>
       <span style="margin-left: 1rem; color: var(--text-muted); font-size: 0.9rem;">
