@@ -3,60 +3,6 @@
 <% content_for :title, "Opportunities" %>
 
 <div style="margin-bottom: 1.5rem;">
-  <!-- Role Type Filter -->
-  <div style="margin-bottom: 1rem; padding: 1rem; background-color: var(--bg-secondary, #f8f9fa); border-radius: 5px;">
-    <label style="font-weight: 600; margin-right: 1rem; color: var(--text-primary, #333);">Filter by Role Type:</label>
-    <div style="display: inline-flex; gap: 0.5rem; flex-wrap: wrap;">
-      <%= link_to "All", opportunities_path(role_type: "all"), 
-          style: "padding: 6px 16px; border-radius: 4px; text-decoration: none; font-size: 14px; transition: all 0.2s; width: 160px; text-align: center;
-                  #{ params[:role_type].blank? || params[:role_type] == 'all' ? 'background-color: #0d6efd; color: white;' : 'background-color: white; color: #333; border: 1px solid #dee2e6;' }",
-          onmouseover: "if (!this.style.backgroundColor.includes('rgb(13, 110, 253)')) { this.style.backgroundColor='#e9ecef'; }",
-          onmouseout: "if (!this.style.backgroundColor.includes('rgb(13, 110, 253)')) { this.style.backgroundColor='white'; }" %>
-      
-      <%= link_to "Software Engineer", opportunities_path(role_type: "software_engineer"), 
-          style: "padding: 6px 16px; border-radius: 4px; text-decoration: none; font-size: 14px; transition: all 0.2s; width: 160px; text-align: center;
-                  #{ params[:role_type] == 'software_engineer' ? 'background-color: #6c757d; color: white;' : 'background-color: white; color: #333; border: 1px solid #dee2e6;' }",
-          onmouseover: "if (!this.style.backgroundColor.includes('rgb(108, 117, 125)')) { this.style.backgroundColor='#e9ecef'; }",
-          onmouseout: "if (!this.style.backgroundColor.includes('rgb(108, 117, 125)')) { this.style.backgroundColor='white'; }" %>
-      
-      <%= link_to "Sales Engineer", opportunities_path(role_type: "sales_engineer"), 
-          style: "padding: 6px 16px; border-radius: 4px; text-decoration: none; font-size: 14px; transition: all 0.2s; width: 160px; text-align: center;
-                  #{ params[:role_type] == 'sales_engineer' ? 'background-color: #28a745; color: white;' : 'background-color: white; color: #333; border: 1px solid #dee2e6;' }",
-          onmouseover: "if (!this.style.backgroundColor.includes('rgb(40, 167, 69)')) { this.style.backgroundColor='#e9ecef'; }",
-          onmouseout: "if (!this.style.backgroundColor.includes('rgb(40, 167, 69)')) { this.style.backgroundColor='white'; }" %>
-      
-      <%= link_to "Solutions Engineer", opportunities_path(role_type: "solutions_engineer"), 
-          style: "padding: 6px 16px; border-radius: 4px; text-decoration: none; font-size: 14px; transition: all 0.2s; width: 160px; text-align: center;
-                  #{ params[:role_type] == 'solutions_engineer' ? 'background-color: #17a2b8; color: white;' : 'background-color: white; color: #333; border: 1px solid #dee2e6;' }",
-          onmouseover: "if (!this.style.backgroundColor.includes('rgb(23, 162, 184)')) { this.style.backgroundColor='#e9ecef'; }",
-          onmouseout: "if (!this.style.backgroundColor.includes('rgb(23, 162, 184)')) { this.style.backgroundColor='white'; }" %>
-      
-      <%= link_to "Product Manager", opportunities_path(role_type: "product_manager"), 
-          style: "padding: 6px 16px; border-radius: 4px; text-decoration: none; font-size: 14px; transition: all 0.2s; width: 160px; text-align: center;
-                  #{ params[:role_type] == 'product_manager' ? 'background-color: #6f42c1; color: white;' : 'background-color: white; color: #333; border: 1px solid #dee2e6;' }",
-          onmouseover: "if (!this.style.backgroundColor.includes('rgb(111, 66, 193)')) { this.style.backgroundColor='#e9ecef'; }",
-          onmouseout: "if (!this.style.backgroundColor.includes('rgb(111, 66, 193)')) { this.style.backgroundColor='white'; }" %>
-
-            <%= link_to "Support Engineer", opportunities_path(role_type: "support_engineer"), 
-          style: "padding: 6px 16px; border-radius: 4px; text-decoration: none; font-size: 14px; transition: all 0.2s; width: 160px; text-align: center;
-            #{ params[:role_type] == 'support_engineer' ? 'background-color: #fd7e14; color: white;' : 'background-color: white; color: #333; border: 1px solid #dee2e6;' }",
-          onmouseover: "if (!this.style.backgroundColor.includes('rgb(253, 126, 20)')) { this.style.backgroundColor='#e9ecef'; }",
-          onmouseout: "if (!this.style.backgroundColor.includes('rgb(253, 126, 20)')) { this.style.backgroundColor='white'; }" %>
-
-            <%= link_to "Other", opportunities_path(role_type: "other"), 
-          style: "padding: 6px 16px; border-radius: 4px; text-decoration: none; font-size: 14px; transition: all 0.2s; width: 160px; text-align: center;
-            #{ params[:role_type] == 'other' ? 'background-color: #343a40; color: white;' : 'background-color: white; color: #333; border: 1px solid #dee2e6;' }",
-          onmouseover: "if (!this.style.backgroundColor.includes('rgb(52, 58, 64)')) { this.style.backgroundColor='#e9ecef'; }",
-          onmouseout: "if (!this.style.backgroundColor.includes('rgb(52, 58, 64)')) { this.style.backgroundColor='white'; }" %>
-    </div>
-    <% if @role_filter %>
-      <span style="margin-left: 1rem; color: var(--text-muted); font-size: 0.9rem;">
-        Showing: <strong><%= @role_filter %></strong>
-        <%= link_to "Clear", opportunities_path, style: "margin-left: 0.5rem; color: #0d6efd; text-decoration: none; font-size: 0.9rem;" %>
-      </span>
-    <% end %>
-  </div>
-
   <div style="display: flex; justify-content: space-between; align-items: center;">
     <div>
       <h1 style="margin: 0;">Opportunities</h1>
@@ -72,6 +18,24 @@
     <%= link_to "Download CSV", opportunities_path(format: :csv, start_date: params[:start_date], end_date: params[:end_date]), style: "margin-top: 20px; text-decoration: none; padding: 10px 20px; background-color: #6c757d; color: white; border-radius: 4px; display: inline-block; cursor: pointer; transition: all 0.2s ease;", onmouseover: "this.style.backgroundColor='#5a6268'", onmouseout: "this.style.backgroundColor='#6c757d'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
   </div>
 </div>
+
+  <!-- Role Type Filter -->
+  <div style="margin-bottom: 1rem; padding: 1rem; background-color: var(--bg-secondary, #f8f9fa); border-radius: 5px;">
+    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+      <label for="role_type_filter" style="font-weight: 600; margin: 0; color: var(--text-primary, #333);">Filter by Role Type:</label>
+      <%= form_with url: opportunities_path, method: :get, local: true do |f| %>
+        <%= f.select :role_type,
+            options_for_select(Opportunity::ROLE_TYPES.map { |k, v| [v, k] }, params[:role_type]),
+            { include_blank: "All Roles" },
+            id: "role_type_filter",
+            style: "padding: 8px; border: 1px solid #ddd; border-radius: 4px; min-width: 200px;" %>
+        <%= f.submit "Filter", style: "padding: 8px 16px; background-color: #6f42c1; color: white; border: none; border-radius: 4px; cursor: pointer;" %>
+        <% if params[:role_type].present? %>
+          <%= link_to "Clear", opportunities_path, style: "padding: 8px 16px; background-color: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block;" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
 <div id="opportunities">
   <table>
