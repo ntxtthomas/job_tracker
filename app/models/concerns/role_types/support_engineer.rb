@@ -26,7 +26,7 @@ module RoleTypes
       tier = role_metadata["support_tier"].upcase
       on_call = role_metadata["on_call"] ? "On-call" : nil
 
-      ["Tier #{tier}", on_call].compact.join(" • ")
+      [ "Tier #{tier}", on_call ].compact.join(" • ")
     end
   end
 end
