@@ -4,7 +4,25 @@
   <div class="opportunity-details">
     <p>
       <strong>Role Type:</strong>
-      <span class="badge" style="background-color: #6c757d; color: white; padding: 5px 10px; border-radius: 4px; font-size: 14px;">
+      <%
+        badge_color = case opportunity.role_type
+        when "software_engineer"
+          "#6c757d"
+        when "sales_engineer"
+          "#28a745"
+        when "solutions_engineer"
+          "#17a2b8"
+        when "product_manager"
+          "#6f42c1"
+        when "support_engineer"
+          "#fd7e14"
+        when "other"
+          "#343a40"
+        else
+          "#6c757d"
+        end
+      %>
+      <span class="badge" style="background-color: <%= badge_color %>; color: white; padding: 5px 10px; border-radius: 4px; font-size: 14px;">
         <%= opportunity.role_type_label %>
       </span>
     </p>

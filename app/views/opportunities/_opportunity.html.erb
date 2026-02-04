@@ -10,6 +10,10 @@
         "#17a2b8" # Teal
       when "product_manager"
         "#6f42c1" # Purple
+      when "support_engineer"
+        "#fd7e14" # Orange
+      when "other"
+        "#343a40" # Dark
       else
         "#6c757d" # Default gray
       end
@@ -22,7 +26,7 @@
       font-size: 11px;
       white-space: nowrap;
       display: inline-block;
-      width: 80px;
+      width: 95px;
       text-align: center;
     ">
       <%= opportunity.role_type_label.gsub("Engineer", "Eng").gsub("Manager", "Mgr") %>
