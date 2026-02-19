@@ -5,6 +5,7 @@ class Opportunity < ApplicationRecord
   include RoleTypes::SolutionsEngineer
   include RoleTypes::ProductManager
   include RoleTypes::SupportEngineer
+  include RoleTypes::SuccessEngineer
   include RoleTypes::Other
 
   belongs_to :company
@@ -23,6 +24,7 @@ class Opportunity < ApplicationRecord
     "solutions_engineer" => "Solutions Engineer",
     "product_manager" => "Product Manager",
     "support_engineer" => "Support Engineer",
+    "success_engineer" => "Success Engineer",
     "other" => "Other"
   }.freeze
 
@@ -54,6 +56,10 @@ class Opportunity < ApplicationRecord
 
   def support_engineer?
     role_type == "support_engineer"
+  end
+
+  def success_engineer?
+    role_type == "success_engineer"
   end
 
   def other?

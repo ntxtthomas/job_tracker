@@ -116,6 +116,11 @@
     <%= render "support_engineer_fields", opportunity: opportunity %>
   </div>
 
+  <!-- Success Engineer Fields -->
+  <div data-role-type-target="section" data-role="success_engineer" style="<%= opportunity.role_type == 'success_engineer' ? '' : 'display: none;' %>">
+    <%= render "success_engineer_fields", opportunity: opportunity %>
+  </div>
+
   <!-- Other Fields -->
   <div data-role-type-target="section" data-role="other" style="<%= opportunity.role_type == 'other' ? '' : 'display: none;' %>">
     <%= render "other_fields", opportunity: opportunity %>
