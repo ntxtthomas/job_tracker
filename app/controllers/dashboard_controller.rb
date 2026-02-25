@@ -28,10 +28,10 @@ class DashboardController < ApplicationController
     today = Date.today
     weeks = []
 
-    # TWC (Texas Workforce Commission) weeks: Friday through Thursday
-    # Calculate days back to find the most recent Friday
-    days_back_to_friday = (today.wday - 5) % 7
-    current_week_start = today - days_back_to_friday.days
+    # TWC (Texas Workforce Commission) weeks: Sunday through Saturday
+    # Calculate days back to find the most recent Sunday
+    days_back_to_sunday = today.wday  # Sunday is 0, so wday gives us days since Sunday
+    current_week_start = today - days_back_to_sunday.days
     current_week_end = current_week_start + 6.days
 
     # Show current week + 3 previous weeks
@@ -52,7 +52,8 @@ class DashboardController < ApplicationController
         count: count,
         start_date: week_start,
         end_date: week_end,
-        week_number: i
+        week_number: i,
+        meets_requirement: count >= 5
       }
     end
 

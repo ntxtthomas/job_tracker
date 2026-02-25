@@ -309,6 +309,24 @@ th a:hover {
   color: #6f42c1;
 }
 
+/* Week card warning state (< 5 applications) */
+.card-week-warning {
+  border-left-color: #dc3545;
+}
+
+.card-week-warning .card-number {
+  color: #dc3545;
+}
+
+/* Week card success state (>= 5 applications) */
+.card-week-success {
+  border-left-color: #198754;
+}
+
+.card-week-success .card-number {
+  color: #198754;
+}
+
 /* Dashboard Actions */
 .dashboard-actions {
   margin-top: 3rem;
