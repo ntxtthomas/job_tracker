@@ -3,13 +3,14 @@ class DashboardController < ApplicationController
     @total_resumes = Opportunity.where.not(application_date: nil).count
     @total_assessed = Opportunity.count
 
-    # Tech stack analytics
-    opportunities_with_tech = Opportunity.joins(:technologies).distinct
-    analyzer = TechStackAnalyzer.new(opportunities_with_tech)
+    # Role-based focus insights
+    focus_analyzer = RoleFocusAnalyzer.new(Opportunity.all)
+    @focus_insights = focus_analyzer.generate_insights(limit: 4)
+    @all_role_insights = focus_analyzer.generate_all_role_insights(limit_per_role: 3)
 
-    @tech_combinations = analyzer.analyze_main_stack_combinations.first(10).to_h # Top 10 simplified combinations
-    @learning_insights = analyzer.learning_insights(limit: 5)
-    @top_technologies = analyzer.top_technologies(limit: 15)
+    # Get primary role for main widget
+    role_distribution = Opportunity.group(:role_type).count.sort_by { |_role, count| -count }.to_h
+    @primary_role = role_distribution.max_by { |_role, count| count }&.first
 
     # Source breakdown
     @source_data = Opportunity.where.not(source: [ nil, "" ])
