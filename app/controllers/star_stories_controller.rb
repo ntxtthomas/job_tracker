@@ -3,6 +3,16 @@ class StarStoriesController < ApplicationController
 
   def index
     @star_stories = StarStory.all.order(created_at: :desc)
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        exporter = StarStoriesCsvExporter.new(@star_stories)
+        send_data exporter.generate,
+                  filename: "star_stories_#{Date.current.strftime('%Y-%m-%d')}.csv",
+                  type: "text/csv"
+      end
+    end
   end
 
   def new
