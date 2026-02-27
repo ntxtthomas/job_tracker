@@ -12,6 +12,11 @@
   <% end %>
 
   <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title, style: "width: 500px; height: 25px;" %>
+  </div>
+
+  <div>
     <%= form.label :situation, style: "display: block" %>
     <%= form.text_area :situation, rows: 4, style: "width: 500px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
   </div>
@@ -48,18 +53,14 @@
   </div>
 
   <div>
-    <%= form.label :strength, "Strength (1-10)", style: "display: block" %>
-    <%= form.number_field :strength, min: 1, max: 10, style: "width: 100px; height: 25px;" %>
+    <%= form.label :strength_score, "Strength Score (1-10)", style: "display: block" %>
+    <%= form.number_field :strength_score, min: 1, max: 10, style: "width: 100px; height: 25px;" %>
+    <small style="color: #666;">How compelling/impactful is this story? (1=weak, 10=very strong)</small>
   </div>
 
   <div>
-    <%= form.label :keywords, style: "display: block" %>
-    <%= form.text_field :keywords, placeholder: "e.g., leadership, problem-solving", style: "width: 500px; height: 25px;" %>
-  </div>
-
-  <div>
-    <%= form.label :reflection, "Notes/Reflection", style: "display: block" %>
-    <%= form.text_area :reflection, rows: 4, style: "width: 500px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+    <%= form.label :notes, "Notes/Reflection", style: "display: block" %>
+    <%= form.text_area :notes, rows: 4, style: "width: 500px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
   </div>
 
   <div>

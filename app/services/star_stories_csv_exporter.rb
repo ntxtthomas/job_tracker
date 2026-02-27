@@ -11,6 +11,7 @@ class StarStoriesCsvExporter
 
       @star_stories.each do |story|
         csv << [
+          story.title,
           story.situation,
           story.task,
           story.action,
@@ -28,6 +29,7 @@ class StarStoriesCsvExporter
 
   def headers
     [
+      "Title",
       "Situation",
       "Task",
       "Action",
