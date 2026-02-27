@@ -19,7 +19,7 @@ class StarStoriesCsvExporter
           story.skills&.join(", "),
           story.category&.titleize,
           story.outcome&.titleize,
-          story.reflection
+          story.notes
         ]
       end
     end
