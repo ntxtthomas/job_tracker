@@ -1,0 +1,55 @@
+<%= form_with(model: interview_session, local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :opportunity_id, "Opportunity" %>
+    <%= form.collection_select :opportunity_id, Opportunity.all.order(:position_title), :id, :position_title, { prompt: "Select an opportunity" }, { class: "form-control" } %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :stage %>
+    <%= form.text_field :stage, class: "form-control", placeholder: "e.g., Phone Screen, Technical Interview, Final Round" %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :date %>
+    <%= form.date_field :date, class: "form-control" %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :confidence_score, "Confidence Score (1-10)" %>
+    <%= form.number_field :confidence_score, class: "form-control", min: 1, max: 10 %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :clarity_score, "Clarity Score (1-10)" %>
+    <%= form.number_field :clarity_score, class: "form-control", min: 1, max: 10 %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :questions_asked %>
+    <%= form.text_area :questions_asked, class: "form-control", rows: 4, placeholder: "What questions were you asked?" %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :weak_areas %>
+    <%= form.text_area :weak_areas, class: "form-control", rows: 3, placeholder: "Areas where you struggled or could improve" %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :strong_areas %>
+    <%= form.text_area :strong_areas, class: "form-control", rows: 3, placeholder: "Areas where you performed well" %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :follow_up %>
+    <%= form.text_area :follow_up, class: "form-control", rows: 3, placeholder: "Follow-up actions or notes" %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.label :overall_signal %>
+    <%= form.text_area :overall_signal, class: "form-control", rows: 3, placeholder: "Overall assessment of how the interview went" %>
+  </div>
+  
+  <div class="form-group">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
