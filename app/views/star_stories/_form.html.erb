@@ -1,0 +1,27 @@
+<%= form_with(model: star_story, local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :situation %>
+    <%= form.text_area :situation, class: "form-control", rows: 3 %>
+  </div>
+  <div class="form-group">
+    <%= form.label :task %>
+    <%= form.text_area :task, class: "form-control", rows: 3 %>
+    </div>
+    <div class="form-group">
+        <%= form.label :action %>
+        <%= form.text_area :action, class: "form-control", rows: 3 %>
+    </div>
+    <div class="form-group">
+        <%= form.label :result %>
+        <%= form.text_area :result, class: "form-control", rows: 3 %>
+    </div>
+        %>
+    </div>
+    <div class="form-group">
+        <%= form.label :opportunity_ids, "Related Opportunities" %>
+        <%= form.collection_select :opportunity_ids, Opportunity.all.order(:position_title), :id, :position_title, {}, { multiple: true, class: "form-control" } %>
+    </div>
+    <div class="form-group">
+        <%= form.submit "Create STAR Story", class: "btn btn-primary" %>
+    </div>
+<% end %>
