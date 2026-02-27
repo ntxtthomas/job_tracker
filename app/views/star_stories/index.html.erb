@@ -16,6 +16,7 @@
   <table>
     <thead>
       <tr>
+        <th>Title</th>
         <th>Situation</th>
         <th>Task</th>
         <th>Action</th>
@@ -24,12 +25,12 @@
         <th>Category</th>
         <th>Outcome</th>
         <th>Notes</th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @star_stories.each do |star_story| %>
-        <tr>
+        <tr id="<%= dom_id star_story %>" class="clickable-row" data-href="<%= star_story_path(star_story) %>">
+          <td><%= star_story.title %></td>
           <td><%= truncate(star_story.situation, length: 100) %></td>
           <td><%= truncate(star_story.task, length: 100) %></td>
           <td><%= truncate(star_story.action, length: 100) %></td>
@@ -37,12 +38,7 @@
           <td><%= star_story.skills&.join(", ") %></td>
           <td><%= star_story.category&.titleize %></td>
           <td><%= star_story.outcome&.titleize %></td>
-          <td><%= truncate(star_story.reflection, length: 100) %></td>
-          <td>
-            <%= link_to "View", star_story, style: "margin-right: 0.5rem;" %>
-            <%= link_to "Edit", edit_star_story_path(star_story), style: "margin-right: 0.5rem;" %>
-            <%= button_to "Delete", star_story, method: :delete, form: { data: { turbo_confirm: "Are you sure?" } }, style: "display: inline; padding: 0; border: none; background: none; color: #dc3545; text-decoration: underline; cursor: pointer;" %>
-          </td>
+          <td><%= truncate(star_story.notes, length: 100) %></td>
         </tr>
       <% end %>
     </tbody>

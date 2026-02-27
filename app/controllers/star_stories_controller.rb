@@ -20,7 +20,10 @@ class StarStoriesController < ApplicationController
   end
 
   def create
-    @star_story = StarStory.new(star_story_params)
+    params_hash = star_story_params
+    process_skills_param(params_hash)
+    
+    @star_story = StarStory.new(params_hash)
 
     if @star_story.save
       redirect_to @star_story, notice: "STAR story was successfully created."
@@ -33,7 +36,10 @@ class StarStoriesController < ApplicationController
   end
 
   def update
-    if @star_story.update(star_story_params)
+    params_hash = star_story_params
+    process_skills_param(params_hash)
+    
+    if @star_story.update(params_hash)
       redirect_to @star_story, notice: "STAR story was successfully updated."
     else
       render :edit, status: :unprocessable_entity
@@ -56,8 +62,14 @@ class StarStoriesController < ApplicationController
 
   def star_story_params
     params.require(:star_story).permit(
-      :situation, :task, :action, :result, :category, :outcome,
-      :strength, :keywords, :reflection, skills: [], opportunity_ids: []
+      :title, :situation, :task, :action, :result, :category, :outcome,
+      :strength_score, :notes, :skills, opportunity_ids: []
     )
+  end
+
+  def process_skills_param(params_hash)
+    if params_hash[:skills].is_a?(String)
+      params_hash[:skills] = params_hash[:skills].split("\n").map(&:strip).reject(&:blank?)
+    end
   end
 end
