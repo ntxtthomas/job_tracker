@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_27_180400) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_28_015924) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -136,6 +136,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_27_180400) do
     t.string "risk_level"
     t.integer "trajectory_score"
     t.integer "strategic_value"
+    t.integer "bus_factor"
     t.index ["company_id"], name: "index_opportunities_on_company_id"
     t.index ["fit_score"], name: "index_opportunities_on_fit_score"
     t.index ["remote_type"], name: "index_opportunities_on_remote_type"

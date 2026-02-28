@@ -13,22 +13,22 @@
 
   <div style="margin-bottom: 1rem;">
     <h3>Situation</h3>
-    <p><%= @star_story.situation %></p>
+    <p style="white-space: pre-wrap;"><%= @star_story.situation %></p>
   </div>
 
   <div style="margin-bottom: 1rem;">
     <h3>Task</h3>
-    <p><%= @star_story.task %></p>
+    <p style="white-space: pre-wrap;"><%= @star_story.task %></p>
   </div>
 
   <div style="margin-bottom: 1rem;">
     <h3>Action</h3>
-    <p><%= @star_story.action %></p>
+    <p style="white-space: pre-wrap;"><%= @star_story.action %></p>
   </div>
 
   <div style="margin-bottom: 1rem;">
     <h3>Result</h3>
-    <p><%= @star_story.result %></p>
+    <p style="white-space: pre-wrap;"><%= @star_story.result %></p>
   </div>
 
   <% if @star_story.skills&.any? %>
