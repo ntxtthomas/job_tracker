@@ -31,7 +31,7 @@ class CoreNarrative < ApplicationRecord
   before_save :set_last_updated, if: :content_changed?
 
   # Scopes
-  scope :for_role, ->(role) { where(role_target: [role, :universal]) }
+  scope :for_role, ->(role) { where(role_target: [ role, :universal ]) }
   scope :by_type, ->(type) { where(narrative_type: type) }
   scope :recently_updated, -> { where("last_updated >= ?", 30.days.ago).order(last_updated: :desc) }
   scope :current_version, -> { where(version: "current").or(where(version: nil)) }
@@ -48,7 +48,7 @@ class CoreNarrative < ApplicationRecord
 
   def needs_update?
     return true if last_updated.nil?
-    
+
     last_updated < 60.days.ago
   end
 

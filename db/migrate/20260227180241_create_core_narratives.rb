@@ -10,7 +10,7 @@ class CreateCoreNarratives < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :core_narratives, [:narrative_type, :role_target]
+    add_index :core_narratives, [ :narrative_type, :role_target ]
     add_index :core_narratives, :narrative_type
   end
 end

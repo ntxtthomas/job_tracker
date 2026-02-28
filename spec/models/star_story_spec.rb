@@ -8,11 +8,11 @@ RSpec.describe StarStory, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:title) }
-    
-    it 'validates strength_score is between 1 and 5' do
-      story = StarStory.new(title: "Test", strength_score: 6)
+
+    it 'validates strength_score is between 1 and 10' do
+      story = StarStory.new(title: "Test", strength_score: 11)
       expect(story).not_to be_valid
-      expect(story.errors[:strength_score]).to include("must be less than or equal to 5")
+      expect(story.errors[:strength_score]).to include("must be less than or equal to 10")
     end
 
     it 'validates times_used is non-negative' do

@@ -33,7 +33,7 @@ class StarStory < ApplicationRecord
   scope :top_rated, -> { where("strength_score >= ?", 4).order(strength_score: :desc) }
   scope :frequently_used, -> { where("times_used > ?", 2).order(times_used: :desc) }
   scope :by_category, ->(category) { where(category: category) }
-  scope :successful, -> { where(outcome: [:advanced, :offer]) }
+  scope :successful, -> { where(outcome: [ :advanced, :offer ]) }
 
   # Methods
   def mark_as_used!
