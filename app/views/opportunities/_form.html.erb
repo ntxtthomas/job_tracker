@@ -161,6 +161,12 @@
 </div>
 
 <div>
+  <%= form.label :bus_factor, "Bus Factor (1-10)", style: "display: block" %>
+  <%= form.number_field :bus_factor, min: 1, max: 10, style: "width: 100px; height: 25px;" %>
+  <small style="color: #666; display: block; margin-top: 4px;">How many key people leaving would collapse the project/company? (1=very fragile, 10=very stable)</small>
+</div>
+
+<div>
   <%= form.label :listing_url, "Listing URL", style: "display: block" %>
   <%= form.url_field :listing_url, placeholder: "https://...", style: "width: 250px; height: 25px;" %>
 </div>

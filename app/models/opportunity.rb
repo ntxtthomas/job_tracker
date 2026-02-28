@@ -11,6 +11,9 @@ class Opportunity < ApplicationRecord
   belongs_to :company
   has_many :opportunity_technologies, dependent: :destroy
   has_many :technologies, through: :opportunity_technologies
+  has_many :interview_sessions, dependent: :destroy
+  has_many :star_story_opportunities, dependent: :destroy
+  has_many :star_stories, through: :star_story_opportunities
 
   accepts_nested_attributes_for :opportunity_technologies, allow_destroy: true
 
@@ -28,7 +31,30 @@ class Opportunity < ApplicationRecord
     "other" => "Other"
   }.freeze
 
+  # Career Intelligence Enums
+  enum :retirement_plan_type, {
+    four_oh_one_k: "401k",
+    simple_ira: "simple_ira",
+    none: "none",
+    unknown: "unknown"
+  }, prefix: :retirement
+
+  enum :remote_type, {
+    remote: "remote",
+    hybrid: "hybrid",
+    onsite: "onsite"
+  }, prefix: :work
+
+  enum :risk_level, {
+    low: "low",
+    medium: "medium",
+    high: "high"
+  }, prefix: :risk
+
   validates :role_type, presence: true, inclusion: { in: ROLE_TYPES.keys }
+  validates :fit_score, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 10 }, allow_nil: true
+  validates :trajectory_score, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }, allow_nil: true
+  validates :strategic_value, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }, allow_nil: true
 
   before_save :shorten_urls
   before_save :standardize_salary_range
