@@ -35,7 +35,7 @@ class StarStoriesController < ApplicationController
 
   def update
     process_skills_from_form
-    
+
     if @star_story.update(star_story_params)
       redirect_to @star_story, notice: "STAR story was successfully updated."
     else

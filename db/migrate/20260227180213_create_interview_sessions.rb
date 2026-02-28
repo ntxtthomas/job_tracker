@@ -15,7 +15,7 @@ class CreateInterviewSessions < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :interview_sessions, [:opportunity_id, :date]
+    add_index :interview_sessions, [ :opportunity_id, :date ]
     add_index :interview_sessions, :stage
     add_index :interview_sessions, :overall_signal
   end

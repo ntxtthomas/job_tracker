@@ -33,7 +33,7 @@ class InterviewSession < ApplicationRecord
   # Methods
   def performance_score
     return nil unless confidence_score.present? && clarity_score.present?
-    
+
     (confidence_score + clarity_score) / 2.0
   end
 
