@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  get "dashboard/index"
   get "dashboard" => "dashboard#index"
   resources :opportunities
   resources :interactions
+  resources :interview_sessions
   resources :contacts
   resources :companies
+  resources :star_stories
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

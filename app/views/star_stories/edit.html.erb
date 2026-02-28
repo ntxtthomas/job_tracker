@@ -1,0 +1,12 @@
+<% content_for :title, "Edit STAR Story" %>
+
+<h1>Edit STAR Story</h1>
+
+<%= render 'form', star_story: @star_story %>
+
+<br>
+
+<div>
+  <%= link_to "Show this STAR story", @star_story %> |
+  <%= link_to "Back to STAR stories", star_stories_path %>
+</div>

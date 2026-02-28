@@ -79,6 +79,79 @@
   </div>
   <%= hidden_field_tag "company[known_tech_stack_list][]", "" %>
 </div>
-  <%= form.submit style: "margin-top: 20px; background-color: #0d6efd; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
+
+<div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #ddd;">
+  <h3 style="margin-bottom: 15px;">Company Intelligence</h3>
+  
+  <div>
+    <%= form.label :primary_product, style: "display: block" %>
+    <%= form.text_area :primary_product, rows: 3, style: "width: 500px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+  </div>
+
+  <div>
+    <%= form.label :revenue_model, style: "display: block" %>
+    <%= form.select :revenue_model, [["Select...", ""], ["SaaS", "SaaS"], ["Enterprise License", "Enterprise License"], ["Freemium", "Freemium"], ["Marketplace", "Marketplace"], ["Advertising", "Advertising"], ["Consulting", "Consulting"]], {}, { style: "width: 250px; height: 30px;" } %>
+  </div>
+
+  <div>
+    <%= form.label :funding_stage, style: "display: block" %>
+    <%= form.select :funding_stage, [["Select...", ""], ["Bootstrapped", "Bootstrapped"], ["Seed", "Seed"], ["Series A", "Series A"], ["Series B", "Series B"], ["Series C+", "Series C+"], ["Public", "Public"], ["Acquired", "Acquired"]], {}, { style: "width: 250px; height: 30px;" } %>
+  </div>
+
+  <div>
+    <%= form.label :estimated_revenue, style: "display: block" %>
+    <%= form.text_field :estimated_revenue, placeholder: "e.g., $10M-$50M ARR", style: "width: 250px; height: 25px;" %>
+  </div>
+
+  <div>
+    <%= form.label :estimated_employees, style: "display: block" %>
+    <%= form.number_field :estimated_employees, style: "width: 150px; height: 25px;" %>
+  </div>
+
+  <div>
+    <%= form.label :growth_signal, style: "display: block" %>
+    <%= form.select :growth_signal, [["Select...", ""], ["Rapid Growth", "Rapid Growth"], ["Steady Growth", "Steady Growth"], ["Stable", "Stable"], ["Declining", "Declining"], ["Unknown", "Unknown"]], {}, { style: "width: 250px; height: 30px;" } %>
+  </div>
+
+  <div>
+    <%= form.label :product_maturity, "Product Maturity (1-10)", style: "display: block" %>
+    <%= form.number_field :product_maturity, min: 1, max: 10, style: "width: 100px; height: 25px;" %>
+    <small style="color: #666; display: block;">1=early prototype, 10=mature/established</small>
+  </div>
+
+  <div>
+    <%= form.label :engineering_maturity, "Engineering Maturity (1-10)", style: "display: block" %>
+    <%= form.number_field :engineering_maturity, min: 1, max: 10, style: "width: 100px; height: 25px;" %>
+    <small style="color: #666; display: block;">1=chaos, 10=world-class practices</small>
+  </div>
+
+  <div>
+    <%= form.label :process_maturity, "Process Maturity (1-10)", style: "display: block" %>
+    <%= form.number_field :process_maturity, min: 1, max: 10, style: "width: 100px; height: 25px;" %>
+    <small style="color: #666; display: block;">1=ad-hoc, 10=optimized</small>
+  </div>
+
+  <div>
+    <%= form.label :market_position, style: "display: block" %>
+    <%= form.select :market_position, [["Select...", ""], ["Market Leader", "Market Leader"], ["Strong Challenger", "Strong Challenger"], ["Niche Player", "Niche Player"], ["Emerging", "Emerging"], ["Unknown", "Unknown"]], {}, { style: "width: 250px; height: 30px;" } %>
+  </div>
+
+  <div>
+    <%= form.label :competitor_tier, style: "display: block" %>
+    <%= form.select :competitor_tier, [["Select...", ""], ["Tier 1 (FAANG-level)", "Tier 1"], ["Tier 2 (Unicorn/Strong)", "Tier 2"], ["Tier 3 (Mid-market)", "Tier 3"], ["Tier 4 (Small/Startup)", "Tier 4"]], {}, { style: "width: 250px; height: 30px;" } %>
+  </div>
+
+  <div>
+    <%= form.label :brand_signal_strength, "Brand Signal Strength (1-10)", style: "display: block" %>
+    <%= form.number_field :brand_signal_strength, min: 1, max: 10, style: "width: 100px; height: 25px;" %>
+    <small style="color: #666; display: block;">1=unknown, 10=household name</small>
+  </div>
+
+  <div>
+    <%= form.label :market_size_estimate, style: "display: block" %>
+    <%= form.text_area :market_size_estimate, rows: 2, placeholder: "e.g., TAM $50B, growing 20% YoY", style: "width: 500px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+  </div>
 </div>
+
+<div>
 <% end %>
