@@ -25,7 +25,7 @@ class OpportunitiesController < ApplicationController
       sort_direction = params[:direction] == "desc" ? "desc" : "asc"
 
       # Validate sort column to prevent SQL injection
-      allowed_columns = %w[position_title application_date status remote tech_stack created_at salary_range chatgpt_match jobright_match linkedin_match role_type]
+      allowed_columns = %w[position_title application_date status remote tech_stack created_at salary_range bus_factor chatgpt_match jobright_match linkedin_match role_type]
       if allowed_columns.include?(sort_column)
         @opportunities = @opportunities.order("#{sort_column} #{sort_direction}")
       elsif sort_column == "company"
@@ -111,7 +111,7 @@ class OpportunitiesController < ApplicationController
     def opportunity_params
       params.expect(opportunity: [
         :company_id, :position_title, :application_date, :status, :notes, :remote,
-        :tech_stack, :other_tech_stack, :source, :salary_range, :listing_url,
+        :tech_stack, :other_tech_stack, :source, :salary_range, :bus_factor, :listing_url,
         :chatgpt_match, :jobright_match, :linkedin_match, :role_type,
         technology_ids: [],
         role_metadata: {}

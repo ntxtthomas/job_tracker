@@ -20,10 +20,8 @@ class StarStoriesController < ApplicationController
   end
 
   def create
-    params_hash = star_story_params
-    process_skills_param(params_hash)
-    
-    @star_story = StarStory.new(params_hash)
+    @star_story = StarStory.new(star_story_params)
+    process_skills_from_form
 
     if @star_story.save
       redirect_to @star_story, notice: "STAR story was successfully created."
@@ -36,10 +34,9 @@ class StarStoriesController < ApplicationController
   end
 
   def update
-    params_hash = star_story_params
-    process_skills_param(params_hash)
+    process_skills_from_form
     
-    if @star_story.update(params_hash)
+    if @star_story.update(star_story_params)
       redirect_to @star_story, notice: "STAR story was successfully updated."
     else
       render :edit, status: :unprocessable_entity
@@ -67,9 +64,10 @@ class StarStoriesController < ApplicationController
     )
   end
 
-  def process_skills_param(params_hash)
-    if params_hash[:skills].is_a?(String)
-      params_hash[:skills] = params_hash[:skills].split("\n").map(&:strip).reject(&:blank?)
+  def process_skills_from_form
+    if params[:star_story][:skills].is_a?(String)
+      skills_array = params[:star_story][:skills].split("\n").map(&:strip).reject(&:blank?)
+      params[:star_story][:skills] = skills_array
     end
   end
 end
