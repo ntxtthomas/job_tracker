@@ -29,7 +29,7 @@ class StarStoriesCsvExporter
 
   def sanitize_for_excel(value)
     return "" if value.nil? || value.to_s.strip.empty?
-    
+
     str = value.to_s
     # Prefix with single quote if starts with formula characters to prevent Excel interpretation
     if str.match?(/^[-=+@]/)
