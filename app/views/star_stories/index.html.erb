@@ -31,14 +31,14 @@
       <% @star_stories.each do |star_story| %>
         <tr id="<%= dom_id star_story %>" class="clickable-row" data-href="<%= star_story_path(star_story) %>">
           <td><%= star_story.title %></td>
-          <td><%= truncate(star_story.situation, length: 100) %></td>
-          <td><%= truncate(star_story.task, length: 100) %></td>
-          <td><%= truncate(star_story.action, length: 100) %></td>
-          <td><%= truncate(star_story.result, length: 100) %></td>
+          <td style="white-space: pre-wrap;"><%= truncate(star_story.situation, length: 200) %></td>
+          <td style="white-space: pre-wrap;"><%= truncate(star_story.task, length: 200) %></td>
+          <td style="white-space: pre-wrap;"><%= truncate(star_story.action, length: 200) %></td>
+          <td style="white-space: pre-wrap;"><%= truncate(star_story.result, length: 200) %></td>
           <td><%= star_story.skills&.join(", ") %></td>
           <td><%= star_story.category&.titleize %></td>
           <td><%= star_story.outcome&.titleize %></td>
-          <td><%= truncate(star_story.notes, length: 100) %></td>
+          <td style="white-space: pre-wrap;"><%= truncate(star_story.notes, length: 200) %></td>
         </tr>
       <% end %>
     </tbody>
