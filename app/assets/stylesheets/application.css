@@ -613,6 +613,52 @@ div[style*="color: red"],
   gap: 0.5rem;
 }
 
+.company-form-page .form-group {
+  max-width: 420px;
+}
+
+.company-form-page .form-group.full-width-field {
+  max-width: 100%;
+}
+
+.contact-form-page .form-group,
+.opportunity-form-page .form-group,
+.star-story-form-page .form-group {
+  max-width: 420px;
+}
+
+.contact-form-page .form-group.full-width-field,
+.opportunity-form-page .form-group.full-width-field,
+.star-story-form-page .form-group.full-width-field {
+  max-width: 100%;
+}
+
+.star-story-form-page .form-group.half-width-field {
+  max-width: 700px;
+}
+
+.star-story-form-page .form-group.score-width-field {
+  max-width: 210px;
+}
+
+.opportunity-form-page .form-group.fifteen-width-field {
+  max-width: 210px;
+}
+
+.opportunity-form-page .form-group.ten-width-field {
+  max-width: 140px;
+}
+
+.contact-form-page .form-group input:not([type="checkbox"]),
+.contact-form-page .form-group select,
+.contact-form-page .form-group textarea,
+.opportunity-form-page .form-group input:not([type="checkbox"]),
+.opportunity-form-page .form-group select,
+.opportunity-form-page .form-group textarea {
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
 /* Skill Badges */
 .skill-badge {
   display: inline-block;
@@ -755,6 +801,20 @@ div[style*="color: red"],
   .table-cell-wrap,
   .table-cell-truncate {
     max-width: 150px;
+  }
+
+  .company-form-page .form-group {
+    max-width: 100%;
+  }
+
+  .contact-form-page .form-group,
+  .opportunity-form-page .form-group,
+  .star-story-form-page .form-group,
+  .star-story-form-page .form-group.half-width-field,
+  .star-story-form-page .form-group.score-width-field,
+  .opportunity-form-page .form-group.fifteen-width-field,
+  .opportunity-form-page .form-group.ten-width-field {
+    max-width: 100%;
   }
 }
 
