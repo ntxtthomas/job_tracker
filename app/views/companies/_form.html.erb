@@ -52,7 +52,7 @@
   <%= form.url_field :linkedin, placeholder: "https://linkedin.com/...", class: "form-input" %>
 </div>
 
-<div class="form-group">
+<div class="form-group full-width-field">
   <%= form.label :known_tech_stack, "Known Technologies", class: "form-label" %>
   <p class="form-hint">
     Technologies this company uses (from research, website, job postings, etc.)
@@ -83,7 +83,7 @@
 <div class="detail-section" style="margin-top: 30px; padding-top: 20px; border-top: 2px solid var(--border-color);">
   <h3 class="detail-label">Company Intelligence</h3>
   
-  <div class="form-group">
+  <div class="form-group full-width-field">
     <%= form.label :primary_product, class: "form-label" %>
     <%= form.text_area :primary_product, rows: 3, class: "form-textarea" %>
   </div>

@@ -16,27 +16,27 @@
     <%= form.text_field :title, class: "form-input" %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group half-width-field">
     <%= form.label :situation, class: "form-label" %>
     <%= form.text_area :situation, rows: 4, class: "form-textarea" %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group half-width-field">
     <%= form.label :task, class: "form-label" %>
     <%= form.text_area :task, rows: 4, class: "form-textarea" %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group half-width-field">
     <%= form.label :action, class: "form-label" %>
     <%= form.text_area :action, rows: 4, class: "form-textarea" %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group half-width-field">
     <%= form.label :result, class: "form-label" %>
     <%= form.text_area :result, rows: 4, class: "form-textarea" %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group half-width-field">
     <%= form.label :skills, "Skills (one per line)", class: "form-label" %>
     <%= form.text_area :skills, value: star_story.skills&.join("\n"), rows: 3, class: "form-textarea" %>
     <small class="form-hint">Enter each skill on a new line</small>
@@ -52,13 +52,13 @@
     <%= form.select :outcome, StarStory.outcomes.keys.map { |k| [k.titleize, k] }, { prompt: "Select an outcome" }, { class: "form-select" } %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group score-width-field">
     <%= form.label :strength_score, "Strength Score (1-10)", class: "form-label" %>
     <%= form.number_field :strength_score, min: 1, max: 10, class: "form-input" %>
     <small class="form-hint">How compelling/impactful is this story? (1=weak, 10=very strong)</small>
   </div>
 
-  <div class="form-group">
+  <div class="form-group full-width-field">
     <%= form.label :notes, "Notes/Reflection", class: "form-label" %>
     <%= form.text_area :notes, rows: 4, class: "form-textarea" %>
   </div>
