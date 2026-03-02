@@ -1,6 +1,6 @@
 <%= form_with(model: company) do |form| %>
 <% if company.errors.any? %>
-<div style="color: red">
+<div class="alert">
   <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
 
   <ul>
@@ -11,50 +11,50 @@
 </div>
 <% end %>
 
-<div>
-  <%= form.label :name, style: "display: block" %>
-  <%= form.text_field :name, style: "width: 250px; height: 25px;" %>
+<div class="form-group">
+  <%= form.label :name, class: "form-label" %>
+  <%= form.text_field :name, class: "form-input" %>
 </div>
 
-<div>
-  <%= form.label :industry, style: "display: block" %>
-  <%= form.text_field :industry, style: "width: 250px; height: 25px;" %>
+<div class="form-group">
+  <%= form.label :industry, class: "form-label" %>
+  <%= form.text_field :industry, class: "form-input" %>
 </div>
 
-<div>
-  <%= form.label :company_type, "Company Type", style: "display: block" %>
+<div class="form-group">
+  <%= form.label :company_type, "Company Type", class: "form-label" %>
   <%= form.select :company_type, 
       [["Select a type...", ""], 
        ["Product / Platform", "Product"], 
        ["Consultancy / Agency", "Consultancy"], 
        ["Staffing / Contract", "Staffing"]], 
       {}, 
-      style: "width: 250px; height: 25px; padding: 4px;" %>
+      class: "form-select" %>
 </div>
 
-<div>
-  <%= form.label :location, style: "display: block" %>
-  <%= form.text_field :location, style: "width: 250px; height: 25px;" %>
+<div class="form-group">
+  <%= form.label :location, class: "form-label" %>
+  <%= form.text_field :location, class: "form-input" %>
 </div>
 
-<div>
-  <%= form.label :size, "Company Size (Employee Range)", style: "display: block" %>
-  <%= form.text_field :size, placeholder: "e.g., 501-1,000", style: "width: 250px; height: 25px;" %>
+<div class="form-group">
+  <%= form.label :size, "Company Size (Employee Range)", class: "form-label" %>
+  <%= form.text_field :size, placeholder: "e.g., 501-1,000", class: "form-input" %>
 </div>
 
-<div>
-  <%= form.label :website, style: "display: block" %>
-  <%= form.url_field :website, placeholder: "https://...", style: "width: 250px; height: 25px;" %>
+<div class="form-group">
+  <%= form.label :website, class: "form-label" %>
+  <%= form.url_field :website, placeholder: "https://...", class: "form-input" %>
 </div>
 
-<div>
-  <%= form.label :linkedin, style: "display: block" %>
-  <%= form.url_field :linkedin, placeholder: "https://linkedin.com/...", style: "width: 250px; height: 25px;" %>
+<div class="form-group">
+  <%= form.label :linkedin, class: "form-label" %>
+  <%= form.url_field :linkedin, placeholder: "https://linkedin.com/...", class: "form-input" %>
 </div>
 
-<div style="margin-top: 20px;">
-  <%= form.label :known_tech_stack, "Known Technologies", style: "display: block; margin-bottom: 10px; font-weight: bold;" %>
-  <p style="font-size: 12px; color: var(--text-secondary, #666); margin-bottom: 10px;">
+<div class="form-group full-width-field">
+  <%= form.label :known_tech_stack, "Known Technologies", class: "form-label" %>
+  <p class="form-hint">
     Technologies this company uses (from research, website, job postings, etc.)
   </p>
   <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 4px; background-color: var(--bg-primary, #fff);">
@@ -80,80 +80,80 @@
   <%= hidden_field_tag "company[known_tech_stack_list][]", "" %>
 </div>
 
-<div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #ddd;">
-  <h3 style="margin-bottom: 15px;">Company Intelligence</h3>
+<div class="detail-section" style="margin-top: 30px; padding-top: 20px; border-top: 2px solid var(--border-color);">
+  <h3 class="detail-label">Company Intelligence</h3>
   
-  <div>
-    <%= form.label :primary_product, style: "display: block" %>
-    <%= form.text_area :primary_product, rows: 3, style: "width: 500px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+  <div class="form-group full-width-field">
+    <%= form.label :primary_product, class: "form-label" %>
+    <%= form.text_area :primary_product, rows: 3, class: "form-textarea" %>
   </div>
 
-  <div>
-    <%= form.label :revenue_model, style: "display: block" %>
-    <%= form.select :revenue_model, [["Select...", ""], ["SaaS", "SaaS"], ["Enterprise License", "Enterprise License"], ["Freemium", "Freemium"], ["Marketplace", "Marketplace"], ["Advertising", "Advertising"], ["Consulting", "Consulting"]], {}, { style: "width: 250px; height: 30px;" } %>
+  <div class="form-group">
+    <%= form.label :revenue_model, class: "form-label" %>
+    <%= form.select :revenue_model, [["Select...", ""], ["SaaS", "SaaS"], ["Enterprise License", "Enterprise License"], ["Freemium", "Freemium"], ["Marketplace", "Marketplace"], ["Advertising", "Advertising"], ["Consulting", "Consulting"]], {}, { class: "form-select" } %>
   </div>
 
-  <div>
-    <%= form.label :funding_stage, style: "display: block" %>
-    <%= form.select :funding_stage, [["Select...", ""], ["Bootstrapped", "Bootstrapped"], ["Seed", "Seed"], ["Series A", "Series A"], ["Series B", "Series B"], ["Series C+", "Series C+"], ["Public", "Public"], ["Acquired", "Acquired"]], {}, { style: "width: 250px; height: 30px;" } %>
+  <div class="form-group">
+    <%= form.label :funding_stage, class: "form-label" %>
+    <%= form.select :funding_stage, [["Select...", ""], ["Bootstrapped", "Bootstrapped"], ["Seed", "Seed"], ["Series A", "Series A"], ["Series B", "Series B"], ["Series C+", "Series C+"], ["Public", "Public"], ["Acquired", "Acquired"]], {}, { class: "form-select" } %>
   </div>
 
-  <div>
-    <%= form.label :estimated_revenue, style: "display: block" %>
-    <%= form.text_field :estimated_revenue, placeholder: "e.g., $10M-$50M ARR", style: "width: 250px; height: 25px;" %>
+  <div class="form-group">
+    <%= form.label :estimated_revenue, class: "form-label" %>
+    <%= form.text_field :estimated_revenue, placeholder: "e.g., $10M-$50M ARR", class: "form-input" %>
   </div>
 
-  <div>
-    <%= form.label :estimated_employees, style: "display: block" %>
-    <%= form.number_field :estimated_employees, style: "width: 150px; height: 25px;" %>
+  <div class="form-group">
+    <%= form.label :estimated_employees, class: "form-label" %>
+    <%= form.number_field :estimated_employees, class: "form-input" %>
   </div>
 
-  <div>
-    <%= form.label :growth_signal, style: "display: block" %>
-    <%= form.select :growth_signal, [["Select...", ""], ["Rapid Growth", "Rapid Growth"], ["Steady Growth", "Steady Growth"], ["Stable", "Stable"], ["Declining", "Declining"], ["Unknown", "Unknown"]], {}, { style: "width: 250px; height: 30px;" } %>
+  <div class="form-group">
+    <%= form.label :growth_signal, class: "form-label" %>
+    <%= form.select :growth_signal, [["Select...", ""], ["Rapid Growth", "Rapid Growth"], ["Steady Growth", "Steady Growth"], ["Stable", "Stable"], ["Declining", "Declining"], ["Unknown", "Unknown"]], {}, { class: "form-select" } %>
   </div>
 
-  <div>
-    <%= form.label :product_maturity, "Product Maturity (1-10)", style: "display: block" %>
-    <%= form.number_field :product_maturity, min: 1, max: 10, style: "width: 100px; height: 25px;" %>
-    <small style="color: #666; display: block;">1=early prototype, 10=mature/established</small>
+  <div class="form-group">
+    <%= form.label :product_maturity, "Product Maturity (1-10)", class: "form-label" %>
+    <%= form.number_field :product_maturity, min: 1, max: 10, class: "form-input" %>
+    <small class="form-hint">1=early prototype, 10=mature/established</small>
   </div>
 
-  <div>
-    <%= form.label :engineering_maturity, "Engineering Maturity (1-10)", style: "display: block" %>
-    <%= form.number_field :engineering_maturity, min: 1, max: 10, style: "width: 100px; height: 25px;" %>
-    <small style="color: #666; display: block;">1=chaos, 10=world-class practices</small>
+  <div class="form-group">
+    <%= form.label :engineering_maturity, "Engineering Maturity (1-10)", class: "form-label" %>
+    <%= form.number_field :engineering_maturity, min: 1, max: 10, class: "form-input" %>
+    <small class="form-hint">1=chaos, 10=world-class practices</small>
   </div>
 
-  <div>
-    <%= form.label :process_maturity, "Process Maturity (1-10)", style: "display: block" %>
-    <%= form.number_field :process_maturity, min: 1, max: 10, style: "width: 100px; height: 25px;" %>
-    <small style="color: #666; display: block;">1=ad-hoc, 10=optimized</small>
+  <div class="form-group">
+    <%= form.label :process_maturity, "Process Maturity (1-10)", class: "form-label" %>
+    <%= form.number_field :process_maturity, min: 1, max: 10, class: "form-input" %>
+    <small class="form-hint">1=ad-hoc, 10=optimized</small>
   </div>
 
-  <div>
-    <%= form.label :market_position, style: "display: block" %>
-    <%= form.select :market_position, [["Select...", ""], ["Market Leader", "Market Leader"], ["Strong Challenger", "Strong Challenger"], ["Niche Player", "Niche Player"], ["Emerging", "Emerging"], ["Unknown", "Unknown"]], {}, { style: "width: 250px; height: 30px;" } %>
+  <div class="form-group">
+    <%= form.label :market_position, class: "form-label" %>
+    <%= form.select :market_position, [["Select...", ""], ["Market Leader", "Market Leader"], ["Strong Challenger", "Strong Challenger"], ["Niche Player", "Niche Player"], ["Emerging", "Emerging"], ["Unknown", "Unknown"]], {}, { class: "form-select" } %>
   </div>
 
-  <div>
-    <%= form.label :competitor_tier, style: "display: block" %>
-    <%= form.select :competitor_tier, [["Select...", ""], ["Tier 1 (FAANG-level)", "Tier 1"], ["Tier 2 (Unicorn/Strong)", "Tier 2"], ["Tier 3 (Mid-market)", "Tier 3"], ["Tier 4 (Small/Startup)", "Tier 4"]], {}, { style: "width: 250px; height: 30px;" } %>
+  <div class="form-group">
+    <%= form.label :competitor_tier, class: "form-label" %>
+    <%= form.select :competitor_tier, [["Select...", ""], ["Tier 1 (FAANG-level)", "Tier 1"], ["Tier 2 (Unicorn/Strong)", "Tier 2"], ["Tier 3 (Mid-market)", "Tier 3"], ["Tier 4 (Small/Startup)", "Tier 4"]], {}, { class: "form-select" } %>
   </div>
 
-  <div>
-    <%= form.label :brand_signal_strength, "Brand Signal Strength (1-10)", style: "display: block" %>
-    <%= form.number_field :brand_signal_strength, min: 1, max: 10, style: "width: 100px; height: 25px;" %>
-    <small style="color: #666; display: block;">1=unknown, 10=household name</small>
+  <div class="form-group">
+    <%= form.label :brand_signal_strength, "Brand Signal Strength (1-10)", class: "form-label" %>
+    <%= form.number_field :brand_signal_strength, min: 1, max: 10, class: "form-input" %>
+    <small class="form-hint">1=unknown, 10=household name</small>
   </div>
 
-  <div>
-    <%= form.label :market_size_estimate, style: "display: block" %>
-    <%= form.text_area :market_size_estimate, rows: 2, placeholder: "e.g., TAM $50B, growing 20% YoY", style: "width: 500px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+  <div class="form-group">
+    <%= form.label :market_size_estimate, class: "form-label" %>
+    <%= form.text_area :market_size_estimate, rows: 2, placeholder: "e.g., TAM $50B, growing 20% YoY", class: "form-textarea" %>
   </div>
 </div>
 
-<div>
-  <%= form.submit style: "margin-top: 20px; background-color: #0d6efd; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
+<div class="form-actions">
+  <%= form.submit class: "btn btn-primary" %>
 </div>
 <% end %>
