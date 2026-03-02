@@ -1,11 +1,13 @@
 <% content_for :title, "New contact" %>
 
-<h1>New contact</h1>
+<div class="contact-form-page">
+  <h1>New contact</h1>
 
-<%= render "form", contact: @contact %>
+  <%= render "form", contact: @contact %>
 
-<br>
+  <br>
 
-<div>
-  <%= link_to "Back to contacts", contacts_path %>
+  <div>
+    <%= link_to "Back to contacts", contacts_path %>
+  </div>
 </div>

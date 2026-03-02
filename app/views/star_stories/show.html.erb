@@ -1,55 +1,59 @@
-<p style="color: green"><%= notice %></p>
+<% if notice.present? %>
+  <p class="notice"><%= notice %></p>
+<% end %>
 
 <% content_for :title, @star_story.title %>
 
 <h1><%= @star_story.title %></h1>
 
-<div style="margin-top: 1rem;">
-  <div style="margin-bottom: 1rem;">
+<div class="detail-section">
+  <div class="detail-value">
     <strong>Category:</strong> <%= @star_story.category&.titleize %> |
     <strong>Outcome:</strong> <%= @star_story.outcome&.titleize %> |
     <strong>Strength:</strong> <%= @star_story.strength_score %>/10
   </div>
 
-  <div style="margin-bottom: 1rem;">
-    <h3>Situation</h3>
-    <p style="white-space: pre-wrap;"><%= @star_story.situation %></p>
+  <div class="detail-section">
+    <h3 class="detail-label">Situation</h3>
+    <p class="detail-value-wrap"><%= @star_story.situation %></p>
   </div>
 
-  <div style="margin-bottom: 1rem;">
-    <h3>Task</h3>
-    <p style="white-space: pre-wrap;"><%= @star_story.task %></p>
+  <div class="detail-section">
+    <h3 class="detail-label">Task</h3>
+    <p class="detail-value-wrap"><%= @star_story.task %></p>
   </div>
 
-  <div style="margin-bottom: 1rem;">
-    <h3>Action</h3>
-    <p style="white-space: pre-wrap;"><%= @star_story.action %></p>
+  <div class="detail-section">
+    <h3 class="detail-label">Action</h3>
+    <p class="detail-value-wrap"><%= @star_story.action %></p>
   </div>
 
-  <div style="margin-bottom: 1rem;">
-    <h3>Result</h3>
-    <p style="white-space: pre-wrap;"><%= @star_story.result %></p>
+  <div class="detail-section">
+    <h3 class="detail-label">Result</h3>
+    <p class="detail-value-wrap"><%= @star_story.result %></p>
   </div>
 
   <% if @star_story.skills&.any? %>
-    <div style="margin-bottom: 1rem;">
-      <strong>Skills:</strong>
-      <% @star_story.skills.each do |skill| %>
-        <span style="background-color: #e7f1ff; color: #0056b3; padding: 2px 6px; border-radius: 3px; font-size: 12px; margin-right: 4px;"><%= skill %></span>
-      <% end %>
+    <div class="detail-section">
+      <strong class="detail-label">Skills:</strong>
+      <div class="skill-list">
+        <% @star_story.skills.each do |skill| %>
+          <span class="skill-badge"><%= skill %></span>
+        <% end %>
+      </div>
     </div>
   <% end %>
 
   <% if @star_story.notes.present? %>
-    <div style="margin-bottom: 1rem;">
-      <h3>Notes</h3>
-      <p style="white-space: pre-wrap;"><%= @star_story.notes %></p>
+    <div class="detail-section">
+      <h3 class="detail-label">Notes</h3>
+      <p class="detail-value-wrap"><%= @star_story.notes %></p>
     </div>
   <% end %>
 
   <% if @star_story.opportunities.any? %>
-    <div style="margin-bottom: 1rem;">
-      <h3>Related Opportunities</h3>
+    <div class="detail-section">
+      <h3 class="detail-label">Related Opportunities</h3>
       <ul>
         <% @star_story.opportunities.each do |opportunity| %>
           <li><%= link_to opportunity.position_title, opportunity %></li>
@@ -59,8 +63,8 @@
   <% end %>
 </div>
 
-<div style="margin-top: 2rem; display: flex; gap: 0.5rem; align-items: center;">
-  <%= link_to "Edit this STAR story", edit_star_story_path(@star_story), style: "background-color: #0d6efd; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
-  <%= link_to "Back to STAR stories", star_stories_path, style: "background-color: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#5a6268'", onmouseout: "this.style.backgroundColor='#6c757d'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
-  <%= button_to "Destroy this STAR story", @star_story, method: :delete, style: "margin: 0; background-color: #dc3545; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease;", data: { confirm: "Are you sure?" }, onmouseover: "this.style.backgroundColor='#c82333'", onmouseout: "this.style.backgroundColor='#dc3545'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
+<div class="form-actions">
+  <%= link_to "Edit this STAR story", edit_star_story_path(@star_story), class: "btn btn-primary" %>
+  <%= link_to "Back to STAR stories", star_stories_path, class: "btn btn-secondary" %>
+  <%= button_to "Destroy this STAR story", @star_story, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
 </div>

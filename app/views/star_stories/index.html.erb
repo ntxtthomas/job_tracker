@@ -1,18 +1,20 @@
-<p style="color: green"><%= notice %></p>
+<% if notice.present? %>
+  <p class="notice"><%= notice %></p>
+<% end %>
 
 <% content_for :title, "STAR Stories" %>
 
-<div style="margin-bottom: 1.5rem;">
-  <div style="display: flex; justify-content: space-between; align-items: center;">
-    <h1 style="margin: 0;">STAR Stories</h1>
-    <div style="display: flex; gap: 10px;">
-      <%= link_to "+", new_star_story_path, style: "padding: 8px 16px; background-color: #0d6efd; color: white; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block; font-size: 1.25rem; line-height: 1;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
-      <%= link_to "Download", star_stories_path(format: :csv), style: "padding: 8px 16px; background-color: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block;", onmouseover: "this.style.backgroundColor='#5a6268'", onmouseout: "this.style.backgroundColor='#6c757d'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
+<div class="page-header">
+  <div class="page-header-content">
+    <h1 class="page-title">STAR Stories</h1>
+    <div class="page-actions">
+      <%= link_to "+", new_star_story_path, class: "btn btn-primary btn-lg" %>
+      <%= link_to "Download", star_stories_path(format: :csv), class: "btn btn-secondary" %>
     </div>
   </div>
 </div>
 
-<div id="star_stories">
+<div id="star_stories" class="table-container">
   <table>
     <thead>
       <tr>
@@ -31,14 +33,14 @@
       <% @star_stories.each do |star_story| %>
         <tr id="<%= dom_id star_story %>" class="clickable-row" data-href="<%= star_story_path(star_story) %>">
           <td><%= star_story.title %></td>
-          <td style="white-space: pre-wrap;"><%= truncate(star_story.situation, length: 200) %></td>
-          <td style="white-space: pre-wrap;"><%= truncate(star_story.task, length: 200) %></td>
-          <td style="white-space: pre-wrap;"><%= truncate(star_story.action, length: 200) %></td>
-          <td style="white-space: pre-wrap;"><%= truncate(star_story.result, length: 200) %></td>
+          <td class="table-cell-wrap"><%= truncate(star_story.situation, length: 200) %></td>
+          <td class="table-cell-wrap"><%= truncate(star_story.task, length: 200) %></td>
+          <td class="table-cell-wrap"><%= truncate(star_story.action, length: 200) %></td>
+          <td class="table-cell-wrap"><%= truncate(star_story.result, length: 200) %></td>
           <td><%= star_story.skills&.join(", ") %></td>
           <td><%= star_story.category&.titleize %></td>
           <td><%= star_story.outcome&.titleize %></td>
-          <td style="white-space: pre-wrap;"><%= truncate(star_story.notes, length: 200) %></td>
+          <td class="table-cell-wrap"><%= truncate(star_story.notes, length: 200) %></td>
         </tr>
       <% end %>
     </tbody>
