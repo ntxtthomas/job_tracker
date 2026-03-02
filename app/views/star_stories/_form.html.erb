@@ -1,6 +1,6 @@
 <%= form_with(model: star_story) do |form| %>
   <% if star_story.errors.any? %>
-    <div style="color: red">
+    <div class="alert">
       <h2><%= pluralize(star_story.errors.count, "error") %> prohibited this STAR story from being saved:</h2>
 
       <ul>
@@ -11,64 +11,64 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title, style: "width: 500px; height: 25px;" %>
+  <div class="form-group">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-input" %>
   </div>
 
-  <div>
-    <%= form.label :situation, style: "display: block" %>
-    <%= form.text_area :situation, rows: 4, style: "width: 500px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+  <div class="form-group">
+    <%= form.label :situation, class: "form-label" %>
+    <%= form.text_area :situation, rows: 4, class: "form-textarea" %>
   </div>
 
-  <div>
-    <%= form.label :task, style: "display: block" %>
-    <%= form.text_area :task, rows: 4, style: "width: 500px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+  <div class="form-group">
+    <%= form.label :task, class: "form-label" %>
+    <%= form.text_area :task, rows: 4, class: "form-textarea" %>
   </div>
 
-  <div>
-    <%= form.label :action, style: "display: block" %>
-    <%= form.text_area :action, rows: 4, style: "width: 500px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+  <div class="form-group">
+    <%= form.label :action, class: "form-label" %>
+    <%= form.text_area :action, rows: 4, class: "form-textarea" %>
   </div>
 
-  <div>
-    <%= form.label :result, style: "display: block" %>
-    <%= form.text_area :result, rows: 4, style: "width: 500px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+  <div class="form-group">
+    <%= form.label :result, class: "form-label" %>
+    <%= form.text_area :result, rows: 4, class: "form-textarea" %>
   </div>
 
-  <div>
-    <%= form.label :skills, "Skills (one per line)", style: "display: block" %>
-    <%= form.text_area :skills, value: star_story.skills&.join("\n"), rows: 3, style: "width: 500px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
-    <small style="color: #666;">Enter each skill on a new line</small>
+  <div class="form-group">
+    <%= form.label :skills, "Skills (one per line)", class: "form-label" %>
+    <%= form.text_area :skills, value: star_story.skills&.join("\n"), rows: 3, class: "form-textarea" %>
+    <small class="form-hint">Enter each skill on a new line</small>
   </div>
 
-  <div>
-    <%= form.label :category, style: "display: block" %>
-    <%= form.select :category, StarStory.categories.keys.map { |k| [k.titleize, k] }, { prompt: "Select a category" }, { style: "display: block; width: 250px; height: 30px;" } %>
+  <div class="form-group">
+    <%= form.label :category, class: "form-label" %>
+    <%= form.select :category, StarStory.categories.keys.map { |k| [k.titleize, k] }, { prompt: "Select a category" }, { class: "form-select" } %>
   </div>
 
-  <div>
-    <%= form.label :outcome, style: "display: block" %>
-    <%= form.select :outcome, StarStory.outcomes.keys.map { |k| [k.titleize, k] }, { prompt: "Select an outcome" }, { style: "display: block; width: 250px; height: 30px;" } %>
+  <div class="form-group">
+    <%= form.label :outcome, class: "form-label" %>
+    <%= form.select :outcome, StarStory.outcomes.keys.map { |k| [k.titleize, k] }, { prompt: "Select an outcome" }, { class: "form-select" } %>
   </div>
 
-  <div>
-    <%= form.label :strength_score, "Strength Score (1-10)", style: "display: block" %>
-    <%= form.number_field :strength_score, min: 1, max: 10, style: "width: 100px; height: 25px;" %>
-    <small style="color: #666;">How compelling/impactful is this story? (1=weak, 10=very strong)</small>
+  <div class="form-group">
+    <%= form.label :strength_score, "Strength Score (1-10)", class: "form-label" %>
+    <%= form.number_field :strength_score, min: 1, max: 10, class: "form-input" %>
+    <small class="form-hint">How compelling/impactful is this story? (1=weak, 10=very strong)</small>
   </div>
 
-  <div>
-    <%= form.label :notes, "Notes/Reflection", style: "display: block" %>
-    <%= form.text_area :notes, rows: 4, style: "width: 500px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" %>
+  <div class="form-group">
+    <%= form.label :notes, "Notes/Reflection", class: "form-label" %>
+    <%= form.text_area :notes, rows: 4, class: "form-textarea" %>
   </div>
 
-  <div>
-    <%= form.label :opportunity_ids, "Related Opportunities", style: "display: block" %>
-    <%= form.collection_select :opportunity_ids, Opportunity.all.order(:position_title), :id, :position_title, {}, { multiple: true, style: "display: block; width: 500px; height: 150px;" } %>
+  <div class="form-group">
+    <%= form.label :opportunity_ids, "Related Opportunities", class: "form-label" %>
+    <%= form.collection_select :opportunity_ids, Opportunity.all.order(:position_title), :id, :position_title, {}, { multiple: true, class: "form-select" } %>
   </div>
 
-  <div style="margin-top: 20px;">
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

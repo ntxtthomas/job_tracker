@@ -1,10 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<% if notice.present? %>
+  <p class="notice"><%= notice %></p>
+<% end %>
 
 <% content_for :title, "Contacts" %>
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-  <h1 style="margin: 0;">Contacts</h1>
-  <%= link_to "+", new_contact_path, style: "padding: 8px 16px; background-color: #0d6efd; color: white; border: none; border-radius: 4px; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block; font-size: 1.25rem; line-height: 1;", onmouseover: "this.style.backgroundColor='#0b5ed7'", onmouseout: "this.style.backgroundColor='#0d6efd'", onmousedown: "this.style.transform='scale(0.95)'", onmouseup: "this.style.transform='scale(1)'" %>
+<div class="page-header">
+  <div class="page-header-content">
+    <h1 class="page-title">Contacts</h1>
+    <div class="page-actions">
+      <%= link_to "+", new_contact_path, class: "btn btn-primary btn-lg" %>
+    </div>
+  </div>
 </div>
 
 <div id="contacts">
