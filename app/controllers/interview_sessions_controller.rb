@@ -3,7 +3,27 @@ class InterviewSessionsController < ApplicationController
   before_action :load_form_collections, only: [ :new, :create, :edit, :update ]
 
   def index
-    @interview_sessions = InterviewSession.includes(opportunity: :company, contact: :company).order(scheduled_at: :desc)
+    @interview_sessions = InterviewSession.includes(opportunity: :company, contact: :company)
+
+    if params[:sort].present?
+      sort_column = params[:sort]
+      sort_direction = params[:direction] == "desc" ? "desc" : "asc"
+      allowed_columns = %w[stage scheduled_at status overall_signal confidence_score duration_minutes format]
+
+      if allowed_columns.include?(sort_column)
+        @interview_sessions = @interview_sessions.order("#{sort_column} #{sort_direction}")
+      elsif sort_column == "company"
+        @interview_sessions = @interview_sessions.joins(opportunity: :company).order("companies.name #{sort_direction}")
+      elsif sort_column == "opportunity"
+        @interview_sessions = @interview_sessions.joins(:opportunity).order("opportunities.position_title #{sort_direction}")
+      elsif sort_column == "contact"
+        @interview_sessions = @interview_sessions.left_joins(:contact).order("contacts.name #{sort_direction} NULLS LAST")
+      else
+        @interview_sessions = @interview_sessions.order(scheduled_at: :desc)
+      end
+    else
+      @interview_sessions = @interview_sessions.order(scheduled_at: :desc)
+    end
   end
 
   def show

@@ -4,43 +4,44 @@
 	<div class="page-header-content">
 		<h1 class="page-title">Interview Sessions</h1>
 		<div class="page-actions">
-			<%= link_to "New interview session", new_interview_session_path, class: "btn btn-primary" %>
+			<%= link_to "+", new_interview_session_path, class: "btn btn-primary btn-lg" %>
 		</div>
 	</div>
 </div>
 
 <% if @interview_sessions.any? %>
-	<table>
-		<thead>
-			<tr>
-				<th>Company</th>
-				<th>Opportunity</th>
-				<th>Stage</th>
-				<th>Scheduled</th>
-				<th>Status</th>
-				<th>Signal</th>
-				<th>Confidence</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @interview_sessions.each do |interview_session| %>
+	<div class="table-container">
+		<table>
+			<thead>
 				<tr>
-					<td><%= interview_session.opportunity.company.name %></td>
-					<td><%= interview_session.opportunity.position_title %></td>
-					<td><%= interview_session.stage.humanize %></td>
-					<td><%= interview_session.scheduled_at&.strftime("%b %d, %Y %I:%M %p") || "—" %></td>
-					<td><%= interview_session.status.humanize %></td>
-					<td><%= interview_session.overall_signal&.humanize || "—" %></td>
-					<td><%= interview_session.confidence_score.nil? ? "—" : interview_session.confidence_score %></td>
-					<td>
-						<%= link_to "Show", interview_session_path(interview_session) %> |
-						<%= link_to "Edit", edit_interview_session_path(interview_session) %>
-					</td>
+					<th><%= sortable_link :company, "Company" %></th>
+					<th><%= sortable_link :opportunity, "Opportunity" %></th>
+					<th><%= sortable_link :contact, "Contact" %></th>
+					<th><%= sortable_link :stage, "Stage" %></th>
+					<th><%= sortable_link :scheduled_at, "Scheduled" %></th>
+					<th><%= sortable_link :format, "Format" %></th>
+					<th><%= sortable_link :status, "Status" %></th>
+					<th><%= sortable_link :overall_signal, "Signal" %></th>
+					<th><%= sortable_link :confidence_score, "Confidence" %></th>
 				</tr>
-			<% end %>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<% @interview_sessions.each do |interview_session| %>
+					<tr id="<%= dom_id interview_session %>" class="clickable-row" data-href="<%= interview_session_path(interview_session) %>">
+						<td><%= interview_session.opportunity.company.name %></td>
+						<td><%= interview_session.opportunity.position_title %></td>
+						<td><%= interview_session.contact&.name || "—" %></td>
+						<td><%= interview_session.stage.humanize %></td>
+						<td><%= interview_session.scheduled_at&.strftime("%b %d, %Y %I:%M %p") || "—" %></td>
+						<td><%= interview_session.format.humanize %></td>
+						<td><%= interview_session.status.humanize %></td>
+						<td><%= interview_session.overall_signal&.humanize || "—" %></td>
+						<td><%= interview_session.confidence_score.nil? ? "—" : interview_session.confidence_score %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
 <% else %>
 	<p>No interview sessions yet.</p>
 <% end %>
