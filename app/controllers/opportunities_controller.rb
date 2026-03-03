@@ -5,10 +5,12 @@ class OpportunitiesController < ApplicationController
   def index
     @opportunities = Opportunity.includes(:company, :technologies)
 
-    # Handle role type filtering
-    if params[:role_type].present? && params[:role_type] != "all"
-      @opportunities = @opportunities.where(role_type: params[:role_type])
-      @role_filter = Opportunity::ROLE_TYPES[params[:role_type]]
+    # Handle status filtering
+    if params[:status].present?
+      allowed_statuses = %w[applied interviewing closed]
+      if allowed_statuses.include?(params[:status])
+        @opportunities = @opportunities.where(status: params[:status])
+      end
     end
 
     # Handle date range filtering from weekly dashboard cards
