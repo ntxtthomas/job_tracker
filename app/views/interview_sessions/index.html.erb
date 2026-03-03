@@ -5,13 +5,14 @@
 		<h1 class="page-title">Interview Sessions</h1>
 		<div class="page-actions">
 			<%= link_to "+", new_interview_session_path, class: "btn btn-primary btn-lg" %>
+			<%= link_to "Download", interview_sessions_path(format: :csv, sort: params[:sort], direction: params[:direction]), class: "btn btn-secondary" %>
 		</div>
 	</div>
 </div>
 
 <% if @interview_sessions.any? %>
-	<div class="table-container">
-		<table>
+	<div class="table-container interview-sessions-index-print">
+		<table class="interview-sessions-table">
 			<thead>
 				<tr>
 					<th><%= sortable_link :company, "Company" %></th>

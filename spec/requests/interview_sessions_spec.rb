@@ -28,6 +28,15 @@ RSpec.describe "InterviewSessions", type: :request do
       get interview_sessions_path
       expect(response).to have_http_status(:ok)
     end
+
+    it "returns csv when requested" do
+      get interview_sessions_path(format: :csv)
+
+      expect(response).to have_http_status(:ok)
+      expect(response.content_type).to include("text/csv")
+      expect(response.body).to include("Company")
+      expect(response.body).to include("Opportunity")
+    end
   end
 
   describe "GET /new" do
