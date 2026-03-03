@@ -1,7 +1,0 @@
-<tr id="<%= dom_id interaction %>" class="clickable-row" data-href="<%= interaction_path(interaction) %>">
-  <td><%= interaction.contact&.name || "No specific contact" %></td>
-  <td><%= interaction.company.name if interaction.company %></td>
-  <td><%= interaction.category %></td>
-  <td><%= interaction.status %></td>
-  <td><%= interaction.follow_up_date %></td>
-</tr>
