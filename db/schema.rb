@@ -10,9 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_28_015924) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_02_130100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -76,36 +114,29 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_28_015924) do
     t.index ["narrative_type"], name: "index_core_narratives_on_narrative_type"
   end
 
-  create_table "interactions", force: :cascade do |t|
-    t.bigint "contact_id"
-    t.bigint "company_id", null: false
-    t.string "category"
-    t.text "note"
-    t.date "follow_up_date"
-    t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_interactions_on_company_id"
-    t.index ["contact_id"], name: "index_interactions_on_contact_id"
-  end
-
   create_table "interview_sessions", force: :cascade do |t|
     t.bigint "opportunity_id", null: false
     t.string "stage", null: false
-    t.date "date", null: false
+    t.datetime "scheduled_at", null: false
     t.integer "confidence_score"
-    t.integer "clarity_score"
-    t.text "questions_asked"
-    t.text "weak_areas"
-    t.text "strong_areas"
-    t.text "follow_up"
     t.string "overall_signal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["opportunity_id", "date"], name: "index_interview_sessions_on_opportunity_id_and_date"
+    t.bigint "contact_id"
+    t.integer "duration_minutes"
+    t.string "format"
+    t.string "status"
+    t.text "questions_they_asked"
+    t.text "questions_i_asked"
+    t.text "follow_ups"
+    t.text "next_steps"
+    t.index ["contact_id"], name: "index_interview_sessions_on_contact_id"
+    t.index ["opportunity_id", "scheduled_at"], name: "index_interview_sessions_on_opportunity_id_and_scheduled_at"
     t.index ["opportunity_id"], name: "index_interview_sessions_on_opportunity_id"
     t.index ["overall_signal"], name: "index_interview_sessions_on_overall_signal"
+    t.index ["scheduled_at"], name: "index_interview_sessions_on_scheduled_at"
     t.index ["stage"], name: "index_interview_sessions_on_stage"
+    t.index ["status"], name: "index_interview_sessions_on_status"
   end
 
   create_table "opportunities", force: :cascade do |t|
@@ -193,9 +224,10 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_28_015924) do
     t.index ["name"], name: "index_technologies_on_name", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "contacts", "companies"
-  add_foreign_key "interactions", "companies"
-  add_foreign_key "interactions", "contacts"
+  add_foreign_key "interview_sessions", "contacts"
   add_foreign_key "interview_sessions", "opportunities"
   add_foreign_key "opportunities", "companies"
   add_foreign_key "opportunity_technologies", "opportunities"

@@ -47,7 +47,6 @@ class OpportunitiesController < ApplicationController
 
   # GET /opportunities/1 or /opportunities/1.json
   def show
-    @interactions = @opportunity.company.interactions.includes(:contact) if @opportunity.company
   end
 
   # GET /opportunities/new

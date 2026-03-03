@@ -1,2 +1,43 @@
-<h1>InterviewSessions#show</h1>
-<p>Find me in app/views/interview_sessions/show.html.erb</p>
+<% content_for :title, "Interview Session" %>
+
+<% if notice.present? %>
+	<p class="notice"><%= notice %></p>
+<% end %>
+
+<div class="detail-section">
+	<h1 class="page-title">Interview Session</h1>
+
+	<p><strong>Company:</strong> <%= @interview_session.opportunity.company.name %></p>
+	<p><strong>Opportunity:</strong> <%= @interview_session.opportunity.position_title %></p>
+	<p><strong>Contact:</strong> <%= @interview_session.contact&.name || "—" %></p>
+	<p><strong>Stage:</strong> <%= @interview_session.stage.humanize %></p>
+	<p><strong>Scheduled At:</strong> <%= @interview_session.scheduled_at&.strftime("%b %d, %Y %I:%M %p") || "—" %></p>
+	<p><strong>Duration (minutes):</strong> <%= @interview_session.duration_minutes || "—" %></p>
+	<p><strong>Format:</strong> <%= @interview_session.format.humanize %></p>
+	<p><strong>Status:</strong> <%= @interview_session.status.humanize %></p>
+	<p><strong>Overall Signal:</strong> <%= @interview_session.overall_signal&.humanize || "—" %></p>
+	<p><strong>Confidence Score:</strong> <%= @interview_session.confidence_score.nil? ? "—" : @interview_session.confidence_score %></p>
+</div>
+
+<div class="detail-section">
+	<h3 class="detail-label">Notes</h3>
+	<div class="detail-value"><%= @interview_session.notes if @interview_session.notes.present? %></div>
+
+	<h3 class="detail-label">Questions They Asked</h3>
+	<p class="detail-value-wrap"><%= @interview_session.questions_they_asked.presence || "—" %></p>
+
+	<h3 class="detail-label">Questions I Asked</h3>
+	<p class="detail-value-wrap"><%= @interview_session.questions_i_asked.presence || "—" %></p>
+
+	<h3 class="detail-label">Follow Ups</h3>
+	<p class="detail-value-wrap"><%= @interview_session.follow_ups.presence || "—" %></p>
+
+	<h3 class="detail-label">Next Steps</h3>
+	<p class="detail-value-wrap"><%= @interview_session.next_steps.presence || "—" %></p>
+</div>
+
+<div class="form-actions">
+	<%= link_to "Edit this interview session", edit_interview_session_path(@interview_session), class: "btn btn-primary" %>
+	<%= link_to "Back to interview sessions", interview_sessions_path, class: "btn btn-secondary" %>
+	<%= button_to "Destroy this interview session", @interview_session, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+</div>
