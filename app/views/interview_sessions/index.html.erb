@@ -1,2 +1,46 @@
-<h1>InterviewSessions#index</h1>
-<p>Find me in app/views/interview_sessions/index.html.erb</p>
+<% content_for :title, "Interview Sessions" %>
+
+<div class="page-header">
+	<div class="page-header-content">
+		<h1 class="page-title">Interview Sessions</h1>
+		<div class="page-actions">
+			<%= link_to "New interview session", new_interview_session_path, class: "btn btn-primary" %>
+		</div>
+	</div>
+</div>
+
+<% if @interview_sessions.any? %>
+	<table>
+		<thead>
+			<tr>
+				<th>Company</th>
+				<th>Opportunity</th>
+				<th>Stage</th>
+				<th>Scheduled</th>
+				<th>Status</th>
+				<th>Signal</th>
+				<th>Confidence</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @interview_sessions.each do |interview_session| %>
+				<tr>
+					<td><%= interview_session.opportunity.company.name %></td>
+					<td><%= interview_session.opportunity.position_title %></td>
+					<td><%= interview_session.stage.humanize %></td>
+					<td><%= interview_session.scheduled_at&.strftime("%b %d, %Y %I:%M %p") || "—" %></td>
+					<td><%= interview_session.status.humanize %></td>
+					<td><%= interview_session.overall_signal&.humanize || "—" %></td>
+					<td><%= interview_session.confidence_score.nil? ? "—" : interview_session.confidence_score %></td>
+					<td>
+						<%= link_to "Show", interview_session_path(interview_session) %> |
+						<%= link_to "Edit", edit_interview_session_path(interview_session) %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<p>No interview sessions yet.</p>
+<% end %>

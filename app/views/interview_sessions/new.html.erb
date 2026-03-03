@@ -1,5 +1,13 @@
-<h1>InterviewSessions#new</h1>
+<% content_for :title, "New Interview Session" %>
 
-<%= render 'form', interview_session: @interview_session %>
+<div class="interview-session-form-page">
+	<h1>New Interview Session</h1>
 
-<%= link_to "Back", interview_sessions_path %>
+	<%= render "form", interview_session: @interview_session %>
+
+	<br>
+
+	<div>
+		<%= link_to "Back to interview sessions", interview_sessions_path %>
+	</div>
+</div>

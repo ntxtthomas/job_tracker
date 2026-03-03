@@ -10,6 +10,8 @@
  */
 
 /* CSS Variables for Light/Dark Theme */
+@import url("https://ga.jspm.io/npm:trix@2.1.15/dist/trix.css");
+
 :root {
   /* Light theme colors (default) */
   --bg-primary: #ffffff;
@@ -649,12 +651,23 @@ div[style*="color: red"],
   max-width: 140px;
 }
 
+.interview-session-form-page .form-group {
+  max-width: 420px;
+}
+
+.interview-session-form-page .form-group.full-width-field {
+  max-width: 100%;
+}
+
 .contact-form-page .form-group input:not([type="checkbox"]),
 .contact-form-page .form-group select,
 .contact-form-page .form-group textarea,
 .opportunity-form-page .form-group input:not([type="checkbox"]),
 .opportunity-form-page .form-group select,
-.opportunity-form-page .form-group textarea {
+.opportunity-form-page .form-group textarea,
+.interview-session-form-page .form-group input:not([type="checkbox"]),
+.interview-session-form-page .form-group select,
+.interview-session-form-page .form-group textarea {
   width: 100% !important;
   box-sizing: border-box;
 }
@@ -809,6 +822,7 @@ div[style*="color: red"],
 
   .contact-form-page .form-group,
   .opportunity-form-page .form-group,
+  .interview-session-form-page .form-group,
   .star-story-form-page .form-group,
   .star-story-form-page .form-group.half-width-field,
   .star-story-form-page .form-group.score-width-field,
