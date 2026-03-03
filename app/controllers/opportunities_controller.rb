@@ -49,6 +49,7 @@ class OpportunitiesController < ApplicationController
 
   # GET /opportunities/1 or /opportunities/1.json
   def show
+    @interview_sessions = @opportunity.interview_sessions.includes(:contact).order(scheduled_at: :desc)
   end
 
   # GET /opportunities/new
