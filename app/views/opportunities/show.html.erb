@@ -5,7 +5,45 @@
 <%= render "opportunity_details", opportunity: @opportunity %>
 <div class="form-actions">
   <%= link_to "Edit this opportunity", edit_opportunity_path(@opportunity), class: "btn btn-primary" %>
+  <%= link_to "+ Interview", new_interview_session_path(opportunity_id: @opportunity.id), class: "btn btn-primary" %>
   <%= link_to "Back to opportunities", opportunities_path, class: "btn btn-secondary" %>
   <%= button_to "Destroy this opportunity", @opportunity, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+</div>
+
+<div style="margin-top: 2rem;">
+  <h3 class="detail-label">Related Interviews</h3>
+
+  <% if @interview_sessions.any? %>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Scheduled</th>
+            <th>Stage</th>
+            <th>Format</th>
+            <th>Status</th>
+            <th>Signal</th>
+            <th>Confidence</th>
+            <th>Contact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @interview_sessions.each do |interview_session| %>
+            <tr id="<%= dom_id interview_session %>" class="clickable-row" data-href="<%= interview_session_path(interview_session) %>">
+              <td><%= interview_session.scheduled_at&.strftime("%b %d, %Y %I:%M %p") || "—" %></td>
+              <td><%= interview_session.stage.humanize %></td>
+              <td><%= interview_session.format.humanize %></td>
+              <td><%= interview_session.status.humanize %></td>
+              <td><%= interview_session.overall_signal&.humanize || "—" %></td>
+              <td><%= interview_session.confidence_score.nil? ? "—" : interview_session.confidence_score %></td>
+              <td><%= interview_session.contact&.name || "—" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p>No interviews yet for this opportunity.</p>
+  <% end %>
 </div>
 
