@@ -770,6 +770,11 @@ div[style*="color: red"],
   line-height: 1.6;
 }
 
+.interview-sessions-table td,
+.interview-sessions-table th {
+  white-space: nowrap;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .dashboard-cards {
@@ -902,6 +907,15 @@ div[style*="color: red"],
     white-space: pre-wrap;
     word-wrap: break-word;
     max-width: none;
+  }
+
+  .interview-sessions-index-print .interview-sessions-table {
+    table-layout: auto;
+  }
+
+  .interview-sessions-index-print .interview-sessions-table td,
+  .interview-sessions-index-print .interview-sessions-table th {
+    white-space: normal;
   }
 
   /* Detail sections for show pages */

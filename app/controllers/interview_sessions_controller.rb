@@ -24,6 +24,16 @@ class InterviewSessionsController < ApplicationController
     else
       @interview_sessions = @interview_sessions.order(scheduled_at: :desc)
     end
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        exporter = InterviewSessionsCsvExporter.new(@interview_sessions)
+        send_data exporter.generate,
+                  filename: "interview_sessions_#{Date.current.strftime('%Y-%m-%d')}.csv",
+                  type: "text/csv"
+      end
+    end
   end
 
   def show
