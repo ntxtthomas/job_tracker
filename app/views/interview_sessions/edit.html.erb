@@ -1,4 +1,14 @@
-<h1>InterviewSessions#edit</h1>
+<% content_for :title, "Edit Interview Session" %>
 
-<%= render 'form', interview_session: @interview_session %>
-<%= link_to "Back", interview_session_path(@interview_session) %>
+<div class="interview-session-form-page">
+	<h1>Edit Interview Session</h1>
+
+	<%= render "form", interview_session: @interview_session %>
+
+	<br>
+
+	<div>
+		<%= link_to "Show this interview session", @interview_session %> |
+		<%= link_to "Back to interview sessions", interview_sessions_path %>
+	</div>
+</div>
