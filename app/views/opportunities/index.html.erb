@@ -18,25 +18,29 @@
   </div>
 </div>
 
-  <!-- Role Type Filter -->
+  <!-- Status Filter -->
   <div class="card" style="margin-bottom: 1rem;">
     <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; width: 100%;">
       <%= form_with url: opportunities_path, method: :get, local: true, style: "display: flex; gap: 10px; align-items: center; flex-wrap: wrap;" do |f| %>
-        <label for="role_type_filter" class="form-label" style="margin: 0;">Filter by Role Type:</label>
-        <%= f.select :role_type,
-            options_for_select(Opportunity::ROLE_TYPES.map { |k, v| [v, k] }, params[:role_type]),
-            { include_blank: "All Roles" },
-            id: "role_type_filter",
+        <label for="status_filter" class="form-label" style="margin: 0;">Filter by Status:</label>
+        <%= f.select :status,
+            options_for_select([
+              ["Applied", "applied"],
+              ["Interviewing", "interviewing"],
+              ["Closed", "closed"]
+            ], params[:status]),
+            { include_blank: "All Statuses" },
+            id: "status_filter",
             class: "form-select",
             style: "width: auto; min-width: 200px;" %>
         <%= f.submit "Filter", class: "btn btn-primary" %>
-        <% if params[:role_type].present? %>
+        <% if params[:status].present? %>
           <%= link_to "Clear", opportunities_path, class: "btn btn-secondary" %>
         <% end %>
       <% end %>
       <div style="margin-left: auto; display: flex; gap: 10px;">
         <%= link_to "+", new_opportunity_path, class: "btn btn-primary btn-lg" %>
-        <%= link_to "Download CSV", opportunities_path(format: :csv, start_date: params[:start_date], end_date: params[:end_date]), class: "btn btn-secondary" %>
+        <%= link_to "Download CSV", opportunities_path(format: :csv, status: params[:status], start_date: params[:start_date], end_date: params[:end_date]), class: "btn btn-secondary" %>
       </div>
     </div>
   </div>
