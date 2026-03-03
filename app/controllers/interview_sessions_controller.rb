@@ -40,7 +40,7 @@ class InterviewSessionsController < ApplicationController
   end
 
   def new
-    @interview_session = InterviewSession.new
+    @interview_session = InterviewSession.new(opportunity_id: params[:opportunity_id])
   end
 
   def create
