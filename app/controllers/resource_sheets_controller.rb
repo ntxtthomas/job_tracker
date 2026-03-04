@@ -87,11 +87,11 @@ class ResourceSheetsController < ApplicationController
   def load_form_collections
     @companies = Company.order(:name)
     @opportunities = Opportunity.includes(:company).references(:company).order("companies.name ASC, opportunities.position_title ASC")
-    @role_type_options = Opportunity::ROLE_TYPES.map { |key, value| [value, key] }
-    @resource_type_options = ResourceSheet::RESOURCE_TYPES.map { |key, label| [label, key] }
+    @role_type_options = Opportunity::ROLE_TYPES.map { |key, value| [ value, key ] }
+    @resource_type_options = ResourceSheet::RESOURCE_TYPES.map { |key, label| [ label, key ] }
 
     @opportunity_select_options = @opportunities.map do |opportunity|
-      ["#{opportunity.company.name} — #{opportunity.position_title}", opportunity.id]
+      [ "#{opportunity.company.name} — #{opportunity.position_title}", opportunity.id ]
     end
 
     @opportunity_scope_data = @opportunities.map do |opportunity|
