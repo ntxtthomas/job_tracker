@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_02_130100) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_03_153000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -186,6 +186,33 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_02_130100) do
     t.index ["technology_id"], name: "index_opportunity_technologies_on_technology_id"
   end
 
+  create_table "resource_sheets", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "resource_type", default: "interview_prep", null: false
+    t.string "role_type"
+    t.bigint "company_id"
+    t.bigint "opportunity_id"
+    t.string "version_label"
+    t.boolean "active", default: true, null: false
+    t.text "about_me_content"
+    t.text "about_me_bullets"
+    t.text "why_company_content"
+    t.text "why_company_bullets"
+    t.text "why_me_content"
+    t.text "why_me_bullets"
+    t.text "salary_content"
+    t.text "salary_bullets"
+    t.text "notes_content"
+    t.text "notes_bullets"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active"], name: "index_resource_sheets_on_active"
+    t.index ["company_id"], name: "index_resource_sheets_on_company_id"
+    t.index ["opportunity_id"], name: "index_resource_sheets_on_opportunity_id"
+    t.index ["resource_type"], name: "index_resource_sheets_on_resource_type"
+    t.index ["role_type"], name: "index_resource_sheets_on_role_type"
+  end
+
   create_table "star_stories", force: :cascade do |t|
     t.string "title", null: false
     t.text "situation"
@@ -232,6 +259,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_02_130100) do
   add_foreign_key "opportunities", "companies"
   add_foreign_key "opportunity_technologies", "opportunities"
   add_foreign_key "opportunity_technologies", "technologies"
+  add_foreign_key "resource_sheets", "companies"
+  add_foreign_key "resource_sheets", "opportunities"
   add_foreign_key "star_story_opportunities", "opportunities"
   add_foreign_key "star_story_opportunities", "star_stories"
 end

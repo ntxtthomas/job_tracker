@@ -1,0 +1,45 @@
+<% content_for :title, "Resources" %>
+
+<div class="page-header">
+  <div class="page-header-content">
+    <h1 class="page-title">Resources</h1>
+    <div class="page-actions">
+      <%= link_to "+", new_resource_sheet_path, class: "btn btn-primary btn-lg" %>
+    </div>
+  </div>
+</div>
+
+<% if @resource_sheets.any? %>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th><%= sortable_link :title, "Title" %></th>
+          <th><%= sortable_link :resource_type, "Type" %></th>
+          <th><%= sortable_link :role_type, "Role" %></th>
+          <th><%= sortable_link :company, "Company" %></th>
+          <th><%= sortable_link :opportunity, "Opportunity" %></th>
+          <th><%= sortable_link :version_label, "Version" %></th>
+          <th><%= sortable_link :active, "Active" %></th>
+          <th><%= sortable_link :updated_at, "Updated" %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @resource_sheets.each do |resource_sheet| %>
+          <tr id="<%= dom_id resource_sheet %>" class="clickable-row" data-href="<%= resource_sheet_path(resource_sheet) %>">
+            <td><%= resource_sheet.title %></td>
+            <td><%= resource_sheet.resource_type.humanize %></td>
+            <td><%= resource_sheet.role_type.present? ? Opportunity::ROLE_TYPES[resource_sheet.role_type] : "—" %></td>
+            <td><%= resource_sheet.company&.name || "—" %></td>
+            <td><%= resource_sheet.opportunity&.position_title || "—" %></td>
+            <td><%= resource_sheet.version_label.presence || "—" %></td>
+            <td><%= resource_sheet.active ? "Yes" : "No" %></td>
+            <td><%= resource_sheet.updated_at.strftime("%b %d, %Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>No resources yet.</p>
+<% end %>

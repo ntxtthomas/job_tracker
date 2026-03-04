@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   get "dashboard" => "dashboard#index"
   resources :opportunities
   resources :interview_sessions
+  resources :resource_sheets do
+    collection do
+      post :generate_from_opportunity
+    end
+  end
   resources :contacts
   resources :companies
   resources :star_stories

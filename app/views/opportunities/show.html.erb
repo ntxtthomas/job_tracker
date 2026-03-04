@@ -6,6 +6,7 @@
 <div class="form-actions">
   <%= link_to "Edit this opportunity", edit_opportunity_path(@opportunity), class: "btn btn-primary" %>
   <%= link_to "+ Interview", new_interview_session_path(opportunity_id: @opportunity.id), class: "btn btn-primary" %>
+  <%= button_to "+ Resource", generate_from_opportunity_resource_sheets_path(opportunity_id: @opportunity.id), method: :post, class: "btn btn-primary" %>
   <%= link_to "Back to opportunities", opportunities_path, class: "btn btn-secondary" %>
   <%= button_to "Destroy this opportunity", @opportunity, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
 </div>
