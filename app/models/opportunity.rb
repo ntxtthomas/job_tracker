@@ -12,6 +12,7 @@ class Opportunity < ApplicationRecord
   has_many :opportunity_technologies, dependent: :destroy
   has_many :technologies, through: :opportunity_technologies
   has_many :interview_sessions, dependent: :destroy
+  has_many :resource_sheets, dependent: :nullify
   has_many :star_story_opportunities, dependent: :destroy
   has_many :star_stories, through: :star_story_opportunities
 
