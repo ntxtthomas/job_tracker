@@ -1,0 +1,48 @@
+<% if notice.present? %>
+  <p class="notice"><%= notice %></p>
+<% end %>
+
+<% content_for :title, @resource_sheet.title %>
+
+<div class="page-header">
+  <div class="page-header-content">
+    <div>
+      <h1 class="page-title"><%= @resource_sheet.title %></h1>
+      <p style="margin: 0.5rem 0 0 0; color: var(--text-muted); font-size: 0.95rem;">
+        <strong>Type:</strong> <%= @resource_sheet.resource_type.humanize %> |
+        <strong>Role:</strong> <%= @resource_sheet.role_type.present? ? Opportunity::ROLE_TYPES[@resource_sheet.role_type] : "—" %> |
+        <strong>Company:</strong> <%= @resource_sheet.company&.name || "—" %> |
+        <strong>Opportunity:</strong> <%= @resource_sheet.opportunity&.position_title || "—" %> |
+        <strong>Version:</strong> <%= @resource_sheet.version_label.presence || "—" %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="resource-cornell-sheet">
+  <div class="resource-cornell-header">
+    <div>Cue / Topic</div>
+    <div>Main Content</div>
+    <div>Bullets / Prompts</div>
+  </div>
+
+  <% [
+    ["About Me", @resource_sheet.about_me_content, @resource_sheet.about_me_bullets],
+    ["Why This Company", @resource_sheet.why_company_content, @resource_sheet.why_company_bullets],
+    ["Why Me", @resource_sheet.why_me_content, @resource_sheet.why_me_bullets],
+    ["Salary", @resource_sheet.salary_content, @resource_sheet.salary_bullets],
+    ["Notes", @resource_sheet.notes_content, @resource_sheet.notes_bullets]
+  ].each do |topic, content, bullets| %>
+    <div class="resource-cornell-row">
+      <div class="resource-cornell-topic"><%= topic %></div>
+      <div class="resource-cornell-content"><%= simple_format(content.presence || "—") %></div>
+      <div class="resource-cornell-bullets"><%= simple_format(bullets.presence || "—") %></div>
+    </div>
+  <% end %>
+</div>
+
+<div class="form-actions">
+  <%= link_to "Edit this resource", edit_resource_sheet_path(@resource_sheet), class: "btn btn-primary" %>
+  <%= link_to "Back to resources", resource_sheets_path, class: "btn btn-secondary" %>
+  <%= button_to "Destroy this resource", @resource_sheet, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+</div>

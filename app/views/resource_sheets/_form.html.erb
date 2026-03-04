@@ -1,0 +1,101 @@
+<%= form_with(model: resource_sheet) do |form| %>
+  <% if resource_sheet.errors.any? %>
+    <div class="alert">
+      <h2><%= pluralize(resource_sheet.errors.count, "error") %> prohibited this resource from being saved:</h2>
+      <ul>
+        <% resource_sheet.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-input", placeholder: "Interview one-pager title" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :resource_type, class: "form-label" %>
+    <%= form.select :resource_type, @resource_type_options, { prompt: "Select type" }, class: "form-select" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :role_type, class: "form-label" %>
+    <%= form.select :role_type, @role_type_options, { prompt: "Optional role type" }, class: "form-select" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :company_id, "Company", class: "form-label" %>
+    <%= form.collection_select :company_id, @companies, :id, :name, { prompt: "Optional company" }, class: "form-select" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :opportunity_id, "Opportunity", class: "form-label" %>
+    <%= form.collection_select :opportunity_id, @opportunities, :id, :position_title, { prompt: "Optional opportunity" }, class: "form-select" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :version_label, class: "form-label" %>
+    <%= form.text_field :version_label, class: "form-input", placeholder: "v1, v2, recruiter-call, etc." %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :active, class: "form-label" %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="form-group full-width-field">
+    <%= form.label :about_me_content, "About Me (Content)", class: "form-label" %>
+    <%= form.text_area :about_me_content, rows: 4, class: "form-textarea" %>
+  </div>
+
+  <div class="form-group full-width-field">
+    <%= form.label :about_me_bullets, "About Me (Bullets)", class: "form-label" %>
+    <%= form.text_area :about_me_bullets, rows: 3, class: "form-textarea", placeholder: "One bullet per line" %>
+  </div>
+
+  <div class="form-group full-width-field">
+    <%= form.label :why_company_content, "Why Company (Content)", class: "form-label" %>
+    <%= form.text_area :why_company_content, rows: 4, class: "form-textarea" %>
+  </div>
+
+  <div class="form-group full-width-field">
+    <%= form.label :why_company_bullets, "Why Company (Bullets)", class: "form-label" %>
+    <%= form.text_area :why_company_bullets, rows: 3, class: "form-textarea", placeholder: "One bullet per line" %>
+  </div>
+
+  <div class="form-group full-width-field">
+    <%= form.label :why_me_content, "Why Me (Content)", class: "form-label" %>
+    <%= form.text_area :why_me_content, rows: 4, class: "form-textarea" %>
+  </div>
+
+  <div class="form-group full-width-field">
+    <%= form.label :why_me_bullets, "Why Me (Bullets)", class: "form-label" %>
+    <%= form.text_area :why_me_bullets, rows: 3, class: "form-textarea", placeholder: "One bullet per line" %>
+  </div>
+
+  <div class="form-group full-width-field">
+    <%= form.label :salary_content, "Salary (Content)", class: "form-label" %>
+    <%= form.text_area :salary_content, rows: 4, class: "form-textarea" %>
+  </div>
+
+  <div class="form-group full-width-field">
+    <%= form.label :salary_bullets, "Salary (Bullets)", class: "form-label" %>
+    <%= form.text_area :salary_bullets, rows: 3, class: "form-textarea", placeholder: "One bullet per line" %>
+  </div>
+
+  <div class="form-group full-width-field">
+    <%= form.label :notes_content, "Notes (Content)", class: "form-label" %>
+    <%= form.text_area :notes_content, rows: 4, class: "form-textarea" %>
+  </div>
+
+  <div class="form-group full-width-field">
+    <%= form.label :notes_bullets, "Notes (Bullets)", class: "form-label" %>
+    <%= form.text_area :notes_bullets, rows: 3, class: "form-textarea", placeholder: "One bullet per line" %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

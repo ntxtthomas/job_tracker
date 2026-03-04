@@ -1,0 +1,13 @@
+<% content_for :title, "New Resource" %>
+
+<div class="resource-sheet-form-page">
+  <h1>New Resource</h1>
+
+  <%= render "form", resource_sheet: @resource_sheet %>
+
+  <br>
+
+  <div>
+    <%= link_to "Back to resources", resource_sheets_path %>
+  </div>
+</div>

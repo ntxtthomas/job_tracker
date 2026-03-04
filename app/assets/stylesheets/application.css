@@ -659,6 +659,52 @@ div[style*="color: red"],
   max-width: 100%;
 }
 
+.resource-sheet-form-page .form-group {
+  max-width: 420px;
+}
+
+.resource-sheet-form-page .form-group.full-width-field {
+  max-width: 100%;
+}
+
+.resource-cornell-sheet {
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 1rem 0 2rem;
+}
+
+.resource-cornell-header,
+.resource-cornell-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+.resource-cornell-header > div {
+  background: var(--table-header-bg);
+  font-weight: 600;
+  padding: 0.6rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.resource-cornell-row > div {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.resource-cornell-row > div:not(:last-child),
+.resource-cornell-header > div:not(:last-child) {
+  border-right: 1px solid var(--border-color);
+}
+
+.resource-cornell-row:last-child > div {
+  border-bottom: none;
+}
+
+.resource-cornell-topic {
+  font-weight: 600;
+}
+
 .contact-form-page .form-group input:not([type="checkbox"]),
 .contact-form-page .form-group select,
 .contact-form-page .form-group textarea,
@@ -667,7 +713,10 @@ div[style*="color: red"],
 .opportunity-form-page .form-group textarea,
 .interview-session-form-page .form-group input:not([type="checkbox"]),
 .interview-session-form-page .form-group select,
-.interview-session-form-page .form-group textarea {
+.interview-session-form-page .form-group textarea,
+.resource-sheet-form-page .form-group input:not([type="checkbox"]),
+.resource-sheet-form-page .form-group select,
+.resource-sheet-form-page .form-group textarea {
   width: 100% !important;
   box-sizing: border-box;
 }
@@ -828,6 +877,7 @@ div[style*="color: red"],
   .contact-form-page .form-group,
   .opportunity-form-page .form-group,
   .interview-session-form-page .form-group,
+  .resource-sheet-form-page .form-group,
   .star-story-form-page .form-group,
   .star-story-form-page .form-group.half-width-field,
   .star-story-form-page .form-group.score-width-field,
@@ -916,6 +966,12 @@ div[style*="color: red"],
   .interview-sessions-index-print .interview-sessions-table td,
   .interview-sessions-index-print .interview-sessions-table th {
     white-space: normal;
+  }
+
+  .resource-cornell-header,
+  .resource-cornell-row {
+    grid-template-columns: 1fr 2fr 1fr;
+    page-break-inside: avoid;
   }
 
   /* Detail sections for show pages */

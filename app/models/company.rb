@@ -1,6 +1,7 @@
 class Company < ApplicationRecord
   has_many :contacts, dependent: :destroy
   has_many :opportunities, dependent: :destroy
+  has_many :resource_sheets, dependent: :nullify
 
   before_save :shorten_urls, :sanitize_size
 
