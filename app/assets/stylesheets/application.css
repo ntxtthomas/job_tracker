@@ -753,6 +753,17 @@ div[style*="color: red"],
   margin: 1rem 0;
 }
 
+.resource-sheets-table-container {
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.resource-sheets-table-container thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
 .table-cell-wrap {
   white-space: pre-wrap;
   max-width: 300px;
@@ -822,6 +833,74 @@ div[style*="color: red"],
 .interview-sessions-table td,
 .interview-sessions-table th {
   white-space: nowrap;
+}
+
+.resource-guides-section {
+  margin-top: 2rem;
+}
+
+.resource-guides-section h2 {
+  margin-bottom: 1rem;
+}
+
+.resource-guide-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.resource-guide-card {
+  display: block;
+  text-decoration: none;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  background: var(--bg-primary);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.resource-guide-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px var(--card-shadow-hover);
+}
+
+.resource-guide-card h3 {
+  margin: 0 0 0.5rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.resource-guide-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.guide-intro {
+  margin-bottom: 1.25rem;
+}
+
+.guide-section {
+  margin-bottom: 1.5rem;
+}
+
+.guide-item {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.75rem;
+  background: var(--bg-primary);
+}
+
+.guide-item h3 {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+}
+
+.guide-item p {
+  margin: 0.35rem 0;
 }
 
 /* Responsive design */
@@ -959,6 +1038,15 @@ div[style*="color: red"],
     max-width: none;
   }
 
+  .resource-sheets-table-container {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .resource-sheets-table-container thead th {
+    position: static;
+  }
+
   .interview-sessions-index-print .interview-sessions-table {
     table-layout: auto;
   }
@@ -988,6 +1076,13 @@ div[style*="color: red"],
   .detail-value-wrap {
     white-space: pre-wrap;
     margin-bottom: 0.5rem;
+  }
+
+  .resource-guide-card,
+  .guide-item {
+    border: 1px solid black;
+    box-shadow: none;
+    page-break-inside: avoid;
   }
 
   /* Skill badges */
