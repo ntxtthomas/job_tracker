@@ -78,6 +78,15 @@ class ResourceSheetsController < ApplicationController
     redirect_to edit_resource_sheet_path(resource_sheet), notice: "Resource draft generated from opportunity."
   end
 
+  def behavioral_guide
+  end
+
+  def technical_guide
+  end
+
+  def interviewer_questions_guide
+  end
+
   private
 
   def set_resource_sheet
