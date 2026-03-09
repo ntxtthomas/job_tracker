@@ -9,9 +9,9 @@
     <div>
       <h1 class="page-title">Opportunities</h1>
       <% if @date_filter %>
-        <p style="margin: 0.5rem 0 0 0; color: var(--text-muted); font-size: 0.95rem;">
+        <p class="opportunities-date-filter-note">
           Showing applications from <%= @date_filter %>
-          <%= link_to "Clear filter", opportunities_path, style: "margin-left: 1rem;" %>
+          <%= link_to "Clear filter", opportunities_path, class: "opportunities-date-filter-clear" %>
         </p>
       <% end %>
     </div>
@@ -19,28 +19,44 @@
 </div>
 
   <!-- Status Filter -->
-  <div class="card" style="margin-bottom: 1rem;">
-    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; width: 100%;">
-      <%= form_with url: opportunities_path, method: :get, local: true, style: "display: flex; gap: 10px; align-items: center; flex-wrap: wrap;" do |f| %>
-        <label for="status_filter" class="form-label" style="margin: 0;">Filter by Status:</label>
-        <%= f.select :status,
-            options_for_select([
-              ["Applied", "applied"],
-              ["Interviewing", "interviewing"],
-              ["Closed", "closed"]
-            ], params[:status]),
-            { include_blank: "All Statuses" },
-            id: "status_filter",
-            class: "form-select",
-            style: "width: auto; min-width: 200px;" %>
-        <%= f.submit "Filter", class: "btn btn-primary" %>
-        <% if params[:status].present? %>
-          <%= link_to "Clear", opportunities_path, class: "btn btn-secondary" %>
+  <div class="card opportunities-filters-card">
+    <div class="opportunities-toolbar">
+      <div class="opportunities-filter-group">
+        <%= form_with url: opportunities_path, method: :get, local: true, class: "opportunities-filter-form" do |f| %>
+          <%= hidden_field_tag :company_query, params[:company_query] %>
+          <%= hidden_field_tag :start_date, params[:start_date] %>
+          <%= hidden_field_tag :end_date, params[:end_date] %>
+          <label for="status_filter" class="form-label opportunities-status-label"></label>
+          <%= f.select :status,
+              options_for_select([
+                ["Applied", "applied"],
+                ["Interviewing", "interviewing"],
+                ["Closed", "closed"]
+              ], params[:status]),
+              { include_blank: "All Statuses" },
+              id: "status_filter",
+              class: "form-select opportunities-status-select" %>
+          <%= f.submit "Filter", class: "btn btn-primary" %>
+          <% if params[:status].present? %>
+            <%= link_to "Clear", opportunities_path(company_query: params[:company_query], start_date: params[:start_date], end_date: params[:end_date]), class: "btn btn-secondary" %>
+          <% end %>
         <% end %>
-      <% end %>
-      <div style="margin-left: auto; display: flex; gap: 10px;">
+        |
+        <%= form_with url: opportunities_path, method: :get, local: true, class: "opportunities-filter-form" do |f| %>
+          <%= hidden_field_tag :status, params[:status] %>
+          <%= hidden_field_tag :start_date, params[:start_date] %>
+          <%= hidden_field_tag :end_date, params[:end_date] %>
+          <%= f.text_field :company_query, value: params[:company_query], placeholder: "Search company", class: "form-input opportunities-company-input" %>
+          <%= f.submit "Search", class: "btn btn-primary" %>
+          <% if params[:company_query].present? %>
+            <%= link_to "Clear", opportunities_path(status: params[:status], start_date: params[:start_date], end_date: params[:end_date]), class: "btn btn-secondary" %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="opportunities-actions">
         <%= link_to "+", new_opportunity_path, class: "btn btn-primary btn-lg" %>
-        <%= link_to "Download CSV", opportunities_path(format: :csv, status: params[:status], start_date: params[:start_date], end_date: params[:end_date]), class: "btn btn-secondary" %>
+        <%= link_to "Download CSV", opportunities_path(format: :csv, status: params[:status], company_query: params[:company_query], start_date: params[:start_date], end_date: params[:end_date]), class: "btn btn-secondary" %>
       </div>
     </div>
   </div>

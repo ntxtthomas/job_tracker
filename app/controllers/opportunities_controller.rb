@@ -5,6 +5,11 @@ class OpportunitiesController < ApplicationController
   def index
     @opportunities = Opportunity.includes(:company, :technologies)
 
+    if params[:company_query].present?
+      company_query = "%#{params[:company_query].strip}%"
+      @opportunities = @opportunities.joins(:company).where("companies.name ILIKE ?", company_query)
+    end
+
     # Handle status filtering
     if params[:status].present?
       allowed_statuses = %w[applied interviewing closed]
