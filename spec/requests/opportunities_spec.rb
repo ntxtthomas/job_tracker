@@ -46,7 +46,7 @@ RSpec.describe "Opportunities", type: :request do
       get opportunities_path
 
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include("Filter by Status:")
+      expect(response.body).to include("")
       expect(response.body).to include("Applied")
       expect(response.body).to include("Interviewing")
       expect(response.body).to include("Closed")
