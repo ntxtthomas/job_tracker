@@ -903,6 +903,62 @@ div[style*="color: red"],
   margin: 0.35rem 0;
 }
 
+.opportunities-date-filter-note {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.opportunities-date-filter-clear {
+  margin-left: 1rem;
+}
+
+.opportunities-filters-card {
+  margin-bottom: 1rem;
+}
+
+.opportunities-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.opportunities-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.opportunities-filter-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.opportunities-status-label {
+  margin: 0;
+}
+
+.opportunities-status-select {
+  width: auto;
+  min-width: 200px;
+}
+
+.opportunities-company-input {
+  width: 220px;
+}
+
+.opportunities-actions {
+  display: flex;
+  gap: 0.625rem;
+  margin-left: auto;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .dashboard-cards {
@@ -947,6 +1003,15 @@ div[style*="color: red"],
   .table-cell-wrap,
   .table-cell-truncate {
     max-width: 150px;
+  }
+
+  .opportunities-toolbar {
+    align-items: flex-start;
+  }
+
+  .opportunities-actions {
+    margin-left: 0;
+    width: 100%;
   }
 
   .company-form-page .form-group {
