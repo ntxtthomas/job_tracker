@@ -3,10 +3,12 @@ class Company < ApplicationRecord
   has_many :opportunities, dependent: :destroy
   has_many :resource_sheets, dependent: :nullify
 
+  before_validation :normalize_name
   before_save :shorten_urls, :sanitize_size
 
   # Validations
   validates :name, presence: true
+  validates :name, uniqueness: { case_sensitive: false }
   validates :company_type, inclusion: { in: %w[Product Consultancy Staffing], message: "%{value} is not a valid company type" }, allow_nil: true
   validates :size, format: { with: /\A[\d,\-\s]*\z/, message: "should be a range like '501-1,000'" }, allow_nil: true, allow_blank: true
 
@@ -63,6 +65,10 @@ class Company < ApplicationRecord
   end
 
   private
+
+  def normalize_name
+    self.name = name.to_s.squish.presence
+  end
 
   def shorten_urls
     if website_changed? && website.present? && !website.include?("is.gd")
