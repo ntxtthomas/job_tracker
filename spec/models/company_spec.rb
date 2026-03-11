@@ -10,8 +10,9 @@ RSpec.describe Company, type: :model do
     end
 
     it "validates name uniqueness case-insensitively" do
-      Company.create!(name: "Acme Corp", company_type: "Product")
-      duplicate = Company.new(name: "acme corp", company_type: "Product")
+      unique_name = "Acme Corp #{SecureRandom.hex(4)}"
+      Company.create!(name: unique_name, company_type: "Product")
+      duplicate = Company.new(name: unique_name.downcase, company_type: "Product")
 
       expect(duplicate).not_to be_valid
       expect(duplicate.errors[:name]).to include("has already been taken")
