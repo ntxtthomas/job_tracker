@@ -18,6 +18,9 @@
   <table>
     <thead>
       <tr>
+        <th class="star-story-order-column">
+          <button type="button" id="star-story-order-sort" class="star-story-order-sort-btn">Order ▲</button>
+        </th>
         <th>Title</th>
         <th>Situation</th>
         <th>Task</th>
@@ -32,6 +35,9 @@
     <tbody>
       <% @star_stories.each do |star_story| %>
         <tr id="<%= dom_id star_story %>" class="clickable-row" data-href="<%= star_story_path(star_story) %>">
+          <td class="star-story-order-column">
+            <input type="number" min="1" class="form-input star-story-order-input" aria-label="Temporary order for <%= star_story.title %>">
+          </td>
           <td><%= star_story.title %></td>
           <td class="table-cell-wrap"><%= truncate(star_story.situation, length: 200) %></td>
           <td class="table-cell-wrap"><%= truncate(star_story.task, length: 200) %></td>
