@@ -6,6 +6,7 @@ class StarStory < ApplicationRecord
   # Enums
   enum :category, {
     incident: "incident",
+    technical_mistake: "technical_mistake",
     leadership: "leadership",
     devops: "devops",
     refactor: "refactor",

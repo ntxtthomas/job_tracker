@@ -10,7 +10,7 @@
  */
 
 /* CSS Variables for Light/Dark Theme */
-@import url("https://ga.jspm.io/npm:trix@2.1.16/dist/trix.css");
+@import url("https://ga.jspm.io/npm:trix@2.1.17/dist/trix.css");
 
 :root {
   /* Light theme colors (default) */
@@ -903,6 +903,21 @@ div[style*="color: red"],
   margin: 0.35rem 0;
 }
 
+.star-story-order-input {
+  width: 36px;
+}
+
+.star-story-order-sort-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  font-weight: 700;
+  color: inherit;
+  cursor: pointer;
+}
+
 .opportunities-date-filter-note {
   margin: 0.5rem 0 0;
   color: var(--text-muted);
@@ -1148,6 +1163,10 @@ div[style*="color: red"],
     border: 1px solid black;
     box-shadow: none;
     page-break-inside: avoid;
+  }
+
+  .star-story-order-column {
+    display: none !important;
   }
 
   /* Skill badges */
