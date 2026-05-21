@@ -1,0 +1,16 @@
+<div id="community_pulse_recent" class="community-pulse-recent community-pulse-live-update">
+  <h3 class="community-pulse-recent-title">Recent activity</h3>
+
+  <% if votes.any? %>
+    <ul class="community-pulse-recent-list">
+      <% votes.each do |vote| %>
+        <li>
+          Someone voted for <strong><%= CommunityPulseVote.topic_label(vote.topic) %></strong>
+          <span class="community-pulse-recent-time"><%= time_ago_in_words(vote.created_at) %> ago</span>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="community-pulse-empty">Be the first to vote.</p>
+  <% end %>
+</div>

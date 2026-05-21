@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   resources :contacts
   resources :companies
   resources :star_stories
+  resources :community_pulse_votes, only: :create
+  namespace :admin do
+    get "community-pulse", to: "community_pulse_stats#index", as: :community_pulse_stats
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

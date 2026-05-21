@@ -33,5 +33,9 @@
     <%= link_to "Continue as Guest", dashboard_path, class: "btn-guest" %>
 
     <p class="sign-in-guest-note">Browse in read-only demo mode</p>
+
+    <div id="community-pulse" class="sign-in-community-pulse-anchor">
+      <%= render "community_pulse_votes/panel", already_voted: cookies.encrypted[:community_pulse_voted_at].present?, error_message: nil %>
+    </div>
   </div>
 </div>

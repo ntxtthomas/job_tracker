@@ -1,0 +1,32 @@
+<div id="community_pulse_panel" class="community-pulse-panel">
+  <h2 class="community-pulse-title">Live Community Pulse</h2>
+  <p class="community-pulse-subtitle">One tap. Anonymous. See what job seekers are struggling with right now.</p>
+
+  <%= turbo_stream_from CommunityPulseVote::STREAM_KEY %>
+
+  <% if error_message.present? %>
+    <p class="community-pulse-error"><%= error_message %></p>
+  <% end %>
+
+  <% if already_voted %>
+    <p class="community-pulse-thanks">Thanks for voting. You can vote again tomorrow.</p>
+  <% else %>
+    <%= form_with model: CommunityPulseVote.new, url: community_pulse_votes_path, class: "community-pulse-form" do |f| %>
+      <div class="community-pulse-options">
+        <% CommunityPulseVote.topic_options.each do |topic_key, label| %>
+          <%= f.button label,
+              type: :submit,
+              name: "community_pulse_vote[topic]",
+              value: topic_key,
+              class: "community-pulse-option" %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= render "community_pulse_votes/totals",
+      tallies: CommunityPulseVote.tallies,
+      total_votes: CommunityPulseVote.total_votes %>
+
+  <%= render "community_pulse_votes/recent", votes: CommunityPulseVote.recent_feed %>
+</div>
