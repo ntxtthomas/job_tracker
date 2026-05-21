@@ -1445,6 +1445,10 @@ div[style*="color: red"],
   padding: 1rem;
 }
 
+.community-pulse-live-update {
+  animation: communityPulseLiveUpdate 0.7s ease-out;
+}
+
 .community-pulse-title {
   margin: 0;
   font-size: 1.05rem;
@@ -1589,6 +1593,26 @@ div[style*="color: red"],
 .community-pulse-recent-time {
   color: var(--text-muted);
   margin-left: 0.3rem;
+}
+
+@keyframes communityPulseLiveUpdate {
+  0% {
+    transform: translateY(6px) scale(0.985);
+    opacity: 0.72;
+    box-shadow: 0 0 0 rgba(13, 110, 253, 0);
+  }
+
+  45% {
+    transform: translateY(0) scale(1.01);
+    opacity: 1;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.08);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    box-shadow: 0 0 0 rgba(13, 110, 253, 0);
+  }
 }
 
 @media (max-width: 640px) {
