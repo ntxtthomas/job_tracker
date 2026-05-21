@@ -1294,7 +1294,7 @@ div[style*="color: red"],
   box-shadow: 0 4px 24px var(--card-shadow);
   padding: 3rem 2.5rem;
   width: 100%;
-  max-width: 420px;
+  max-width: 560px;
   text-align: center;
 }
 
@@ -1431,6 +1431,180 @@ div[style*="color: red"],
   font-size: 0.8rem;
   color: var(--text-muted);
   margin-top: 0.5rem;
+}
+
+.sign-in-community-pulse-anchor {
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.community-pulse-panel {
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  background: var(--bg-primary);
+  padding: 1rem;
+}
+
+.community-pulse-title {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.community-pulse-subtitle {
+  margin: 0.35rem 0 0.9rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.community-pulse-error {
+  margin: 0 0 0.75rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.5rem;
+  background: #ffe3e3;
+  color: #b42318;
+  font-size: 0.8rem;
+}
+
+.community-pulse-thanks {
+  margin: 0 0 0.9rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.5rem;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+}
+
+.community-pulse-form {
+  margin-bottom: 0.85rem;
+}
+
+.community-pulse-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.community-pulse-option {
+  border: 1px solid var(--border-color);
+  border-radius: 0.55rem;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 0.55rem 0.65rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.community-pulse-option:hover {
+  background: var(--bg-tertiary);
+  transform: translateY(-1px);
+}
+
+.community-pulse-totals {
+  margin-top: 0.45rem;
+}
+
+.community-pulse-total-count {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.community-pulse-total-number {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.community-pulse-total-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.community-pulse-bars {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.community-pulse-bar-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 30px;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.community-pulse-bar-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.community-pulse-bar-track {
+  background: var(--bg-secondary);
+  border-radius: 999px;
+  height: 0.5rem;
+  overflow: hidden;
+}
+
+.community-pulse-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0d6efd 0%, #30a46c 100%);
+  border-radius: 999px;
+  min-width: 0;
+}
+
+.community-pulse-bar-value {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: right;
+}
+
+.community-pulse-recent {
+  margin-top: 0.85rem;
+  border-top: 1px dashed var(--border-color);
+  padding-top: 0.65rem;
+}
+
+.community-pulse-recent-title {
+  margin: 0 0 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.community-pulse-recent-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.community-pulse-recent-list li,
+.community-pulse-empty {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.community-pulse-recent-time {
+  color: var(--text-muted);
+  margin-left: 0.3rem;
+}
+
+@media (max-width: 640px) {
+  .sign-in-card {
+    padding: 2rem 1rem;
+    max-width: 100%;
+  }
+
+  .community-pulse-options {
+    grid-template-columns: 1fr;
+  }
+
+  .community-pulse-bar-row {
+    grid-template-columns: 90px 1fr 24px;
+    gap: 0.35rem;
+  }
 }
 
 /* Trix editor — restore list styles stripped by Tailwind preflight */

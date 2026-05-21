@@ -1,0 +1,19 @@
+<div id="community_pulse_totals" class="community-pulse-totals">
+  <div class="community-pulse-total-count">
+    <span class="community-pulse-total-number"><%= total_votes %></span>
+    <span class="community-pulse-total-label">total votes</span>
+  </div>
+
+  <div class="community-pulse-bars">
+    <% tallies.each do |topic_key, count| %>
+      <% percent = total_votes.positive? ? ((count.to_f / total_votes) * 100).round : 0 %>
+      <div class="community-pulse-bar-row">
+        <span class="community-pulse-bar-label"><%= CommunityPulseVote.topic_label(topic_key) %></span>
+        <div class="community-pulse-bar-track">
+          <div class="community-pulse-bar-fill" style="width: <%= percent %>%;"></div>
+        </div>
+        <span class="community-pulse-bar-value"><%= count %></span>
+      </div>
+    <% end %>
+  </div>
+</div>
