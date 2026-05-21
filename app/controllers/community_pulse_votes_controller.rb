@@ -85,7 +85,7 @@ class CommunityPulseVotesController < ApplicationController
   end
 
   def vote_fingerprint
-    raw = [request.remote_ip, request.user_agent.to_s.first(140), Date.current.to_s].join("|")
+    raw = [ request.remote_ip, request.user_agent.to_s.first(140), Date.current.to_s ].join("|")
     Digest::SHA256.hexdigest(raw)
   end
 end
