@@ -1,0 +1,55 @@
+<% content_for :title, "Community Pulse Admin" %>
+
+<h1 style="padding-top: 1.5rem;">Community Pulse Admin</h1>
+<p style="margin-bottom: 1rem; color: var(--text-muted);">Daily vote counts by topic (last 7 days).</p>
+
+<div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+  <% CommunityPulseVote::TOPIC_LABELS.each do |topic_key, label| %>
+    <div class="card">
+      <div class="card-header justify-center text-center">
+        <h3><%= label %></h3>
+      </div>
+      <div class="card-body">
+        <div class="card-number"><%= @today_counts[topic_key] %></div>
+        <p class="card-subtitle">today</p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="card mb-6">
+  <div class="card-header justify-between">
+    <h3>Today Total</h3>
+    <div class="card-number" style="font-size: 1.8rem;"><%= @today_total %></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header justify-between">
+    <h3>7-Day Breakdown</h3>
+  </div>
+  <div class="card-body" style="padding-top: 0;">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <% CommunityPulseVote::TOPIC_LABELS.each_value do |label| %>
+            <th><%= label %></th>
+          <% end %>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @daily_rows.each do |row| %>
+          <tr>
+            <td><%= row[:date].strftime("%b %d, %Y") %></td>
+            <% CommunityPulseVote::TOPIC_LABELS.each_key do |topic_key| %>
+              <td><%= row[:counts][topic_key] %></td>
+            <% end %>
+            <td><strong><%= row[:total] %></strong></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_action :require_authentication_for_writes
 
-  helper_method :current_or_demo_user
+  helper_method :current_or_demo_user, :admin_user?
 
   private
 
@@ -21,5 +21,9 @@ class ApplicationController < ActionController::Base
     return if request.get? || request.head?
 
     redirect_to root_path, alert: "This app is for demo only, save is not allowed."
+  end
+
+  def admin_user?
+    user_signed_in? && !current_user.demo?
   end
 end
