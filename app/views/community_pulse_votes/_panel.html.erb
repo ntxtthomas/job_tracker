@@ -8,9 +8,10 @@
     <p class="community-pulse-error"><%= error_message %></p>
   <% end %>
 
-  <% if already_voted %>
-    <p class="community-pulse-thanks">Thanks for voting. You can vote again tomorrow.</p>
+  <% if daily_limit_reached %>
+    <p class="community-pulse-thanks">Thanks for voting. You have used all 5 votes for today.</p>
   <% else %>
+    <p class="community-pulse-subtitle">You have <strong><%= votes_remaining %></strong> vote<%= "s" unless votes_remaining == 1 %> remaining today.</p>
     <%= form_with model: CommunityPulseVote.new, url: community_pulse_votes_path, class: "community-pulse-form" do |f| %>
       <div class="community-pulse-options">
         <% CommunityPulseVote.topic_options.each do |topic_key, label| %>

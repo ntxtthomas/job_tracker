@@ -1,22 +1,27 @@
 require "digest"
+require "securerandom"
 
 class CommunityPulseVotesController < ApplicationController
   skip_before_action :require_authentication_for_writes, only: :create
 
+  DAILY_LIMIT_MAX = 5
   RATE_LIMIT_WINDOW = 10.minutes
   RATE_LIMIT_MAX = 5
   RATE_LIMIT_ERROR = "Too many votes from this connection. Please try again in a few minutes.".freeze
+  DAILY_LIMIT_ERROR = "You have reached today's vote limit. Please come back tomorrow.".freeze
 
   def create
-    already_voted = voted_recently?
+    daily_count = daily_votes_count
+    votes_remaining = [ DAILY_LIMIT_MAX - daily_count, 0 ].max
+    daily_limit_reached = votes_remaining.zero?
     error_message = nil
     status = :ok
 
     if rate_limited?
       error_message = RATE_LIMIT_ERROR
       status = :too_many_requests
-    elsif already_voted
-      error_message = nil
+    elsif daily_limit_reached
+      error_message = DAILY_LIMIT_ERROR
     else
       vote = CommunityPulseVote.new(
         topic: vote_params[:topic],
@@ -24,8 +29,10 @@ class CommunityPulseVotesController < ApplicationController
       )
 
       if vote.save
-        mark_voted!
-        already_voted = true
+        increment_daily_votes!
+        daily_count = daily_votes_count
+        votes_remaining = [ DAILY_LIMIT_MAX - daily_count, 0 ].max
+        daily_limit_reached = votes_remaining.zero?
       else
         error_message = "Vote was not recorded. Please try again."
       end
@@ -37,7 +44,8 @@ class CommunityPulseVotesController < ApplicationController
           "community_pulse_panel",
           partial: "community_pulse_votes/panel",
           locals: {
-            already_voted: already_voted,
+            votes_remaining: votes_remaining,
+            daily_limit_reached: daily_limit_reached,
             error_message: error_message
           }
         ), status: status
@@ -56,14 +64,23 @@ class CommunityPulseVotesController < ApplicationController
     params.require(:community_pulse_vote).permit(:topic)
   end
 
-  def voted_recently?
-    cookies.encrypted[:community_pulse_voted_at].present?
+  def daily_votes_count
+    payload = cookies.encrypted[:community_pulse_daily_votes]
+    return 0 unless payload.is_a?(Hash)
+
+    stored_date = payload["date"] || payload[:date]
+    return 0 unless stored_date == Date.current.iso8601
+
+    (payload["count"] || payload[:count]).to_i
   end
 
-  def mark_voted!
-    cookies.encrypted[:community_pulse_voted_at] = {
-      value: Time.current.to_i,
-      expires: 24.hours.from_now,
+  def increment_daily_votes!
+    cookies.encrypted[:community_pulse_daily_votes] = {
+      value: {
+        date: Date.current.iso8601,
+        count: daily_votes_count + 1
+      },
+      expires: 2.days.from_now,
       httponly: true
     }
   end
@@ -85,7 +102,12 @@ class CommunityPulseVotesController < ApplicationController
   end
 
   def vote_fingerprint
-    raw = [ request.remote_ip, request.user_agent.to_s.first(140), Date.current.to_s ].join("|")
+    raw = [
+      request.remote_ip,
+      request.user_agent.to_s.first(140),
+      Time.current.to_f,
+      SecureRandom.hex(8)
+    ].join("|")
     Digest::SHA256.hexdigest(raw)
   end
 end
