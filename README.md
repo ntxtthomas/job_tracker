@@ -15,6 +15,7 @@ A Rails 8 application for tracking, analyzing, and strategizing a job search. Bu
 ## Features
 
 - **Dashboard Analytics** — Role distribution, technology demand trends, weekly application tracking, and open/assessed/response metrics
+- **Live Community Pulse (Turbo Streams)** — Public one-tap poll on the sign-in page with real-time totals/activity updates, subtle live-update animations, and anonymous participation
 - **Opportunity Tracking** — Full CRUD with filtering, sorting across 10+ columns, salary range standardization, and fit/trajectory/bus-factor scoring
 - **Multi-Role System** — Role-specific metadata via JSONB with concern modules for Software Engineer, Sales Engineer, Solutions Engineer, Product Manager, Support Engineer, and Success Engineer
 - **Technology Demand Analysis** — 75 tracked technologies across 6 categories with combination analysis, pairing insights, and learning priority recommendations
@@ -24,6 +25,7 @@ A Rails 8 application for tracking, analyzing, and strategizing a job search. Bu
 - **Resource Sheets & Interview Guides** — Auto-generated prep sheets from opportunities, plus behavioral, technical, interviewer, and acquired question guides
 - **CSV Exports** — Export opportunities, interview sessions, and STAR stories for external analysis
 - **Demo Mode** — Read-only access for unauthenticated visitors to explore the app without an account
+- **Pulse Admin Readout** — Owner-only `/admin/community-pulse` dashboard with daily topic totals and 7-day trend table
 - **PWA Support** — Installable as a mobile app with service worker caching, web app manifest, and offline-ready static assets
 - **Responsive Design** — Mobile-friendly layouts with adaptive dashboard grid, responsive table column visibility, and sticky table headers
 - **CI/CD Pipeline** — Brakeman security scanning, RuboCop linting, importmap audit, and RSpec test suite via GitHub Actions
@@ -152,6 +154,7 @@ A summary of planned enhancements — see the [Roadmap wiki page](../../wiki/Roa
 - [x] Dockerized deployment (AWS EC2 + Docker)
 - [x] Public deployment — [mycareerintel.com](https://mycareerintel.com)
 - [x] Enhanced GitHub Actions CI/CD (SSM deploy with manual trigger)
+- [x] Live Community Pulse on sign-in (Hotwire Turbo Streams)
 - [ ] Improved sign-in page UI
 - [ ] RAG/VectorDB for refined data analysis
 - [ ] Wins tracking system

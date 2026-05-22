@@ -34,8 +34,19 @@
 
     <p class="sign-in-guest-note">Browse in read-only demo mode</p>
 
+    <% pulse_vote_cookie = cookies.encrypted[:community_pulse_daily_votes] %>
+    <% pulse_daily_count = if pulse_vote_cookie.is_a?(Hash) && (pulse_vote_cookie["date"] || pulse_vote_cookie[:date]) == Date.current.iso8601
+                            (pulse_vote_cookie["count"] || pulse_vote_cookie[:count]).to_i
+                          else
+                            0
+                          end %>
+    <% pulse_remaining = [CommunityPulseVotesController::DAILY_LIMIT_MAX - pulse_daily_count, 0].max %>
+
     <div id="community-pulse" class="sign-in-community-pulse-anchor">
-      <%= render "community_pulse_votes/panel", already_voted: cookies.encrypted[:community_pulse_voted_at].present?, error_message: nil %>
+      <%= render "community_pulse_votes/panel",
+          votes_remaining: pulse_remaining,
+          daily_limit_reached: pulse_remaining.zero?,
+          error_message: nil %>
     </div>
   </div>
 </div>

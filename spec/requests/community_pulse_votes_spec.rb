@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "CommunityPulseVotes", type: :request do
+  include ActiveSupport::Testing::TimeHelpers
+
   let(:cache_store) { ActiveSupport::Cache::MemoryStore.new }
 
   before do
@@ -21,19 +23,41 @@ RSpec.describe "CommunityPulseVotes", type: :request do
       end.to change(CommunityPulseVote, :count).by(1)
 
       expect(response).to redirect_to(new_user_session_path(anchor: "community-pulse"))
-      expect(response.headers["Set-Cookie"]).to include("community_pulse_voted_at")
+      expect(response.headers["Set-Cookie"]).to include("community_pulse_daily_votes")
     end
 
-    it "does not create a second vote from the same client on the same day" do
+    it "allows additional votes up to the daily limit" do
       post community_pulse_votes_path,
            params: { community_pulse_vote: { topic: "getting_interviews" } }
 
       expect do
         post community_pulse_votes_path,
              params: { community_pulse_vote: { topic: "passing_screens" } }
-      end.not_to change(CommunityPulseVote, :count)
+      end.to change(CommunityPulseVote, :count).by(1)
 
       expect(response).to redirect_to(new_user_session_path(anchor: "community-pulse"))
+    end
+
+    it "blocks the sixth vote in the same day for the same connection" do
+      5.times do |index|
+        post community_pulse_votes_path,
+             params: { community_pulse_vote: { topic: "getting_interviews" } },
+             headers: { "HTTP_USER_AGENT" => "DailyLimitSpec/1", "REMOTE_ADDR" => "203.0.113.10" }
+
+        expect(response).to redirect_to(new_user_session_path(anchor: "community-pulse"))
+      end
+
+      travel_to(Time.current + 11.minutes) do
+        expect do
+          post community_pulse_votes_path,
+               params: { community_pulse_vote: { topic: "passing_screens" } },
+               headers: { "HTTP_USER_AGENT" => "DailyLimitSpec/1", "REMOTE_ADDR" => "203.0.113.10" }
+        end.not_to change(CommunityPulseVote, :count)
+      end
+
+      expect(response).to redirect_to(new_user_session_path(anchor: "community-pulse"))
+      follow_redirect!
+      expect(response.body).to include("You have reached today&#39;s vote limit")
     end
 
     it "rate limits burst submissions from the same connection" do
@@ -42,8 +66,6 @@ RSpec.describe "CommunityPulseVotes", type: :request do
              params: { community_pulse_vote: { topic: "getting_interviews" } },
              as: :turbo_stream,
              headers: { "HTTP_USER_AGENT" => "SpecBot/#{index}", "REMOTE_ADDR" => "203.0.113.10" }
-
-        cookies.delete(:community_pulse_voted_at)
       end
 
       expect do
