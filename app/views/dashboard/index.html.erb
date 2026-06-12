@@ -3,7 +3,17 @@
 <h1 style="padding-top: 1.5rem;">Career Intelligence Dashboard</h1>
 
 <!-- Row 1: KPI Stats -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+<div class="dashboard-cards dashboard-kpi-cards">
+  <div class="card card-assessed">
+    <div class="card-header justify-center text-center">
+      <h3>Assessed Opportunities</h3>
+    </div>
+    <div class="card-body">
+      <div class="card-number"><%= @total_assessed %></div>
+      <p class="card-subtitle">Total opportunities tracked</p>
+    </div>
+  </div>
+
   <div class="card card-submitted">
     <div class="card-header justify-center text-center">
       <h3>Total Applications Submitted</h3>
@@ -14,6 +24,16 @@
     </div>
   </div>
 
+  <div class="card card-interviews">
+    <div class="card-header justify-center text-center">
+      <h3>Total Interviews</h3>
+    </div>
+    <div class="card-body">
+      <div class="card-number"><%= @total_interviews %></div>
+      <p class="card-subtitle"><%= @interview_conversion_rate %>% of applications submitted</p>
+    </div>
+  </div>
+
   <div class="card card-open-applications">
     <div class="card-header justify-center text-center">
       <h3>Total Open Applications</h3>
@@ -21,16 +41,6 @@
     <div class="card-body">
       <div class="card-number"><%= @total_open_applications %></div>
       <p class="card-subtitle">Current Applications in Flight</p>
-    </div>
-  </div>
-
-  <div class="card card-assessed">
-    <div class="card-header justify-center text-center">
-      <h3>Assessed Opportunities</h3>
-    </div>
-    <div class="card-body">
-      <div class="card-number"><%= @total_assessed %></div>
-      <p class="card-subtitle">Total opportunities tracked</p>
     </div>
   </div>
 </div>

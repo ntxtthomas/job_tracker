@@ -5,6 +5,12 @@ class DashboardController < ApplicationController
     @total_resumes = opportunities.where.not(application_date: nil).count
     @total_open_applications = opportunities.where(status: %w[applied interviewing]).count
     @total_assessed = opportunities.count
+    @total_interviews = InterviewSession.where(opportunity_id: opportunities.select(:id)).count
+    @interview_conversion_rate = if @total_resumes.positive?
+      ((@total_interviews.to_f / @total_resumes) * 100).round(1)
+    else
+      0.0
+    end
 
     # Role-based focus insights
     focus_analyzer = RoleFocusAnalyzer.new(opportunities)

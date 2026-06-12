@@ -199,6 +199,22 @@ th a:hover {
   margin: 2rem 0;
 }
 
+.dashboard-kpi-cards {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .dashboard-kpi-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-kpi-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 .weekly-cards {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
