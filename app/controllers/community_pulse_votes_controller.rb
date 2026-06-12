@@ -53,7 +53,7 @@ class CommunityPulseVotesController < ApplicationController
 
       format.html do
         flash[:alert] = error_message if error_message.present?
-        redirect_to new_user_session_path(anchor: "community-pulse")
+        redirect_to dashboard_path(anchor: "community-pulse")
       end
     end
   end

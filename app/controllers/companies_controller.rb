@@ -3,7 +3,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies or /companies.json
   def index
-    @companies = current_or_demo_user.companies.includes(:opportunities)
+    @companies = current_or_demo_user.companies
     @technologies = Technology.order(:name)
 
     # Filter by company name search
@@ -21,9 +21,6 @@ class CompaniesController < ApplicationController
       end
       @selected_technology = params[:technology]
     end
-
-    # Always include technologies for display
-    @companies = @companies.includes(opportunities: :technologies)
 
     # Skip sorting for tech_stack since it's aggregated data, but allow other columns
     if params[:sort].present? && params[:sort] != "tech_stack"
