@@ -199,6 +199,64 @@ th a:hover {
   margin: 2rem 0;
 }
 
+.dashboard-kpi-cards {
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.dashboard-kpi-cards .funnel-card {
+  padding: 1rem;
+  position: relative;
+}
+
+.dashboard-kpi-cards .funnel-card .card-header h3 {
+  font-size: 1rem;
+}
+
+.dashboard-kpi-cards .funnel-card .card-number {
+  font-size: 2.1rem;
+}
+
+.dashboard-kpi-cards .funnel-card .card-subtitle {
+  font-size: 0.82rem;
+}
+
+@media (min-width: 768px) {
+  .dashboard-kpi-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-kpi-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .dashboard-kpi-cards .funnel-card:nth-child(-n+2)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -0.45rem;
+    width: 0.9rem;
+    border-top: 2px dashed var(--border-color);
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  .dashboard-kpi-cards .funnel-card:nth-child(-n+2)::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -0.62rem;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 7px solid var(--border-color);
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+}
+
 .weekly-cards {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
