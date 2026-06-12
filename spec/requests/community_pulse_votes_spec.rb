@@ -22,7 +22,7 @@ RSpec.describe "CommunityPulseVotes", type: :request do
              params: { community_pulse_vote: { topic: "getting_interviews" } }
       end.to change(CommunityPulseVote, :count).by(1)
 
-      expect(response).to redirect_to(new_user_session_path(anchor: "community-pulse"))
+      expect(response).to redirect_to(dashboard_path(anchor: "community-pulse"))
       expect(response.headers["Set-Cookie"]).to include("community_pulse_daily_votes")
     end
 
@@ -35,7 +35,7 @@ RSpec.describe "CommunityPulseVotes", type: :request do
              params: { community_pulse_vote: { topic: "passing_screens" } }
       end.to change(CommunityPulseVote, :count).by(1)
 
-      expect(response).to redirect_to(new_user_session_path(anchor: "community-pulse"))
+      expect(response).to redirect_to(dashboard_path(anchor: "community-pulse"))
     end
 
     it "blocks the sixth vote in the same day for the same connection" do
@@ -44,7 +44,7 @@ RSpec.describe "CommunityPulseVotes", type: :request do
              params: { community_pulse_vote: { topic: "getting_interviews" } },
              headers: { "HTTP_USER_AGENT" => "DailyLimitSpec/1", "REMOTE_ADDR" => "203.0.113.10" }
 
-        expect(response).to redirect_to(new_user_session_path(anchor: "community-pulse"))
+        expect(response).to redirect_to(dashboard_path(anchor: "community-pulse"))
       end
 
       travel_to(Time.current + 11.minutes) do
@@ -55,9 +55,8 @@ RSpec.describe "CommunityPulseVotes", type: :request do
         end.not_to change(CommunityPulseVote, :count)
       end
 
-      expect(response).to redirect_to(new_user_session_path(anchor: "community-pulse"))
-      follow_redirect!
-      expect(response.body).to include("You have reached today&#39;s vote limit")
+      expect(response).to redirect_to(dashboard_path(anchor: "community-pulse"))
+      expect(flash[:alert]).to eq("You have reached today's vote limit. Please come back tomorrow.")
     end
 
     it "rate limits burst submissions from the same connection" do
