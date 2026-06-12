@@ -180,3 +180,10 @@
     </div>
   </div>
 <% end %>
+
+<div id="community-pulse" class="dashboard-community-pulse-anchor">
+  <%= render "community_pulse_votes/panel",
+      votes_remaining: @pulse_votes_remaining,
+      daily_limit_reached: @pulse_votes_remaining.zero?,
+      error_message: nil %>
+</div>

@@ -1496,6 +1496,11 @@ div[style*="color: red"],
   text-align: left;
 }
 
+.dashboard-community-pulse-anchor {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .community-pulse-panel {
   border: 1px solid var(--border-color);
   border-radius: 0.75rem;
@@ -1543,17 +1548,19 @@ div[style*="color: red"],
 .community-pulse-options {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.45rem;
+  gap: 0.4rem;
 }
 
 .community-pulse-option {
   border: 1px solid var(--border-color);
-  border-radius: 0.55rem;
+  border-radius: 0.48rem;
   background: var(--bg-secondary);
   color: var(--text-primary);
-  padding: 0.55rem 0.65rem;
+  padding: 0.48rem 0.57rem;
   font-size: 0.82rem;
   font-weight: 600;
+  width: 100%;
+  text-align: center;
   cursor: pointer;
   transition: background-color 0.15s ease, transform 0.15s ease;
 }
@@ -1681,6 +1688,7 @@ div[style*="color: red"],
 
   .community-pulse-options {
     grid-template-columns: 1fr;
+    gap: 0.32rem;
   }
 
   .community-pulse-bar-row {

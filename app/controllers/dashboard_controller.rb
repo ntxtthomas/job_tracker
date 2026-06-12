@@ -12,6 +12,14 @@ class DashboardController < ApplicationController
       0.0
     end
 
+    pulse_vote_cookie = cookies.encrypted[:community_pulse_daily_votes]
+    pulse_daily_count = if pulse_vote_cookie.is_a?(Hash) && (pulse_vote_cookie["date"] || pulse_vote_cookie[:date]) == Date.current.iso8601
+      (pulse_vote_cookie["count"] || pulse_vote_cookie[:count]).to_i
+    else
+      0
+    end
+    @pulse_votes_remaining = [ CommunityPulseVotesController::DAILY_LIMIT_MAX - pulse_daily_count, 0 ].max
+
     # Role-based focus insights
     focus_analyzer = RoleFocusAnalyzer.new(opportunities)
     @focus_insights = focus_analyzer.generate_insights(limit: 4)
