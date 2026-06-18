@@ -1,11 +1,13 @@
 class DashboardController < ApplicationController
   def index
     opportunities = current_or_demo_user.opportunities
+    submitted_opportunities = opportunities.where.not(application_date: nil)
 
-    @total_resumes = opportunities.where.not(application_date: nil).count
+    @total_resumes = submitted_opportunities.count
     @total_open_applications = opportunities.where(status: %w[applied interviewing]).count
     @total_assessed = opportunities.count
-    @total_interviews = InterviewSession.where(opportunity_id: opportunities.select(:id)).count
+    # Count interview processes, not interview rounds: 1 per submitted opportunity that has interviews.
+    @total_interviews = submitted_opportunities.joins(:interview_sessions).distinct.count
     @interview_conversion_rate = if @total_resumes.positive?
       ((@total_interviews.to_f / @total_resumes) * 100).round(1)
     else
