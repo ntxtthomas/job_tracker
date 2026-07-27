@@ -8,6 +8,13 @@ Rails.application.routes.draw do
       post :generate_from_opportunity
     end
   end
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :opportunities, only: [:index]
+    end
+  end
+
   get "resources/guides/behavioral" => "resource_sheets#behavioral_guide", as: :behavioral_guide
   get "resources/guides/technical" => "resource_sheets#technical_guide", as: :technical_guide
   get "resources/guides/interviewer-questions" => "resource_sheets#interviewer_questions_guide", as: :interviewer_questions_guide

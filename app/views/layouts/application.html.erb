@@ -20,8 +20,8 @@
 
 
   <%# Includes all stylesheet files in app/assets/stylesheets %>
-  <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-  <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag :app, "data-turbo-track": "reload", "as": "stylesheet" %>
+  <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload", "as": "stylesheet" %>
   <%= javascript_importmap_tags %>
   <%= Sentry.get_trace_propagation_meta.html_safe %>
   </head>
