@@ -5,7 +5,6 @@ class DashboardController < ApplicationController
 
     @total_resumes = submitted_opportunities.count
     @total_open_applications = opportunities.where(status: %w[applied interviewing]).count
-    @total_assessed = opportunities.count
     # Count interview processes, not interview rounds: 1 per submitted opportunity that has interviews.
     @total_interviews = submitted_opportunities.joins(:interview_sessions).distinct.count
     @interview_conversion_rate = if @total_resumes.positive?

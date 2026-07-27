@@ -230,30 +230,7 @@ th a:hover {
 
 @media (min-width: 1024px) {
   .dashboard-kpi-cards {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .dashboard-kpi-cards .funnel-card:nth-child(-n+2)::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: -0.45rem;
-    width: 0.9rem;
-    border-top: 2px dashed var(--border-color);
-    transform: translateY(-50%);
-    z-index: 2;
-  }
-
-  .dashboard-kpi-cards .funnel-card:nth-child(-n+2)::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: -0.62rem;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 7px solid var(--border-color);
-    transform: translateY(-50%);
-    z-index: 2;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
