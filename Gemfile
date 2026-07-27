@@ -62,7 +62,7 @@ gem "appsignal", "~> 4.8", ">= 4.8.4"
 gem "honeybadger", "~> 6.6"
 
 # rack-cors
-gem 'rack-cors', '>= 3.0'
+gem "rack-cors", ">= 3.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
