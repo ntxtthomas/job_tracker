@@ -449,7 +449,7 @@ PLATFORMS
 DEPENDENCIES
   appsignal (~> 4.8, >= 4.8.4)
   bootsnap
-  brakeman (>= 8.0.4)
+  brakeman (~> 8.0)
   bullet (~> 8.1, >= 8.1.1)
   capybara
   csv
