@@ -159,7 +159,7 @@ count.times do |i|
       ].sample,
       location: company_locations.sample,
       company_type: company_types.sample,
-      size: ["11-50", "51-200", "201-500", "501-1000", "1001-5000"].sample
+      size: [ "11-50", "51-200", "201-500", "501-1000", "1001-5000" ].sample
     )
     company_cache << company
     company
