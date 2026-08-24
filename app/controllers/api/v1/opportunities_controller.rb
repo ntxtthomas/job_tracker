@@ -6,10 +6,10 @@ class Api::V1::OpportunitiesController < ApplicationController
         scope = current_or_demo_user
             .opportunities
             .includes(:company)
-            .order(id: :desc)
+            .order("opportunities.id DESC")
 
         if params[:cursor].present?
-            scope = scope.where("id < ?", params[:cursor].to_i)
+            scope = scope.where("opportunities.id < ?", params[:cursor].to_i)
         end
 
         rows = scope.limit(limit + 1).to_a
@@ -25,5 +25,14 @@ class Api::V1::OpportunitiesController < ApplicationController
                 next_cursor: next_cursor
             }
         }
+    end
+
+    def show
+        opportunity = current_or_demo_user
+            .opportunities
+            .includes(:company)
+            .find(params[:id])
+
+        render json: { data: opportunity }
     end
 end
