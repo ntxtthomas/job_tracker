@@ -24,6 +24,8 @@ class Company < ApplicationRecord
     Staffing: "Staffing"
   }, validate: true
 
+  scope :preferred, -> { where(preferred: true) }
+
   def tech_stack_summary
     opportunities
       .joins(:technologies)

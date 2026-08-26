@@ -141,7 +141,6 @@ class RoleFocusAnalyzer
 
     tech_data.each do |tech_name, count|
       percentage = (count.to_f / total_opps * 100).round
-      next if percentage < 15 # Only show technologies in 15%+ of jobs
 
       tech = Technology.find_by(name: tech_name)
       next unless tech

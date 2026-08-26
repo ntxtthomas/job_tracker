@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_05_21_090000) do
+ActiveRecord::Schema[8.0].define(version: 2026_08_24_213529) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -94,6 +94,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_05_21_090000) do
     t.integer "personal_upside_score"
     t.integer "career_risk_score"
     t.bigint "user_id", null: false
+    t.boolean "preferred", default: false, null: false
     t.index "lower((name)::text)", name: "index_companies_on_lower_name", unique: true
     t.index ["funding_stage"], name: "index_companies_on_funding_stage"
     t.index ["growth_signal"], name: "index_companies_on_growth_signal"

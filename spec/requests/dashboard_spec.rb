@@ -82,5 +82,22 @@ RSpec.describe "Dashboard", type: :request do
       expect(response.body).to match(/Companies That Interviewed Me.*?<div class=\"card-number\">2<\/div>/m)
       expect(response.body).to include("66.7% of applications submitted")
     end
+
+    it "renders the tech skills widget when skills are sparse across opportunities" do
+      7.times do |index|
+        opportunity = Opportunity.create!(
+          company: company,
+          position_title: "Distinct Tech Role #{index}",
+          role_type: "software_engineer"
+        )
+        technology = Technology.create!(name: "Distinct Tech #{index}", category: "Backend")
+        OpportunityTechnology.create!(opportunity: opportunity, technology: technology)
+      end
+
+      get dashboard_path
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Top 4 Tech Skills to Focus On")
+    end
   end
 end

@@ -11,14 +11,14 @@
     <div class="opportunities-filter-group">
       <%= form_with url: companies_path, method: :get, local: true, class: "opportunities-filter-form" do |f| %>
         <%= hidden_field_tag :company_query, params[:company_query] %>
-        <label for="technology_filter" class="form-label opportunities-status-label"></label>
-        <%= f.select :technology, 
-            options_from_collection_for_select(@technologies, :name, :name, @selected_technology),
-            { include_blank: "All Technologies" },
-            id: "technology_filter",
+        <label for="preferred_filter" class="form-label opportunities-status-label"></label>
+        <%= f.select :preferred, 
+            [["All Companies", ""], ["Preferred Only", "true"], ["Not Preferred Only", "false"]],
+            { selected: params[:preferred] || "" },
+            id: "preferred_filter",
             class: "form-select opportunities-status-select" %>
         <%= f.submit "Filter", class: "btn btn-primary" %>
-        <% if @selected_technology.present? %>
+        <% if params[:preferred].present? %>
           <%= link_to "Clear", companies_path(company_query: params[:company_query]), class: "btn btn-secondary" %>
         <% end %>
       <% end %>
@@ -48,6 +48,7 @@
         <th><%= sortable_link :company_type, "Type" %></th>
         <th><%= sortable_link :location %></th>
         <th><%= sortable_link :size, "Size" %></th>
+        <th><%= sortable_link :preferred, "Preferred" %></th>
         <th><%= sortable_link :website %></th>
         <th><%= sortable_link :linkedin %></th>
         <th>Tech Stack</th>

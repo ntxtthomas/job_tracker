@@ -84,4 +84,19 @@ RSpec.describe "Opportunities", type: :request do
       expect(response.body).not_to include("Interviewing Role")
     end
   end
+
+  describe "GET /opportunities/new" do
+    it "renders the current opportunity source options" do
+      get new_opportunity_path
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Wellfound")
+      expect(response.body).to include("Toptal")
+      expect(response.body).to include("lemon.io")
+      expect(response.body).to include("Braintrust")
+      expect(response.body).to include("gun.io")
+      expect(response.body).to include("Upwork")
+      expect(response.body).not_to include(">Monster<")
+    end
+  end
 end
