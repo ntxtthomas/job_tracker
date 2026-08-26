@@ -22,6 +22,11 @@ class CompaniesController < ApplicationController
       @selected_technology = params[:technology]
     end
 
+    # Filter by preferred status if provided
+    if params[:preferred].present?
+      @companies = @companies.where(preferred: params[:preferred] == "true")
+    end
+
     # Skip sorting for tech_stack since it's aggregated data, but allow other columns
     if params[:sort].present? && params[:sort] != "tech_stack"
       direction = params[:direction] == "desc" ? "desc" : "asc"
@@ -103,7 +108,7 @@ class CompaniesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def company_params
       params.expect(company: [
-        :name, :industry, :company_type, :location, :size, :website, :linkedin, :known_tech_stack,
+        :name, :industry, :company_type, :location, :size, :website, :linkedin, :known_tech_stack, :preferred,
         :primary_product, :revenue_model, :funding_stage, :estimated_revenue, :estimated_employees,
         :growth_signal, :product_maturity, :engineering_maturity, :process_maturity,
         :market_position, :competitor_tier, :brand_signal_strength, :market_size_estimate

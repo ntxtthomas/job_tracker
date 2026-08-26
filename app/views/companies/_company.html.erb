@@ -4,6 +4,7 @@
   <td><%= company.company_type || "—" %></td>
   <td><%= company.location %></td>
   <td><%= company.size.present? ? company.size : "—" %></td>
+  <td><%= company.preferred? ? "✓" : "" %></td>
   <td><%= company.website %></td>
   <td><%= company.linkedin %></td>
   <td>
