@@ -83,6 +83,25 @@ RSpec.describe "Opportunities", type: :request do
       expect(response.body).not_to include("Applied Role")
       expect(response.body).not_to include("Interviewing Role")
     end
+
+    it "sorts opportunities by company industry" do
+      retail_company = Company.create!(
+        name: "RetailCo",
+        industry: "Retail",
+        company_type: "Product",
+        user: user
+      )
+      Opportunity.create!(
+        company: retail_company,
+        position_title: "Retail Role",
+        role_type: "software_engineer"
+      )
+
+      get opportunities_path, params: { sort: "industry", direction: "asc" }
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body.index("Retail Role")).to be < response.body.index("Applied Role")
+    end
   end
 
   describe "GET /opportunities/new" do

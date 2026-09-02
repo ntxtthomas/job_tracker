@@ -37,6 +37,8 @@ class OpportunitiesController < ApplicationController
         @opportunities = @opportunities.order("#{sort_column} #{sort_direction}")
       elsif sort_column == "company"
         @opportunities = @opportunities.joins(:company).order("companies.name #{sort_direction}")
+      elsif sort_column == "industry"
+        @opportunities = @opportunities.joins(:company).order("companies.industry #{sort_direction}")
       end
     else
       @opportunities = @opportunities.order(:application_date).reverse_order
