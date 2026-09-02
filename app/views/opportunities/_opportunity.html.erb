@@ -35,10 +35,10 @@
     </span>
   </td>
   <td><%= opportunity.company.name if opportunity.company %></td>
+  <td><%= opportunity.company&.industry if opportunity.company %></td>
   <td><%= opportunity.position_title %></td>
   <td><%= opportunity.application_date %></td>
   <td><%= opportunity.status.present? && opportunity.status != "select" ? opportunity.status : "" %></td>
-  <td class="hidden md:table-cell"><%= opportunity.source.present? ? opportunity.source.humanize : "" %></td>
   <td class="hidden md:table-cell">
     <% tech_sources = opportunity.technologies.map { |t| { name: t.name, category: t.category, source: :opportunity } } %>
     <% if opportunity.other_tech_stack.present? %>
@@ -83,7 +83,6 @@
     <% end %>
   </td>
   <td class="hidden md:table-cell"><%= opportunity.salary_range %></td>
-  <td class="hidden md:table-cell"><%= opportunity.bus_factor %></td>
   <td class="hidden md:table-cell"><%= opportunity.chatgpt_match %></td>
   <td class="hidden md:table-cell"><%= opportunity.jobright_match %></td>
   <td class="hidden md:table-cell"><%= opportunity.linkedin_match %></td>

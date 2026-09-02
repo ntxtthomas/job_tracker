@@ -2,142 +2,154 @@
   <h1 style="padding-top: 1.5rem;"><%= opportunity.position_title %></h1>
 
   <div class="opportunity-details">
-    <p>
-      <strong>Role Type:</strong>
-      <%
-        badge_color = case opportunity.role_type
-        when "software_engineer"
-          "#6c757d"
-        when "sales_engineer"
-          "#28a745"
-        when "solutions_engineer"
-          "#17a2b8"
-        when "product_manager"
-          "#6f42c1"
-        when "support_engineer"
-          "#fd7e14"
-        when "success_engineer"
-          "#20c997"
-        when "other"
-          "#343a40"
-        else
-          "#6c757d"
-        end
-      %>
-      <span class="badge" style="background-color: <%= badge_color %>; color: white; padding: 5px 10px; border-radius: 4px; font-size: 14px;">
-        <%= opportunity.role_type_label %>
-      </span>
-    </p>
+    <div class="card" style="margin-bottom: 1.5rem;">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+        <div style="display: flex; gap: 0.4rem; align-items: baseline; flex-wrap: wrap;">
+          <span class="detail-label" style="margin-bottom: 0;">Role Type:</span>
+          <span class="detail-value" style="margin-bottom: 0;">
+            <%
+              badge_color = case opportunity.role_type
+              when "software_engineer"
+                "#6c757d"
+              when "sales_engineer"
+                "#28a745"
+              when "solutions_engineer"
+                "#17a2b8"
+              when "product_manager"
+                "#6f42c1"
+              when "support_engineer"
+                "#fd7e14"
+              when "success_engineer"
+                "#20c997"
+              when "other"
+                "#343a40"
+              else
+                "#6c757d"
+              end
+            %>
+            <span class="badge" style="background-color: <%= badge_color %>; color: white; padding: 5px 10px; border-radius: 4px; font-size: 14px;">
+              <%= opportunity.role_type_label %>
+            </span>
+          </span>
+        </div>
 
-    <p>
-      <strong>Company:</strong>
-      <%= link_to opportunity.company.name, opportunity.company if opportunity.company %>
-    </p>
+        <div style="display: flex; gap: 0.4rem; align-items: baseline;">
+          <span class="detail-label" style="margin-bottom: 0;">Status:</span>
+          <span class="detail-value" style="margin-bottom: 0;">
+            <span class="status-<%= opportunity.status %>"><%= opportunity.status&.humanize %></span>
+          </span>
+        </div>
 
-    <% if opportunity.company&.website.present? %>
-    <p>
-      <strong>Website:</strong>
-      <%= link_to opportunity.company.website, opportunity.company.website, target: "_blank", rel: "noopener noreferrer" %>
-    </p>
-    <% end %>
+        <div style="display: flex; gap: 0.4rem; align-items: baseline;">
+          <span class="detail-label" style="margin-bottom: 0;">Company:</span>
+          <span class="detail-value" style="margin-bottom: 0;"><%= link_to opportunity.company.name, opportunity.company if opportunity.company %></span>
+        </div>
 
-    <% if opportunity.company&.linkedin.present? %>
-    <p>
-      <strong>LinkedIn:</strong>
-      <%= link_to opportunity.company.linkedin, opportunity.company.linkedin, target: "_blank", rel: "noopener noreferrer" %>
-    </p>
-    <% end %>
+        <div style="display: flex; gap: 0.4rem; align-items: baseline;">
+          <span class="detail-label" style="margin-bottom: 0;">Remote:</span>
+          <span class="detail-value" style="margin-bottom: 0;"><%= opportunity.remote ? "Yes" : "No" %></span>
+        </div>
 
-    <p>
-      <strong>Application Date:</strong>
-      <%= opportunity.application_date %>
-    </p>
+        <% if opportunity.company&.website.present? %>
+        <div style="display: flex; gap: 0.4rem; align-items: baseline;">
+          <span class="detail-label" style="margin-bottom: 0;">Website:</span>
+          <span class="detail-value" style="margin-bottom: 0;"><%= link_to opportunity.company.website, opportunity.company.website, target: "_blank", rel: "noopener noreferrer" %></span>
+        </div>
+        <% end %>
 
-    <p>
-      <strong>Status:</strong>
-      <span class="status-<%= opportunity.status %>"><%= opportunity.status&.humanize %></span>
-    </p>
+        <% if opportunity.company&.linkedin.present? %>
+        <div style="display: flex; gap: 0.4rem; align-items: baseline;">
+          <span class="detail-label" style="margin-bottom: 0;">LinkedIn:</span>
+          <span class="detail-value" style="margin-bottom: 0;"><%= link_to opportunity.company.linkedin, opportunity.company.linkedin, target: "_blank", rel: "noopener noreferrer" %></span>
+        </div>
+        <% end %>
 
-    <p>
-      <strong>Remote:</strong>
-      <%= opportunity.remote ? "Yes" : "No" %>
-    </p>
+        <div style="display: flex; gap: 0.4rem; align-items: baseline;">
+          <span class="detail-label" style="margin-bottom: 0;">Created At:</span>
+          <span class="detail-value" style="margin-bottom: 0;"><%= opportunity.created_at.strftime("%m/%d/%y") %></span>
+        </div>
 
-    <% if opportunity.technologies.any? %>
-    <p>
-      <strong>Technologies:</strong>
-      <div style="margin-top: 5px;">
-        <% Technology::CATEGORIES.each do |category| %>
-          <% category_techs = opportunity.technologies.where(category: category).order(:name) %>
-          <% next if category_techs.empty? %>
-          <div style="margin-bottom: 10px;">
-            <strong style="font-size: 14px; color: var(--text-secondary, #666);"><%= category %>:</strong>
-            <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px;">
-              <% category_techs.each do |tech| %>
-                <span style="background-color: #e7f1ff; color: #0056b3; padding: 3px 8px; border-radius: 3px; font-size: 13px;"><%= tech.name %></span>
-              <% end %>
-            </div>
-          </div>
+        <div style="display: flex; gap: 0.4rem; align-items: baseline;">
+          <span class="detail-label" style="margin-bottom: 0;">Application Date:</span>
+          <span class="detail-value" style="margin-bottom: 0;"><%= opportunity.application_date&.strftime("%m/%d/%y") %></span>
+        </div>
+
+        <% if opportunity.source.present? %>
+        <div style="display: flex; gap: 0.4rem; align-items: baseline;">
+          <span class="detail-label" style="margin-bottom: 0;">Source:</span>
+          <span class="detail-value" style="margin-bottom: 0;"><%= opportunity.source&.humanize %></span>
+        </div>
+        <% end %>
+
+        <% if opportunity.jobright_match.present? %>
+        <div style="display: flex; gap: 0.4rem; align-items: baseline;">
+          <span class="detail-label" style="margin-bottom: 0;">Jobright Match:</span>
+          <span class="detail-value" style="margin-bottom: 0;"><%= opportunity.jobright_match %></span>
+        </div>
+        <% end %>
+
+        <% if opportunity.listing_url.present? %>
+        <div style="display: flex; gap: 0.4rem; align-items: baseline;">
+          <span class="detail-label" style="margin-bottom: 0;">Listing URL:</span>
+          <span class="detail-value" style="margin-bottom: 0;"><%= link_to opportunity.listing_url, opportunity.listing_url, target: "_blank", rel: "noopener noreferrer" %></span>
+        </div>
+        <% end %>
+
+        <% if opportunity.chatgpt_match.present? %>
+        <div style="display: flex; gap: 0.4rem; align-items: baseline;">
+          <span class="detail-label" style="margin-bottom: 0;">ChatGPT Match:</span>
+          <span class="detail-value" style="margin-bottom: 0;"><%= opportunity.chatgpt_match %></span>
+        </div>
+        <% end %>
+
+        <% if opportunity.salary_range.present? %>
+        <div style="display: flex; gap: 0.4rem; align-items: baseline;">
+          <span class="detail-label" style="margin-bottom: 0;">Salary Range:</span>
+          <span class="detail-value" style="margin-bottom: 0;"><%= opportunity.salary_range %></span>
+        </div>
+        <% end %>
+
+        <% if opportunity.linkedin_match.present? %>
+        <div style="display: flex; gap: 0.4rem; align-items: baseline;">
+          <span class="detail-label" style="margin-bottom: 0;">LinkedIn Match:</span>
+          <span class="detail-value" style="margin-bottom: 0;"><%= opportunity.linkedin_match %></span>
+        </div>
         <% end %>
       </div>
-    </p>
-    <% end %>
-    
-    <% if opportunity.other_tech_stack.present? %>
-    <p>
-      <strong>Other Technologies:</strong>
-      <%= opportunity.other_tech_stack %>
-    </p>
-    <% end %>
+    </div>
 
-    <% if opportunity.source.present? %>
-    <p>
-      <strong>Source:</strong>
-      <%= opportunity.source&.humanize %>
-    </p>
-    <% end %>
+    <% if opportunity.technologies.any? || opportunity.other_tech_stack.present? %>
+    <div class="card" style="margin-bottom: 1.5rem;">
+      <div class="detail-label" style="margin-bottom: 0.75rem;">Technologies</div>
+      <% Technology::CATEGORIES.each do |category| %>
+        <% category_techs = opportunity.technologies.where(category: category).order(:name) %>
+        <% next if category_techs.empty? %>
+        <div style="margin-bottom: 10px;">
+          <strong style="font-size: 14px; color: var(--text-secondary, #666);"><%= category %>:</strong>
+          <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px;">
+            <% category_techs.each do |tech| %>
+              <span style="background-color: #e7f1ff; color: #0056b3; padding: 3px 8px; border-radius: 3px; font-size: 13px;"><%= tech.name %></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
 
-    <% if opportunity.salary_range.present? %>
-    <p>
-      <strong>Salary Range:</strong>
-      <%= opportunity.salary_range %>
-    </p>
-    <% end %>
-
-    <% if opportunity.listing_url.present? %>
-    <p>
-      <strong>Listing URL:</strong>
-      <%= link_to opportunity.listing_url, opportunity.listing_url, target: "_blank", rel: "noopener noreferrer" %>
-    </p>
-    <% end %>
-
-    <% if opportunity.chatgpt_match.present? %>
-    <p>
-      <strong>ChatGPT Match:</strong>
-      <%= opportunity.chatgpt_match %>
-    </p>
-    <% end %>
-
-    <% if opportunity.jobright_match.present? %>
-    <p>
-      <strong>Jobright Match:</strong>
-      <%= opportunity.jobright_match %>
-    </p>
-    <% end %>
-
-    <% if opportunity.linkedin_match.present? %>
-    <p>
-      <strong>LinkedIn Match:</strong>
-      <%= opportunity.linkedin_match %>
-    </p>
+      <% if opportunity.other_tech_stack.present? %>
+      <div>
+        <strong style="font-size: 14px; color: var(--text-secondary, #666);">Other:</strong>
+        <%= opportunity.other_tech_stack %>
+      </div>
+      <% end %>
+    </div>
     <% end %>
 
     <% if opportunity.notes.present? %>
-    <p>
-      <strong>Notes:</strong>
-    </p>
-    <div class="notes">
-      <%= simple_format(opportunity.notes) %>
+    <div class="card" style="margin-bottom: 1.5rem;">
+      <div class="detail-label" style="margin-bottom: 0.75rem;">Notes</div>
+      <p>==================================================================</p>
+      <div class="notes">
+        <%= simple_format(opportunity.notes) %>
+      </div>
     </div>
     <% end %>
 

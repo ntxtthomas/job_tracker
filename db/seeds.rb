@@ -27,18 +27,16 @@ technologies_data = {
     "Ruby on Rails",
     "Python",
     "Django",
-    "Flask",
     "Node.js",
     "Express",
     "Java",
     "Spring Boot",
     "PHP",
-    "Laravel",
-    ".NET",
-    "C#",
     "Go",
     "Elixir",
-    "Phoenix"
+    "Phoenix",
+    "FastAPI",
+    "Sidekiq"
   ],
   "Frontend" => [
     "React",
@@ -48,13 +46,10 @@ technologies_data = {
     "TypeScript",
     "Tailwind",
     "Bootstrap",
-    "Foundation",
     "Stimulus",
     "Hotwire",
     "Turbo",
     "Next.js",
-    "Nuxt.js",
-    "Svelte",
     "HTML/CSS"
   ],
   "Database" => [
@@ -62,24 +57,19 @@ technologies_data = {
     "MySQL",
     "MongoDB",
     "Redis",
-    "SQLite",
-    "MariaDB",
     "Elasticsearch",
-    "Cassandra",
     "DynamoDB",
-    "Oracle"
+    "SQL"
   ],
   "Testing" => [
     "RSpec",
     "Jest",
-    "Minitest",
     "Capybara",
     "Cypress",
     "Selenium",
-    "Mocha",
-    "Chai",
     "PyTest",
-    "JUnit"
+    "FactoryBot",
+    "Playwright"
   ],
   "DevOps/Infrastructure" => [
     "Docker",
@@ -91,24 +81,45 @@ technologies_data = {
     "AWS S3",
     "AWS SES",
     "AWS Lambda",
+    "AWS EC2",
     "Azure",
     "Google Cloud",
     "Heroku",
     "Terraform",
-    "Ansible",
     "GitHub Actions",
+    "GitLab CI/CD",
     "CircleCI"
   ],
   "API/Integration" => [
     "RESTful APIs",
     "GraphQL",
     "gRPC",
-    "LLM API Integration",
-    "OpenAI API",
     "Stripe API",
     "Twilio",
-    "SendGrid",
     "Webhooks"
+  ],
+  "AI/LLM" => [
+    "LLM API",
+    "RAG",
+    "Vector Databases",
+    "Agentic AI",
+    "MCP",
+    "Prompt Engineering"
+  ],
+  "Observability" => [
+    "AWS CloudWatch",
+    "New Relic",
+    "Honeybadger",
+    "Sentry",
+    "AppSignal",
+    "Datadog",
+    "PostHog"
+  ],
+  "Event/Messaging" => [
+    "Kafka",
+    "RabbitMQ",
+    "AWS SQS",
+    "AWS SNS"
   ]
 }
 

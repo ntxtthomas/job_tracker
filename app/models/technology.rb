@@ -13,6 +13,9 @@ class Technology < ApplicationRecord
     "Testing",
     "DevOps/Infrastructure",
     "API/Integration",
+    "AI/LLM",
+    "Observability",
+    "Event/Messaging",
     "Other"
   ].freeze
 end

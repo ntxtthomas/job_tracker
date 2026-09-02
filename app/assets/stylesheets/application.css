@@ -726,6 +726,12 @@ div[style*="color: red"],
   box-sizing: border-box;
 }
 
+.opportunity-form-page .form-group textarea.technology-picker-input {
+  max-width: none !important;
+  height: auto !important;
+  padding: 0.5rem !important;
+}
+
 /* Skill Badges */
 .skill-badge {
   display: inline-block;
