@@ -117,5 +117,14 @@ RSpec.describe "Opportunities", type: :request do
       expect(response.body).to include("Upwork")
       expect(response.body).not_to include(">Monster<")
     end
+
+    it "renders the paste tech stack control" do
+      get new_opportunity_path
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Paste Tech Stack")
+      expect(response.body).to include("data-controller=\"technology-picker\"")
+      expect(response.body).to include("data-action=\"technology-picker#apply\"")
+    end
   end
 end

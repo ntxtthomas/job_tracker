@@ -71,8 +71,14 @@
 <div id="role-specific-fields">
   <!-- Software Engineer Fields -->
   <div data-role-type-target="section" data-role="software_engineer" style="<%= opportunity.role_type == 'software_engineer' || opportunity.role_type.blank? ? '' : 'display: none;' %>">
-    <div class="form-group full-width-field">
+    <div class="form-group full-width-field" data-controller="technology-picker">
       <%= form.label "Technologies" %>
+      <label for="opportunity_technology_paste" class="form-label">Paste Tech Stack</label>
+      <div style="display: flex; gap: 0.5rem; align-items: flex-start; margin-bottom: 0.5rem;">
+        <textarea id="opportunity_technology_paste" class="form-input technology-picker-input" rows="2" placeholder="Ruby on Rails, PostgreSQL, React" data-technology-picker-target="input"></textarea>
+        <button type="button" class="btn btn-secondary" data-action="technology-picker#apply">Apply</button>
+      </div>
+      <p class="form-hint" data-technology-picker-target="result" aria-live="polite"></p>
       <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 4px; background-color: var(--bg-primary, #fff);">
       <% Technology::CATEGORIES.each do |category| %>
         <% techs = Technology.where(category: category).order(:name) %>
@@ -83,7 +89,7 @@
           <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 5px;">
             <% techs.each do |tech| %>
               <label style="display: flex; align-items: center; cursor: pointer;">
-                <%= check_box_tag "opportunity[technology_ids][]", tech.id, opportunity.technologies.include?(tech), id: "opportunity_technology_ids_#{tech.id}" %>
+                <%= check_box_tag "opportunity[technology_ids][]", tech.id, opportunity.technologies.include?(tech) || (opportunity.new_record? && tech.name == "Ruby on Rails"), id: "opportunity_technology_ids_#{tech.id}", data: { technology_picker_target: "checkbox", technology_name: tech.name } %>
                 <span style="margin-left: 5px; font-size: 14px;"><%= tech.name %></span>
               </label>
             <% end %>

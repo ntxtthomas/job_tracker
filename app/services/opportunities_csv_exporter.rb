@@ -17,7 +17,6 @@ class OpportunitiesCsvExporter
       csv << headers
 
       @opportunities.each do |opportunity|
-        
         csv << [
           opportunity.role_type,
           opportunity.company.name,

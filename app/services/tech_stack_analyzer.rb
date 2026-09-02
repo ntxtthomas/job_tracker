@@ -39,7 +39,7 @@ class TechStackAnalyzer
     combination_counts = Hash.new(0)
 
     # Main framework technologies to track
-    backend_frameworks = [ "Ruby on Rails", "Python", "Django", "Node.js", "Laravel", "Express" ]
+    backend_frameworks = [ "Ruby on Rails", "Python", "Django", "Node.js", "Express", "FastAPI" ]
     frontend_frameworks = [ "React", "Vue", "Angular", "Stimulus", "Hotwire" ]
 
     @opportunities.each do |opp|
